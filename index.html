@@ -264,7 +264,7 @@
 <div class="toast" id="toast"></div>
 
 <script>
-const DATA_KEY = 'trip_data_v3';
+const DATA_KEY = 'trip_data_v4';
 
 const defaultData = [
   {
@@ -281,7 +281,7 @@ const defaultData = [
     ]
   },
   {
-    title: "第二天｜奮起湖 → 阿里山", sub: "小火車繼續上山，神木群＋晚間賞螢",
+    title: "第二天｜奮起湖 → 阿里山", sub: "小火車繼續上山，神木群＋夜間星空",
     items: [
       { time: "07:30", name: "民宿早餐", desc: "整理行李準備搭小火車上山", tag: "food", map: "", timetable: "" },
       { time: "09:00", name: "搭小火車至阿里山站", desc: "奮起湖→阿里山約1小時，沿途雲海景色迷人", tag: "transport", map: "奮起湖車站", timetable: "https://afrch.forest.gov.tw/0000115" },
@@ -289,14 +289,14 @@ const defaultData = [
       { time: "12:00", name: "阿里山午餐", desc: "園區內餐廳或自備輕食，山上選擇有限建議自備零食", tag: "food", map: "阿里山國家森林遊樂區", timetable: "" },
       { time: "14:00", name: "姐妹潭、受鎮宮", desc: "湖景超美，繞湖一圈約30分鐘，孩子可餵魚", tag: "sight", map: "阿里山姐妹潭", timetable: "" },
       { time: "16:00", name: "Check-in 阿里山民宿", desc: "建議石棹地區民宿，性價比高，詢問是否有安排螢火蟲導覽", tag: "hotel", map: "阿里山石棹民宿", timetable: "" },
-      { time: "18:30", name: "晚餐", desc: "民宿或附近餐廳用餐，山上天黑早，早點吃完準備賞螢", tag: "food", map: "石棹 嘉義縣", timetable: "" },
-      { time: "19:30", name: "阿里山螢火蟲觀賞", desc: "阿里山全年皆有螢火蟲，5月是山地黃緣螢高峰，建議跟民宿導覽一起走更安全", tag: "firefly", map: "阿里山國家森林遊樂區", timetable: "" },
+      { time: "18:30", name: "晚餐", desc: "民宿或附近餐廳用餐，山上天黑早，吃完準備看星星", tag: "food", map: "石棹 嘉義縣", timetable: "" },
+      { time: "20:00", name: "阿里山星空觀賞", desc: "海拔2000m以上無光害，銀河清晰可見，孩子第一次看這麼多星星保證驚嘆。民宿外空地仰頭就看得到", tag: "activity", map: "阿里山國家森林遊樂區", timetable: "" },
     ]
   },
   {
     title: "第三天｜阿里山 → 嘉義 → 高雄", sub: "看日出（可選）、下山返家",
     items: [
-      { time: "05:00", name: "【可選】阿里山日出觀賞", desc: "搭祝山線小火車至祝山站看日出，幼童太早可略過", tag: "activity", map: "阿里山祝山觀日出平台", timetable: "https://afrch.forest.gov.tw/0000115" },
+      { time: "05:00", name: "阿里山日出觀賞", desc: "搭祝山線小火車至祝山站（全台最高火車站），看雲海日出。昨晚早睡，孩子起得來！這是阿里山最經典的體驗", tag: "activity", map: "阿里山祝山觀日出平台", timetable: "https://afrch.forest.gov.tw/0000115" },
       { time: "08:00", name: "早餐、整理行李", desc: "", tag: "food", map: "", timetable: "" },
       { time: "09:30", name: "搭阿里山小火車下山", desc: "下山至嘉義約2.5小時，沿途可睡覺補眠", tag: "transport", map: "阿里山車站", timetable: "https://afrch.forest.gov.tw/0000115" },
       { time: "12:00", name: "抵嘉義，午餐", desc: "方圓廚坊或文化路周邊，嘉義在地美食收尾", tag: "food", map: "嘉義文化路夜市", timetable: "" },
