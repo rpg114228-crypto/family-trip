@@ -3,29 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>嘉義×阿里山 螢火蟲親子行</title>
+<title id="pageTitle">嘉義×阿里山 螢火蟲親子行</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: -apple-system, "Noto Sans TC", sans-serif; background: #f0f4f0; color: #333; }
 
   header {
     background: linear-gradient(135deg, #1b4332, #2d6a4f, #40916c);
-    color: white; padding: 16px 16px 12px;
+    color: white; padding: 14px 16px 12px;
     position: sticky; top: 0; z-index: 100;
     box-shadow: 0 2px 12px rgba(0,0,0,0.3);
   }
-  header h1 { font-size: 19px; font-weight: 700; letter-spacing: 0.3px; }
-  .header-meta { display: flex; gap: 8px; margin-top: 6px; flex-wrap: wrap; }
+  .header-row { display: flex; align-items: flex-start; gap: 8px; }
+  .header-text { flex: 1; }
+  header h1 { font-size: 18px; font-weight: 700; letter-spacing: 0.3px; line-height: 1.3; }
+  .header-meta { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; }
   .header-badge {
     font-size: 12px; opacity: 0.92;
     background: rgba(255,255,255,0.18); border-radius: 20px;
     padding: 2px 9px; border: 1px solid rgba(255,255,255,0.2);
   }
+  .btn-settings {
+    flex-shrink: 0; background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.3); color: white;
+    border-radius: 10px; padding: 7px 11px; font-size: 13px;
+    font-weight: 600; cursor: pointer; margin-top: 1px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn-settings:active { background: rgba(255,255,255,0.3); }
 
   .day-tabs {
     display: flex; background: white;
     border-bottom: 2px solid #d8e8d8;
-    position: sticky; top: 66px; z-index: 99;
+    position: sticky; top: 70px; z-index: 99;
   }
   .day-tab {
     flex: 1; padding: 9px 2px 8px; text-align: center;
@@ -52,7 +62,7 @@
     border-left: 4px solid #2d6a4f;
   }
   .day-header h2 { font-size: 16px; color: #1b4332; font-weight: 700; }
-  .day-header p { font-size: 13px; color: #555; margin-top: 3px; }
+  .day-header p  { font-size: 13px; color: #555; margin-top: 3px; }
 
   .item-card {
     background: white; border-radius: 12px;
@@ -73,22 +83,22 @@
   .item-card.tag-border-firefly   { border-left-color: #f9a825; }
 
   .item-main {
-    display: flex; align-items: flex-start;
+    display: flex; align-items: center;
     padding: 12px 12px 10px 0;
   }
   .item-time {
-    min-width: 54px; text-align: center; padding: 0 8px;
+    min-width: 54px; text-align: center; padding: 0 8px; flex-shrink: 0;
   }
   .item-time span { font-size: 14px; font-weight: 700; color: #2d6a4f; display: block; line-height: 1.3; }
 
   .item-divider {
     width: 1px; background: #e8e8e8;
-    align-self: stretch; margin-right: 10px; position: relative;
+    align-self: stretch; margin-right: 10px; position: relative; flex-shrink: 0;
   }
   .item-divider::before {
     content: ''; width: 7px; height: 7px;
     background: #2d6a4f; border-radius: 50%;
-    position: absolute; left: -3px; top: 4px;
+    position: absolute; left: -3px; top: 50%; transform: translateY(-50%);
   }
 
   .item-body { flex: 1; padding-right: 8px; }
@@ -139,11 +149,10 @@
     background: white; border: 2px dashed #a8d5b5;
     border-radius: 12px; color: #2d6a4f;
     font-size: 15px; font-weight: 600; cursor: pointer; margin-bottom: 10px;
-    min-height: 50px;
-    -webkit-tap-highlight-color: transparent;
+    min-height: 50px; -webkit-tap-highlight-color: transparent;
   }
 
-  /* Summary tab */
+  /* Summary */
   .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
   .summary-card {
     background: white; border-radius: 12px; padding: 14px 10px;
@@ -168,13 +177,12 @@
   .tips-card li { font-size: 13px; color: #555; line-height: 2.0; }
   .tips-card a  { color: #2d6a4f; font-weight: 700; text-decoration: underline; }
 
-  /* Modal */
+  /* Modal shared */
   .modal-overlay {
     display: none; position: fixed; inset: 0;
     background: rgba(0,0,0,0.45); z-index: 200;
     align-items: flex-end;
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px);
   }
   .modal-overlay.open { display: flex; }
   .modal {
@@ -189,7 +197,7 @@
   }
   .modal-handle { width: 36px; height: 4px; background: #ddd; border-radius: 2px; margin: 0 auto 16px; }
   .modal h3 { font-size: 16px; font-weight: 700; margin-bottom: 16px; }
-  .modal label { font-size: 12px; font-weight: 600; color: #555; display: block; margin-bottom: 4px; margin-top: 12px; }
+  .modal label { font-size: 12px; font-weight: 600; color: #555; display: block; margin-bottom: 4px; margin-top: 14px; }
   .modal input, .modal textarea, .modal select {
     width: 100%; padding: 11px 12px; font-size: 15px;
     border: 1.5px solid #e0e0e0; border-radius: 10px;
@@ -202,8 +210,43 @@
   .modal textarea { resize: vertical; min-height: 80px; }
   .modal-btns { display: flex; gap: 10px; margin-top: 20px; }
   .btn-cancel { flex: 1; padding: 13px; border: 1.5px solid #e0e0e0; border-radius: 12px; background: white; font-size: 15px; font-weight: 600; color: #666; cursor: pointer; }
-  .btn-save { flex: 2; padding: 13px; border: none; border-radius: 12px; background: #2d6a4f; color: white; font-size: 15px; font-weight: 700; cursor: pointer; }
+  .btn-save   { flex: 2; padding: 13px; border: none; border-radius: 12px; background: #2d6a4f; color: white; font-size: 15px; font-weight: 700; cursor: pointer; }
   .btn-save:active { background: #1b4332; }
+
+  /* Settings-specific */
+  .dest-wrap { position: relative; }
+  .dest-suggestions {
+    position: absolute; left: 0; right: 0; top: calc(100% + 2px);
+    background: white; border: 1.5px solid #c8e6c9; border-radius: 12px;
+    z-index: 10; max-height: 210px; overflow-y: auto;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  }
+  .dest-item {
+    padding: 11px 14px; font-size: 14px; cursor: pointer; color: #333;
+    border-bottom: 1px solid #f5f5f5; display: flex; align-items: center; gap: 8px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .dest-item:last-child { border-bottom: none; }
+  .dest-item:active { background: #f0faf0; }
+  .dest-item .dest-icon { font-size: 16px; flex-shrink: 0; }
+  .dest-no-result { padding: 14px; font-size: 13px; color: #aaa; text-align: center; }
+
+  .counter-row {
+    display: flex; align-items: center; gap: 0;
+    background: #fafafa; border: 1.5px solid #e0e0e0;
+    border-radius: 10px; overflow: hidden;
+  }
+  .counter-btn {
+    width: 48px; height: 48px; border: none; background: none;
+    color: #2d6a4f; font-size: 22px; font-weight: 700; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    -webkit-tap-highlight-color: transparent; flex-shrink: 0;
+  }
+  .counter-btn:active { background: #e8f5e9; }
+  .counter-val {
+    flex: 1; text-align: center; font-size: 20px;
+    font-weight: 700; color: #1b4332;
+  }
 
   .toast {
     position: fixed;
@@ -211,8 +254,7 @@
     left: 50%; transform: translateX(-50%);
     background: rgba(30,30,30,0.85); color: white; padding: 10px 22px;
     border-radius: 20px; font-size: 13px; z-index: 300;
-    opacity: 0; transition: opacity 0.3s; pointer-events: none;
-    white-space: nowrap;
+    opacity: 0; transition: opacity 0.3s; pointer-events: none; white-space: nowrap;
   }
   .toast.show { opacity: 1; }
 </style>
@@ -220,12 +262,17 @@
 <body>
 
 <header>
-  <h1>✨ 嘉義×阿里山 螢火蟲親子行</h1>
-  <div class="header-meta">
-    <span class="header-badge">👨‍👩‍👧 3大3小</span>
-    <span class="header-badge">🚂 高雄出發</span>
-    <span class="header-badge">🌙 3天2夜</span>
-    <span class="header-badge">🌿 螢火蟲季尾聲</span>
+  <div class="header-row">
+    <div class="header-text">
+      <h1>✨ <span id="hDest">嘉義×阿里山</span> <span id="hLabel">螢火蟲親子行</span></h1>
+      <div class="header-meta">
+        <span class="header-badge" id="hPeople">👨‍👩‍👧 3大3小</span>
+        <span class="header-badge">🚂 高雄出發</span>
+        <span class="header-badge">🌙 3天2夜</span>
+        <span class="header-badge">🌿 螢火蟲季尾聲</span>
+      </div>
+    </div>
+    <button class="btn-settings" onclick="openSettings()">⚙️ 設定</button>
   </div>
 </header>
 
@@ -252,16 +299,16 @@
 <div id="day2" class="day-panel"></div>
 
 <div id="day3" class="day-panel">
-  <div style="padding: 4px 0 80px;">
+  <div style="padding:4px 0 80px;">
     <div class="section-title">人員與天數</div>
     <div class="summary-grid">
       <div class="summary-card">
         <span class="s-icon">👨‍👩‍👧</span>
-        <div class="label">大人</div><div class="value">3</div><div class="unit">人</div>
+        <div class="label">大人</div><div class="value" id="sumAdults">3</div><div class="unit">人</div>
       </div>
       <div class="summary-card">
         <span class="s-icon">🧒</span>
-        <div class="label">小孩</div><div class="value">3</div><div class="unit">人（3-6歲）</div>
+        <div class="label">小孩</div><div class="value" id="sumChildren">3</div><div class="unit" id="sumChildAge">人（3-6歲）</div>
       </div>
       <div class="summary-card">
         <span class="s-icon">📅</span>
@@ -270,7 +317,7 @@
       <div class="summary-card">
         <span class="s-icon">🚂</span>
         <div class="label">交通</div>
-        <div class="value" style="font-size:13px; line-height:1.5;">台鐵<br>小火車</div>
+        <div class="value" style="font-size:13px;line-height:1.5;">台鐵<br>小火車</div>
       </div>
     </div>
 
@@ -285,7 +332,7 @@
     </div>
 
     <div class="section-title">小火車訂不到票的備用方案</div>
-    <div class="tips-card" style="background:#e3f2fd; border-color:#1565c0;">
+    <div class="tips-card" style="background:#e3f2fd;border-color:#1565c0;">
       <h3 style="color:#1565c0;">🚌 備用交通方案</h3>
       <ul>
         <li><b>方案一｜台灣好行客運 7322（最推薦）</b></li>
@@ -298,7 +345,7 @@
     </div>
 
     <div class="section-title">螢火蟲注意事項</div>
-    <div class="tips-card" style="background:#fffbf0; border-color:#ffb300;">
+    <div class="tips-card" style="background:#fffbf0;border-color:#ffb300;">
       <h3 style="color:#e65100;">✨ 賞螢貼士</h3>
       <ul>
         <li>2026 螢火蟲季至 <b>5/31</b> 止，現在去正是尾聲！</li>
@@ -324,7 +371,7 @@
     </div>
 
     <div class="section-title">住宿推薦</div>
-    <div class="tips-card" style="background:#e8f5e9; border-color:#4caf50;">
+    <div class="tips-card" style="background:#e8f5e9;border-color:#4caf50;">
       <h3 style="color:#2e7d32;">🏨 第一晚｜奮起湖（含螢火蟲導覽）</h3>
       <ul>
         <li><a href="https://www.fenchihu.com.tw/" target="_blank">奮起湖大飯店</a>｜免費螢火蟲導覽，緊鄰老街，詢問 6 人方案</li>
@@ -332,7 +379,7 @@
         <li>建議訂兩間四人房，或詢問整棟包棟</li>
       </ul>
     </div>
-    <div class="tips-card" style="background:#e8f5e9; border-color:#4caf50;">
+    <div class="tips-card" style="background:#e8f5e9;border-color:#4caf50;">
       <h3 style="color:#2e7d32;">🏨 第二晚｜石棹/阿里山（星空觀賞）</h3>
       <ul>
         <li><a href="https://xiangquan.tw/" target="_blank">湘泉民宿</a>｜賞螢導覽 $50/人、觀賞飛鼠 $100/人，4人獨棟木屋（加人費 $400）</li>
@@ -343,7 +390,7 @@
   </div>
 </div>
 
-<!-- Edit/Add Modal -->
+<!-- 行程 Edit/Add Modal -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal">
     <div class="modal-handle"></div>
@@ -374,77 +421,240 @@
   </div>
 </div>
 
+<!-- 設定 Modal -->
+<div class="modal-overlay" id="settingsOverlay">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <h3>行程設定</h3>
+
+    <label>旅遊目的地</label>
+    <div class="dest-wrap">
+      <input type="text" id="sDest" placeholder="例：嘉義×阿里山"
+             oninput="filterDest(this.value)" onfocus="filterDest(this.value)" autocomplete="off">
+      <div class="dest-suggestions" id="destList"></div>
+    </div>
+
+    <label>副標題（選填）</label>
+    <input type="text" id="sLabel" placeholder="例：螢火蟲親子行">
+
+    <label>大人人數</label>
+    <div class="counter-row">
+      <button class="counter-btn" onclick="changeCount('adults',-1)">－</button>
+      <span class="counter-val" id="dAdults">3</span>
+      <button class="counter-btn" onclick="changeCount('adults',1)">＋</button>
+    </div>
+
+    <label>小孩人數</label>
+    <div class="counter-row">
+      <button class="counter-btn" onclick="changeCount('children',-1)">－</button>
+      <span class="counter-val" id="dChildren">3</span>
+      <button class="counter-btn" onclick="changeCount('children',1)">＋</button>
+    </div>
+
+    <label>小孩年齡（選填）</label>
+    <input type="text" id="sChildAge" placeholder="例：3-6歲">
+
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeSettings()">取消</button>
+      <button class="btn-save" onclick="saveSettings()">套用</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
+// ── 旅行資料 ──────────────────────────────────────────
 const DATA_KEY = 'trip_data_v4';
+const SETTINGS_KEY = 'trip_settings_v1';
+
+const defaultSettings = {
+  destination: '嘉義×阿里山',
+  label: '螢火蟲親子行',
+  adults: 3,
+  children: 3,
+  childrenAge: '3-6歲',
+};
+
+let settings = JSON.parse(localStorage.getItem(SETTINGS_KEY) || 'null') || { ...defaultSettings };
+let tempAdults = settings.adults;
+let tempChildren = settings.children;
 
 const defaultData = [
   {
     title: "第一天｜高雄 → 嘉義 → 奮起湖", sub: "台鐵出發，搭阿里山小火車上山",
     items: [
-      { time: "07:30", name: "高雄車站搭台鐵自強號出發", desc: "台鐵高雄→嘉義約1小時10分，直達嘉義車站不用轉車", tag: "transport", map: "高雄車站", timetable: "https://tip.railway.gov.tw/tra-tip-web/tip/tip001/tipZ001/query" },
-      { time: "08:50", name: "抵嘉義車站", desc: "嘉義車站就是阿里山小火車的起點站，超方便", tag: "transport", map: "嘉義車站", timetable: "" },
-      { time: "09:00", name: "嘉義火雞肉飯早午餐", desc: "車站附近就有！噴水火雞肉飯或劉里長雞肉飯，在地必吃", tag: "food", map: "嘉義噴水雞肉飯", timetable: "" },
-      { time: "10:30", name: "嘉義車站搭阿里山小火車", desc: "復古齒軌小火車，穿越熱帶→溫帶三種氣候帶，孩子最愛！需提前網路訂票", tag: "transport", map: "嘉義車站", timetable: "https://afrch.forest.gov.tw/0000115" },
-      { time: "12:30", name: "抵奮起湖，享用鐵路便當", desc: "奮起湖便當全台最有名，現點現做，坐在月台邊吃最有感覺", tag: "food", map: "奮起湖車站", timetable: "" },
-      { time: "13:30", name: "奮起湖老街散步", desc: "手工愛玉凍、木製工藝品，小孩可跑跳，地面平整", tag: "sight", map: "奮起湖老街 嘉義", timetable: "" },
-      { time: "15:00", name: "Check-in 奮起湖民宿", desc: "建議選有螢火蟲步道的民宿，提早確認晚上是否有導覽", tag: "hotel", map: "奮起湖民宿", timetable: "" },
-      { time: "20:00", name: "夜間賞螢火蟲", desc: "沿民宿附近步道慢走，入夜後大量螢火蟲出現，記得不要開白光手電筒", tag: "firefly", map: "奮起湖步道 嘉義縣", timetable: "" }
+      { time:"07:30", name:"高雄車站搭台鐵自強號出發", desc:"台鐵高雄→嘉義約1小時10分，直達嘉義車站不用轉車", tag:"transport", map:"高雄車站", timetable:"https://tip.railway.gov.tw/tra-tip-web/tip/tip001/tipZ001/query" },
+      { time:"08:50", name:"抵嘉義車站", desc:"嘉義車站就是阿里山小火車的起點站，超方便", tag:"transport", map:"嘉義車站", timetable:"" },
+      { time:"09:00", name:"嘉義火雞肉飯早午餐", desc:"車站附近就有！噴水火雞肉飯或劉里長雞肉飯，在地必吃", tag:"food", map:"嘉義噴水雞肉飯", timetable:"" },
+      { time:"10:30", name:"嘉義車站搭阿里山小火車", desc:"復古齒軌小火車，穿越熱帶→溫帶三種氣候帶，孩子最愛！需提前網路訂票", tag:"transport", map:"嘉義車站", timetable:"https://afrch.forest.gov.tw/0000115" },
+      { time:"12:30", name:"抵奮起湖，享用鐵路便當", desc:"奮起湖便當全台最有名，現點現做，坐在月台邊吃最有感覺", tag:"food", map:"奮起湖車站", timetable:"" },
+      { time:"13:30", name:"奮起湖老街散步", desc:"手工愛玉凍、木製工藝品，小孩可跑跳，地面平整", tag:"sight", map:"奮起湖老街 嘉義", timetable:"" },
+      { time:"15:00", name:"Check-in 奮起湖民宿", desc:"建議選有螢火蟲步道的民宿，提早確認晚上是否有導覽", tag:"hotel", map:"奮起湖民宿", timetable:"" },
+      { time:"20:00", name:"夜間賞螢火蟲", desc:"沿民宿附近步道慢走，入夜後大量螢火蟲出現，記得不要開白光手電筒", tag:"firefly", map:"奮起湖步道 嘉義縣", timetable:"" }
     ]
   },
   {
     title: "第二天｜奮起湖 → 阿里山", sub: "小火車繼續上山，神木群＋夜間星空",
     items: [
-      { time: "07:30", name: "民宿早餐", desc: "整理行李準備搭小火車上山", tag: "food", map: "", timetable: "" },
-      { time: "09:00", name: "搭小火車至阿里山站", desc: "奮起湖→阿里山約1小時，沿途雲海景色迷人", tag: "transport", map: "奮起湖車站", timetable: "https://afrch.forest.gov.tw/0000115" },
-      { time: "10:00", name: "阿里山神木群步道", desc: "千年神木巨大壯觀，孩子會驚嘆「樹樹樹！」，步道平整好走", tag: "sight", map: "阿里山神木群步道", timetable: "" },
-      { time: "12:00", name: "阿里山午餐", desc: "園區內餐廳或自備輕食，山上選擇有限建議自備零食", tag: "food", map: "阿里山國家森林遊樂區", timetable: "" },
-      { time: "14:00", name: "姐妹潭、受鎮宮", desc: "湖景超美，繞湖一圈約30分鐘，孩子可餵魚", tag: "sight", map: "阿里山姐妹潭", timetable: "" },
-      { time: "16:00", name: "Check-in 阿里山民宿", desc: "建議石棹地區民宿，性價比高，詢問是否有安排螢火蟲導覽", tag: "hotel", map: "阿里山石棹民宿", timetable: "" },
-      { time: "18:30", name: "晚餐", desc: "民宿或附近餐廳用餐，山上天黑早，吃完準備看星星", tag: "food", map: "石棹 嘉義縣", timetable: "" },
-      { time: "20:00", name: "阿里山星空觀賞", desc: "海拔2000m以上無光害，銀河清晰可見，孩子第一次看這麼多星星保證驚嘆。民宿外空地仰頭就看得到", tag: "activity", map: "阿里山國家森林遊樂區", timetable: "" }
+      { time:"07:30", name:"民宿早餐", desc:"整理行李準備搭小火車上山", tag:"food", map:"", timetable:"" },
+      { time:"09:00", name:"搭小火車至阿里山站", desc:"奮起湖→阿里山約1小時，沿途雲海景色迷人", tag:"transport", map:"奮起湖車站", timetable:"https://afrch.forest.gov.tw/0000115" },
+      { time:"10:00", name:"阿里山神木群步道", desc:"千年神木巨大壯觀，孩子會驚嘆「樹樹樹！」，步道平整好走", tag:"sight", map:"阿里山神木群步道", timetable:"" },
+      { time:"12:00", name:"阿里山午餐", desc:"園區內餐廳或自備輕食，山上選擇有限建議自備零食", tag:"food", map:"阿里山國家森林遊樂區", timetable:"" },
+      { time:"14:00", name:"姐妹潭、受鎮宮", desc:"湖景超美，繞湖一圈約30分鐘，孩子可餵魚", tag:"sight", map:"阿里山姐妹潭", timetable:"" },
+      { time:"16:00", name:"Check-in 阿里山民宿", desc:"建議石棹地區民宿，性價比高，詢問是否有安排螢火蟲導覽", tag:"hotel", map:"阿里山石棹民宿", timetable:"" },
+      { time:"18:30", name:"晚餐", desc:"民宿或附近餐廳用餐，山上天黑早，吃完準備看星星", tag:"food", map:"石棹 嘉義縣", timetable:"" },
+      { time:"20:00", name:"阿里山星空觀賞", desc:"海拔2000m以上無光害，銀河清晰可見，孩子第一次看這麼多星星保證驚嘆", tag:"activity", map:"阿里山國家森林遊樂區", timetable:"" }
     ]
   },
   {
     title: "第三天｜阿里山 → 嘉義 → 高雄", sub: "看日出（可選）、下山返家",
     items: [
-      { time: "05:00", name: "阿里山日出觀賞", desc: "搭祝山線小火車至祝山站（全台最高火車站），看雲海日出。昨晚早睡，孩子起得來！這是阿里山最經典的體驗", tag: "activity", map: "阿里山祝山觀日出平台", timetable: "https://afrch.forest.gov.tw/0000115" },
-      { time: "08:00", name: "早餐、整理行李", desc: "", tag: "food", map: "", timetable: "" },
-      { time: "09:30", name: "搭阿里山小火車下山", desc: "下山至嘉義約2.5小時，沿途可睡覺補眠", tag: "transport", map: "阿里山車站", timetable: "https://afrch.forest.gov.tw/0000115" },
-      { time: "12:00", name: "抵嘉義，午餐", desc: "方圓廚坊或文化路周邊，嘉義在地美食收尾", tag: "food", map: "嘉義文化路夜市", timetable: "" },
-      { time: "13:30", name: "嘉義文化路周邊伴手禮", desc: "林聰明沙鍋魚頭、方塊酥、阿里山高山茶當伴手禮", tag: "sight", map: "嘉義文化路", timetable: "" },
-      { time: "15:00", name: "嘉義車站搭台鐵返高雄", desc: "台鐵嘉義→高雄約1小時10分，直達高雄車站", tag: "transport", map: "嘉義車站", timetable: "https://tip.railway.gov.tw/tra-tip-web/tip/tip001/tipZ001/query" },
-      { time: "16:20", name: "高雄車站抵達，旅程結束", desc: "帶著滿滿螢火蟲回憶平安到家", tag: "transport", map: "高雄車站", timetable: "" }
+      { time:"05:00", name:"阿里山日出觀賞", desc:"搭祝山線小火車至祝山站（全台最高火車站），看雲海日出。這是阿里山最經典的體驗", tag:"activity", map:"阿里山祝山觀日出平台", timetable:"https://afrch.forest.gov.tw/0000115" },
+      { time:"08:00", name:"早餐、整理行李", desc:"", tag:"food", map:"", timetable:"" },
+      { time:"09:30", name:"搭阿里山小火車下山", desc:"下山至嘉義約2.5小時，沿途可睡覺補眠", tag:"transport", map:"阿里山車站", timetable:"https://afrch.forest.gov.tw/0000115" },
+      { time:"12:00", name:"抵嘉義，午餐", desc:"方圓廚坊或文化路周邊，嘉義在地美食收尾", tag:"food", map:"嘉義文化路夜市", timetable:"" },
+      { time:"13:30", name:"嘉義文化路周邊伴手禮", desc:"林聰明沙鍋魚頭、方塊酥、阿里山高山茶當伴手禮", tag:"sight", map:"嘉義文化路", timetable:"" },
+      { time:"15:00", name:"嘉義車站搭台鐵返高雄", desc:"台鐵嘉義→高雄約1小時10分，直達高雄車站", tag:"transport", map:"嘉義車站", timetable:"https://tip.railway.gov.tw/tra-tip-web/tip/tip001/tipZ001/query" },
+      { time:"16:20", name:"高雄車站抵達，旅程結束", desc:"帶著滿滿回憶平安到家", tag:"transport", map:"高雄車站", timetable:"" }
     ]
   }
 ];
 
 let data = JSON.parse(localStorage.getItem(DATA_KEY) || 'null') || defaultData;
 let editingDay = 0, editingIdx = -1, currentDay = 0;
-
-const tagLabels = { food: '餐飲', sight: '景點', transport: '交通', hotel: '住宿', activity: '活動', firefly: '螢火蟲' };
+const tagLabels = { food:'餐飲', sight:'景點', transport:'交通', hotel:'住宿', activity:'活動', firefly:'螢火蟲' };
 
 function save() { localStorage.setItem(DATA_KEY, JSON.stringify(data)); }
 
-function openNav(query) {
-  window.open('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(query), '_blank');
-}
-function openTimetable(url) { window.open(url, '_blank'); }
+// ── 旅遊目的地建議清單 ──────────────────────────────
+const DEST_LIST = [
+  { icon:'🌿', name:'嘉義×阿里山' },
+  { icon:'🚂', name:'阿里山×奮起湖' },
+  { icon:'🌸', name:'台北×九份' },
+  { icon:'🏯', name:'台南×古都' },
+  { icon:'🌊', name:'花蓮×太魯閣' },
+  { icon:'🌴', name:'墾丁×恆春' },
+  { icon:'♨️', name:'宜蘭×礁溪' },
+  { icon:'🚣', name:'宜蘭×冬山河' },
+  { icon:'🛶', name:'日月潭×集集' },
+  { icon:'🐑', name:'南投×清境農場' },
+  { icon:'🏝', name:'澎湖' },
+  { icon:'🐢', name:'小琉球' },
+  { icon:'🌋', name:'綠島' },
+  { icon:'🏖', name:'蘭嶼' },
+  { icon:'🏰', name:'金門' },
+  { icon:'⛵', name:'馬祖' },
+  { icon:'🌾', name:'台東×池上' },
+  { icon:'🌿', name:'台東×知本' },
+  { icon:'🎨', name:'苗栗×三義' },
+  { icon:'🌺', name:'苗栗×南庄' },
+  { icon:'🏔', name:'新竹×尖石' },
+  { icon:'🚞', name:'新竹×內灣' },
+  { icon:'🍑', name:'桃園×拉拉山' },
+  { icon:'🦋', name:'高雄×茂林' },
+  { icon:'🌿', name:'屏東×霧台' },
+  { icon:'🌅', name:'基隆×和平島' },
+  { icon:'🏛', name:'彰化×鹿港' },
+  { icon:'🎪', name:'雲林×北港' },
+  { icon:'🍣', name:'嘉義×東石' },
+];
 
-function esc(s) {
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+function filterDest(q) {
+  const query = (q || '').trim().toLowerCase();
+  const matched = query
+    ? DEST_LIST.filter(d => d.name.toLowerCase().includes(query))
+    : DEST_LIST;
+  const el = document.getElementById('destList');
+  if (!matched.length) {
+    el.innerHTML = '<div class="dest-no-result">找不到符合的目的地</div>';
+    return;
+  }
+  el.innerHTML = matched.map(d =>
+    `<div class="dest-item" onclick="selectDest(${JSON.stringify(d.name)})">
+       <span class="dest-icon">${d.icon}</span>${d.name}
+     </div>`
+  ).join('');
 }
+
+function selectDest(name) {
+  document.getElementById('sDest').value = name;
+  document.getElementById('destList').innerHTML = '';
+}
+
+// ── 設定 Modal ──────────────────────────────────────
+function openSettings() {
+  tempAdults   = settings.adults;
+  tempChildren = settings.children;
+  document.getElementById('sDest').value     = settings.destination;
+  document.getElementById('sLabel').value    = settings.label;
+  document.getElementById('sChildAge').value = settings.childrenAge;
+  document.getElementById('dAdults').textContent   = tempAdults;
+  document.getElementById('dChildren').textContent = tempChildren;
+  filterDest('');
+  document.getElementById('settingsOverlay').classList.add('open');
+}
+
+function closeSettings() {
+  document.getElementById('settingsOverlay').classList.remove('open');
+  document.getElementById('destList').innerHTML = '';
+}
+
+function changeCount(field, delta) {
+  if (field === 'adults') {
+    tempAdults = Math.max(0, tempAdults + delta);
+    document.getElementById('dAdults').textContent = tempAdults;
+  } else {
+    tempChildren = Math.max(0, tempChildren + delta);
+    document.getElementById('dChildren').textContent = tempChildren;
+  }
+}
+
+function saveSettings() {
+  const dest = document.getElementById('sDest').value.trim();
+  settings.destination  = dest || settings.destination;
+  settings.label        = document.getElementById('sLabel').value.trim() || '親子旅行';
+  settings.adults       = tempAdults;
+  settings.children     = tempChildren;
+  settings.childrenAge  = document.getElementById('sChildAge').value.trim();
+  localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+  updateHeader();
+  closeSettings();
+  showToast('設定已更新 ✓');
+}
+
+function updateHeader() {
+  document.getElementById('hDest').textContent   = settings.destination;
+  document.getElementById('hLabel').textContent  = settings.label;
+  document.getElementById('hPeople').textContent =
+    `👨‍👩‍👧 ${settings.adults}大${settings.children}小`;
+  document.getElementById('sumAdults').textContent   = settings.adults;
+  document.getElementById('sumChildren').textContent = settings.children;
+  const ageText = settings.childrenAge
+    ? `人（${settings.childrenAge}）` : '人';
+  document.getElementById('sumChildAge').textContent = ageText;
+  document.title = `${settings.destination} ${settings.label}`;
+}
+
+// ── 行程渲染 ─────────────────────────────────────────
+function esc(s) {
+  return String(s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function openNav(q)  { window.open('https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q),'_blank'); }
+function openTimetable(u) { window.open(u,'_blank'); }
 
 function renderDay(dayIdx) {
-  const panel = document.getElementById('day' + dayIdx);
+  const panel = document.getElementById('day'+dayIdx);
   const d = data[dayIdx];
   let html = `<div class="day-header"><h2>${esc(d.title)}</h2><p>${esc(d.sub)}</p></div>`;
   d.items.forEach((item, i) => {
     const hasMap = item.map && item.map.trim();
-    const hasTimetable = item.timetable && item.timetable.trim();
-    const mapJs = JSON.stringify(item.map || item.name);
-    const ttJs  = JSON.stringify(item.timetable || '');
+    const hasTT  = item.timetable && item.timetable.trim();
+    const mapJs  = JSON.stringify(item.map || item.name);
+    const ttJs   = JSON.stringify(item.timetable || '');
     html += `
     <div class="item-card tag-border-${item.tag}">
       <div class="item-main">
@@ -453,18 +663,16 @@ function renderDay(dayIdx) {
         <div class="item-body">
           <div class="item-name">${esc(item.name)}</div>
           ${item.desc ? `<div class="item-desc">${esc(item.desc)}</div>` : ''}
-          <span class="item-tag tag-${item.tag}">${tagLabels[item.tag] || esc(item.tag)}</span>
+          <span class="item-tag tag-${item.tag}">${tagLabels[item.tag]||esc(item.tag)}</span>
         </div>
       </div>
       <div class="item-actions">
         ${hasMap
           ? `<button class="btn-action nav" onclick="openNav(${mapJs})">📍 導航</button>`
           : `<button class="btn-action" disabled>📍 無地點</button>`}
-        ${hasTimetable
-          ? `<button class="btn-action timetable" onclick="openTimetable(${ttJs})">🕐 時刻</button>`
-          : ''}
+        ${hasTT ? `<button class="btn-action timetable" onclick="openTimetable(${ttJs})">🕐 時刻</button>` : ''}
         <button class="btn-action edit" onclick="openEdit(${dayIdx},${i})">✏️ 編輯</button>
-        <button class="btn-action del" onclick="askDelete(${dayIdx},${i})">🗑 刪除</button>
+        <button class="btn-action del"  onclick="askDelete(${dayIdx},${i})">🗑 刪除</button>
       </div>
       <div class="delete-confirm" id="dc-${dayIdx}-${i}">
         <span>確定刪除此行程？</span>
@@ -475,37 +683,37 @@ function renderDay(dayIdx) {
   });
   html += `<button class="add-btn" onclick="openAdd(${dayIdx})">＋ 新增行程</button>`;
   panel.innerHTML = html;
-  const el = document.getElementById('count' + dayIdx);
+  const el = document.getElementById('count'+dayIdx);
   if (el) el.textContent = d.items.length;
 }
 
-function renderAll() { for (let i = 0; i < 3; i++) renderDay(i); }
+function renderAll() { for (let i=0;i<3;i++) renderDay(i); }
 
 function switchDay(idx) {
   currentDay = idx;
-  document.querySelectorAll('.day-tab').forEach((t,i) => t.classList.toggle('active', i===idx));
-  document.querySelectorAll('.day-panel').forEach((p,i) => p.classList.toggle('active', i===idx));
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  document.querySelectorAll('.day-tab').forEach((t,i) => t.classList.toggle('active',i===idx));
+  document.querySelectorAll('.day-panel').forEach((p,i) => p.classList.toggle('active',i===idx));
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
 function openEdit(dayIdx, itemIdx) {
-  editingDay = dayIdx; editingIdx = itemIdx;
+  editingDay=dayIdx; editingIdx=itemIdx;
   const item = data[dayIdx].items[itemIdx];
   document.getElementById('modalTitle').textContent = '編輯行程';
-  document.getElementById('fTime').value = item.time;
-  document.getElementById('fName').value = item.name;
-  document.getElementById('fDesc').value = item.desc;
-  document.getElementById('fMap').value = item.map || '';
-  document.getElementById('fTimetable').value = item.timetable || '';
-  document.getElementById('fTag').value = item.tag;
+  document.getElementById('fTime').value      = item.time;
+  document.getElementById('fName').value      = item.name;
+  document.getElementById('fDesc').value      = item.desc;
+  document.getElementById('fMap').value       = item.map||'';
+  document.getElementById('fTimetable').value = item.timetable||'';
+  document.getElementById('fTag').value       = item.tag;
   document.getElementById('modalOverlay').classList.add('open');
 }
 
 function openAdd(dayIdx) {
-  editingDay = dayIdx; editingIdx = -1;
+  editingDay=dayIdx; editingIdx=-1;
   document.getElementById('modalTitle').textContent = '新增行程';
-  ['fTime','fName','fDesc','fMap','fTimetable'].forEach(id => document.getElementById(id).value = '');
-  document.getElementById('fTag').value = 'sight';
+  ['fTime','fName','fDesc','fMap','fTimetable'].forEach(id => document.getElementById(id).value='');
+  document.getElementById('fTag').value='sight';
   document.getElementById('modalOverlay').classList.add('open');
 }
 
@@ -513,56 +721,62 @@ function closeModal() { document.getElementById('modalOverlay').classList.remove
 
 function saveItem() {
   const item = {
-    time: document.getElementById('fTime').value || '--:--',
-    name: document.getElementById('fName').value || '（未命名）',
-    desc: document.getElementById('fDesc').value,
-    map: document.getElementById('fMap').value,
+    time:      document.getElementById('fTime').value||'--:--',
+    name:      document.getElementById('fName').value||'（未命名）',
+    desc:      document.getElementById('fDesc').value,
+    map:       document.getElementById('fMap').value,
     timetable: document.getElementById('fTimetable').value,
-    tag: document.getElementById('fTag').value,
+    tag:       document.getElementById('fTag').value,
   };
-  if (editingIdx === -1) data[editingDay].items.push(item);
-  else data[editingDay].items[editingIdx] = item;
+  if (editingIdx===-1) data[editingDay].items.push(item);
+  else data[editingDay].items[editingIdx]=item;
   save(); renderDay(editingDay); closeModal(); showToast('已儲存 ✓');
 }
 
-function askDelete(dayIdx, itemIdx) {
+function askDelete(dayIdx,itemIdx) {
   document.getElementById(`dc-${dayIdx}-${itemIdx}`).classList.add('show');
 }
-function cancelDelete(dayIdx, itemIdx) {
+function cancelDelete(dayIdx,itemIdx) {
   document.getElementById(`dc-${dayIdx}-${itemIdx}`).classList.remove('show');
 }
-function confirmDelete(dayIdx, itemIdx) {
-  data[dayIdx].items.splice(itemIdx, 1);
+function confirmDelete(dayIdx,itemIdx) {
+  data[dayIdx].items.splice(itemIdx,1);
   save(); renderDay(dayIdx); showToast('已刪除');
 }
 
 function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2000);
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2000);
 }
 
-document.getElementById('modalOverlay').addEventListener('click', function(e) {
-  if (e.target === this) closeModal();
+// 點背景關閉 modal
+document.getElementById('modalOverlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
+document.getElementById('settingsOverlay').addEventListener('click',function(e){if(e.target===this)closeSettings();});
+
+// 點其他地方關閉目的地建議
+document.addEventListener('click',function(e){
+  if(!e.target.closest('.dest-wrap')){
+    document.getElementById('destList').innerHTML='';
+  }
 });
 
 // 左右滑動切換天數
-(function() {
-  let sx = 0, sy = 0;
-  document.body.addEventListener('touchstart', e => {
-    sx = e.touches[0].clientX;
-    sy = e.touches[0].clientY;
-  }, { passive: true });
-  document.body.addEventListener('touchend', e => {
-    const dx = e.changedTouches[0].clientX - sx;
-    const dy = e.changedTouches[0].clientY - sy;
-    if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.5) {
-      const next = currentDay + (dx < 0 ? 1 : -1);
-      if (next >= 0 && next <= 3) switchDay(next);
+(function(){
+  let sx=0,sy=0;
+  document.body.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY;},{passive:true});
+  document.body.addEventListener('touchend',e=>{
+    const dx=e.changedTouches[0].clientX-sx;
+    const dy=e.changedTouches[0].clientY-sy;
+    if(Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)*1.5){
+      const next=currentDay+(dx<0?1:-1);
+      if(next>=0&&next<=3)switchDay(next);
     }
-  }, { passive: true });
+  },{passive:true});
 })();
 
+// 初始化
+updateHeader();
 renderAll();
 </script>
 </body>
