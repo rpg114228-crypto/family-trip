@@ -2,35 +2,48 @@
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>親子小旅行行程</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>嘉義×阿里山 螢火蟲親子行</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: -apple-system, "Noto Sans TC", sans-serif; background: #f0f4f0; color: #333; }
 
   header {
-    background: linear-gradient(135deg, #2d6a4f, #1b4332);
-    color: white; padding: 18px 16px 14px;
+    background: linear-gradient(135deg, #1b4332, #2d6a4f, #40916c);
+    color: white; padding: 16px 16px 12px;
     position: sticky; top: 0; z-index: 100;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
   }
-  header h1 { font-size: 20px; font-weight: 700; }
-  header p { font-size: 14px; opacity: 0.85; margin-top: 2px; }
+  header h1 { font-size: 19px; font-weight: 700; letter-spacing: 0.3px; }
+  .header-meta { display: flex; gap: 8px; margin-top: 6px; flex-wrap: wrap; }
+  .header-badge {
+    font-size: 12px; opacity: 0.92;
+    background: rgba(255,255,255,0.18); border-radius: 20px;
+    padding: 2px 9px; border: 1px solid rgba(255,255,255,0.2);
+  }
 
   .day-tabs {
     display: flex; background: white;
     border-bottom: 2px solid #d8e8d8;
-    position: sticky; top: 62px; z-index: 99;
+    position: sticky; top: 66px; z-index: 99;
   }
   .day-tab {
-    flex: 1; padding: 12px 4px; text-align: center;
-    font-size: 15px; font-weight: 600; color: #888;
-    cursor: pointer; transition: all 0.2s;
+    flex: 1; padding: 9px 2px 8px; text-align: center;
+    font-weight: 600; color: #aaa;
+    cursor: pointer; transition: color 0.2s, border-color 0.2s;
     border-bottom: 3px solid transparent;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .day-tab .tab-label { display: block; font-size: 12px; }
+  .day-tab .tab-count {
+    display: inline-block; font-size: 10px; font-weight: 700;
+    background: #ebebeb; color: #999; border-radius: 10px;
+    padding: 1px 6px; margin-top: 2px;
   }
   .day-tab.active { color: #2d6a4f; border-bottom-color: #2d6a4f; }
+  .day-tab.active .tab-count { background: #d8f3dc; color: #2d6a4f; }
 
-  .day-panel { display: none; padding: 12px 12px 80px; }
+  .day-panel { display: none; padding: 12px 12px 100px; }
   .day-panel.active { display: block; }
 
   .day-header {
@@ -38,121 +51,168 @@
     border-radius: 12px; padding: 12px 14px; margin-bottom: 12px;
     border-left: 4px solid #2d6a4f;
   }
-  .day-header h2 { font-size: 17px; color: #1b4332; font-weight: 700; }
-  .day-header p { font-size: 14px; color: #555; margin-top: 3px; }
+  .day-header h2 { font-size: 16px; color: #1b4332; font-weight: 700; }
+  .day-header p { font-size: 13px; color: #555; margin-top: 3px; }
 
   .item-card {
     background: white; border-radius: 12px;
     margin-bottom: 10px; overflow: hidden;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+    border-left: 4px solid #ddd;
+    animation: slideIn 0.22s ease both;
   }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .item-card.tag-border-food      { border-left-color: #ff8f00; }
+  .item-card.tag-border-sight     { border-left-color: #2d6a4f; }
+  .item-card.tag-border-transport { border-left-color: #1565c0; }
+  .item-card.tag-border-hotel     { border-left-color: #6a1b9a; }
+  .item-card.tag-border-activity  { border-left-color: #c62828; }
+  .item-card.tag-border-firefly   { border-left-color: #f9a825; }
+
   .item-main {
     display: flex; align-items: flex-start;
-    padding: 12px 12px 12px 0;
+    padding: 12px 12px 10px 0;
   }
   .item-time {
-    min-width: 56px; text-align: center; padding: 0 10px;
+    min-width: 54px; text-align: center; padding: 0 8px;
   }
-  .item-time span { font-size: 15px; font-weight: 700; color: #2d6a4f; display: block; line-height: 1.3; }
+  .item-time span { font-size: 14px; font-weight: 700; color: #2d6a4f; display: block; line-height: 1.3; }
 
   .item-divider {
-    width: 1px; background: #d8e8d8;
-    align-self: stretch; margin-right: 12px; position: relative;
+    width: 1px; background: #e8e8e8;
+    align-self: stretch; margin-right: 10px; position: relative;
   }
   .item-divider::before {
-    content: ''; width: 8px; height: 8px;
+    content: ''; width: 7px; height: 7px;
     background: #2d6a4f; border-radius: 50%;
-    position: absolute; left: -3.5px; top: 4px;
+    position: absolute; left: -3px; top: 4px;
   }
 
   .item-body { flex: 1; padding-right: 8px; }
-  .item-name { font-size: 17px; font-weight: 600; color: #222; line-height: 1.3; }
-  .item-desc { font-size: 14px; color: #666; margin-top: 4px; line-height: 1.5; }
+  .item-name { font-size: 16px; font-weight: 600; color: #222; line-height: 1.3; }
+  .item-desc { font-size: 13px; color: #666; margin-top: 4px; line-height: 1.65; }
   .item-tag {
-    display: inline-block; font-size: 12px;
+    display: inline-block; font-size: 11px;
     padding: 2px 7px; border-radius: 20px;
-    margin-top: 5px; font-weight: 600;
+    margin-top: 5px; font-weight: 600; letter-spacing: 0.3px;
   }
-  .tag-food { background: #fff3e0; color: #e65100; }
-  .tag-sight { background: #e8f5e9; color: #2e7d32; }
+  .tag-food      { background: #fff3e0; color: #e65100; }
+  .tag-sight     { background: #e8f5e9; color: #2e7d32; }
   .tag-transport { background: #e3f2fd; color: #1565c0; }
-  .tag-hotel { background: #f3e5f5; color: #6a1b9a; }
-  .tag-activity { background: #fce4ec; color: #880e4f; }
-  .tag-firefly { background: #fffde7; color: #f57f17; }
+  .tag-hotel     { background: #f3e5f5; color: #6a1b9a; }
+  .tag-activity  { background: #fce4ec; color: #880e4f; }
+  .tag-firefly   { background: #fffde7; color: #f57f17; }
 
-  .item-actions { display: flex; border-top: 1px solid #f0f0f0; }
+  .item-actions { display: flex; border-top: 1px solid #f5f5f5; }
   .btn-action {
-    flex: 1; padding: 10px 4px; font-size: 14px;
+    flex: 1; padding: 11px 4px; font-size: 13px;
     background: none; border: none; cursor: pointer;
-    color: #888; font-weight: 500; transition: background 0.15s;
-    border-right: 1px solid #f0f0f0;
+    color: #888; font-weight: 500;
+    border-right: 1px solid #f5f5f5;
+    min-height: 44px; display: flex; align-items: center; justify-content: center;
+    gap: 2px; transition: background 0.12s;
+    -webkit-tap-highlight-color: transparent;
   }
   .btn-action:last-child { border-right: none; }
   .btn-action:active { background: #f5f5f5; }
-  .btn-action.nav { color: #2d6a4f; }
+  .btn-action:disabled { opacity: 0.25; cursor: default; }
+  .btn-action.nav       { color: #2d6a4f; }
   .btn-action.timetable { color: #6a1b9a; }
-  .btn-action.edit { color: #1565c0; }
-  .btn-action.del { color: #e53935; }
+  .btn-action.edit      { color: #1565c0; }
+  .btn-action.del       { color: #e53935; }
+
+  .delete-confirm {
+    display: none; background: #fff8f8; padding: 10px 14px;
+    border-top: 1px solid #ffcdd2; align-items: center; gap: 8px;
+  }
+  .delete-confirm.show { display: flex; animation: slideIn 0.15s ease; }
+  .delete-confirm > span { flex: 1; font-size: 13px; color: #c62828; font-weight: 500; }
+  .btn-del-yes { padding: 7px 16px; background: #e53935; color: white; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; }
+  .btn-del-no  { padding: 7px 14px; background: none; border: 1.5px solid #ddd; border-radius: 8px; font-size: 13px; color: #666; cursor: pointer; }
 
   .add-btn {
     display: flex; align-items: center; justify-content: center;
-    gap: 6px; width: 100%; padding: 12px;
+    gap: 6px; width: 100%; padding: 14px;
     background: white; border: 2px dashed #a8d5b5;
     border-radius: 12px; color: #2d6a4f;
-    font-size: 16px; font-weight: 600; cursor: pointer; margin-bottom: 10px;
+    font-size: 15px; font-weight: 600; cursor: pointer; margin-bottom: 10px;
+    min-height: 50px;
+    -webkit-tap-highlight-color: transparent;
   }
 
   /* Summary tab */
   .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
   .summary-card {
-    background: white; border-radius: 12px; padding: 14px 12px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.08); text-align: center;
+    background: white; border-radius: 12px; padding: 14px 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07); text-align: center;
   }
-  .summary-card .label { font-size: 13px; color: #888; margin-bottom: 4px; }
-  .summary-card .value { font-size: 20px; font-weight: 700; color: #2d6a4f; }
-  .summary-card .unit { font-size: 13px; color: #999; }
+  .summary-card .s-icon { font-size: 22px; display: block; margin-bottom: 4px; }
+  .summary-card .label  { font-size: 12px; color: #888; margin-bottom: 2px; }
+  .summary-card .value  { font-size: 22px; font-weight: 700; color: #2d6a4f; }
+  .summary-card .unit   { font-size: 11px; color: #999; }
 
-  .cost-table { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
-  .cost-row { display: flex; padding: 12px 14px; border-bottom: 1px solid #f5f5f5; font-size: 15px; }
+  .cost-table { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
+  .cost-row { display: flex; padding: 12px 14px; border-bottom: 1px solid #f5f5f5; font-size: 14px; align-items: center; }
   .cost-row:last-child { border-bottom: none; font-weight: 700; background: #f0faf0; }
-  .cost-row span:last-child { margin-left: auto; color: #2d6a4f; font-weight: 600; }
+  .cost-row span:first-child { flex: 1; color: #555; }
+  .cost-row span:last-child  { color: #2d6a4f; font-weight: 600; white-space: nowrap; margin-left: 8px; }
 
-  .section-title { font-size: 15px; font-weight: 700; color: #555; margin: 14px 0 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .section-title { font-size: 12px; font-weight: 700; color: #999; margin: 16px 0 8px; text-transform: uppercase; letter-spacing: 1px; }
 
   .tips-card { background: #fffde7; border-radius: 12px; padding: 12px 14px; border-left: 4px solid #fdd835; margin-bottom: 10px; }
-  .tips-card h3 { font-size: 15px; font-weight: 700; color: #f57f17; margin-bottom: 6px; }
-  .tips-card ul { padding-left: 14px; }
-  .tips-card li { font-size: 14px; color: #555; line-height: 1.9; }
-  .tips-card a { color: #2d6a4f; font-weight: 700; text-decoration: underline; }
+  .tips-card h3 { font-size: 14px; font-weight: 700; color: #f57f17; margin-bottom: 6px; }
+  .tips-card ul { padding-left: 16px; }
+  .tips-card li { font-size: 13px; color: #555; line-height: 2.0; }
+  .tips-card a  { color: #2d6a4f; font-weight: 700; text-decoration: underline; }
 
   /* Modal */
   .modal-overlay {
     display: none; position: fixed; inset: 0;
-    background: rgba(0,0,0,0.5); z-index: 200; align-items: flex-end;
+    background: rgba(0,0,0,0.45); z-index: 200;
+    align-items: flex-end;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
   }
   .modal-overlay.open { display: flex; }
   .modal {
     background: white; width: 100%; border-radius: 20px 20px 0 0;
-    padding: 20px 16px 32px; max-height: 90vh; overflow-y: auto;
+    padding: 16px 16px max(32px, env(safe-area-inset-bottom, 24px));
+    max-height: 90vh; overflow-y: auto;
+    animation: modalUp 0.25s cubic-bezier(0.32,0.72,0,1) both;
   }
+  @keyframes modalUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+  }
+  .modal-handle { width: 36px; height: 4px; background: #ddd; border-radius: 2px; margin: 0 auto 16px; }
   .modal h3 { font-size: 16px; font-weight: 700; margin-bottom: 16px; }
   .modal label { font-size: 12px; font-weight: 600; color: #555; display: block; margin-bottom: 4px; margin-top: 12px; }
   .modal input, .modal textarea, .modal select {
-    width: 100%; padding: 10px 12px; font-size: 14px;
-    border: 1.5px solid #ddd; border-radius: 8px;
+    width: 100%; padding: 11px 12px; font-size: 15px;
+    border: 1.5px solid #e0e0e0; border-radius: 10px;
     font-family: inherit; outline: none; transition: border-color 0.2s;
+    background: #fafafa;
   }
-  .modal input:focus, .modal textarea:focus, .modal select:focus { border-color: #2d6a4f; }
-  .modal textarea { resize: vertical; min-height: 70px; }
-  .modal-btns { display: flex; gap: 10px; margin-top: 18px; }
-  .btn-cancel { flex: 1; padding: 12px; border: 1.5px solid #ddd; border-radius: 10px; background: white; font-size: 14px; font-weight: 600; color: #666; cursor: pointer; }
-  .btn-save { flex: 2; padding: 12px; border: none; border-radius: 10px; background: #2d6a4f; color: white; font-size: 14px; font-weight: 700; cursor: pointer; }
+  .modal input:focus, .modal textarea:focus, .modal select:focus {
+    border-color: #2d6a4f; background: white;
+  }
+  .modal textarea { resize: vertical; min-height: 80px; }
+  .modal-btns { display: flex; gap: 10px; margin-top: 20px; }
+  .btn-cancel { flex: 1; padding: 13px; border: 1.5px solid #e0e0e0; border-radius: 12px; background: white; font-size: 15px; font-weight: 600; color: #666; cursor: pointer; }
+  .btn-save { flex: 2; padding: 13px; border: none; border-radius: 12px; background: #2d6a4f; color: white; font-size: 15px; font-weight: 700; cursor: pointer; }
+  .btn-save:active { background: #1b4332; }
 
   .toast {
-    position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
-    background: #333; color: white; padding: 10px 20px;
+    position: fixed;
+    bottom: max(90px, calc(80px + env(safe-area-inset-bottom, 0px)));
+    left: 50%; transform: translateX(-50%);
+    background: rgba(30,30,30,0.85); color: white; padding: 10px 22px;
     border-radius: 20px; font-size: 13px; z-index: 300;
     opacity: 0; transition: opacity 0.3s; pointer-events: none;
+    white-space: nowrap;
   }
   .toast.show { opacity: 1; }
 </style>
@@ -161,14 +221,30 @@
 
 <header>
   <h1>✨ 嘉義×阿里山 螢火蟲親子行</h1>
-  <p>3天2夜｜3大3小｜高雄搭台鐵出發</p>
+  <div class="header-meta">
+    <span class="header-badge">👨‍👩‍👧 3大3小</span>
+    <span class="header-badge">🚂 高雄出發</span>
+    <span class="header-badge">🌙 3天2夜</span>
+    <span class="header-badge">🌿 螢火蟲季尾聲</span>
+  </div>
 </header>
 
 <div class="day-tabs">
-  <div class="day-tab active" onclick="switchDay(0)">第一天</div>
-  <div class="day-tab" onclick="switchDay(1)">第二天</div>
-  <div class="day-tab" onclick="switchDay(2)">第三天</div>
-  <div class="day-tab" onclick="switchDay(3)">總覽</div>
+  <div class="day-tab active" onclick="switchDay(0)">
+    <span class="tab-label">🚂 Day 1</span>
+    <span class="tab-count" id="count0">0</span>
+  </div>
+  <div class="day-tab" onclick="switchDay(1)">
+    <span class="tab-label">🌲 Day 2</span>
+    <span class="tab-count" id="count1">0</span>
+  </div>
+  <div class="day-tab" onclick="switchDay(2)">
+    <span class="tab-label">🌅 Day 3</span>
+    <span class="tab-count" id="count2">0</span>
+  </div>
+  <div class="day-tab" onclick="switchDay(3)">
+    <span class="tab-label">📋 總覽</span>
+  </div>
 </div>
 
 <div id="day0" class="day-panel active"></div>
@@ -176,13 +252,26 @@
 <div id="day2" class="day-panel"></div>
 
 <div id="day3" class="day-panel">
-  <div style="padding: 12px 0 80px;">
+  <div style="padding: 4px 0 80px;">
     <div class="section-title">人員與天數</div>
     <div class="summary-grid">
-      <div class="summary-card"><div class="label">大人</div><div class="value">3</div><div class="unit">人</div></div>
-      <div class="summary-card"><div class="label">小孩</div><div class="value">3</div><div class="unit">人（3-6歲）</div></div>
-      <div class="summary-card"><div class="label">天數</div><div class="value">3</div><div class="unit">天 2 夜</div></div>
-      <div class="summary-card"><div class="label">交通</div><div class="value" style="font-size:13px;">台鐵+小火車</div></div>
+      <div class="summary-card">
+        <span class="s-icon">👨‍👩‍👧</span>
+        <div class="label">大人</div><div class="value">3</div><div class="unit">人</div>
+      </div>
+      <div class="summary-card">
+        <span class="s-icon">🧒</span>
+        <div class="label">小孩</div><div class="value">3</div><div class="unit">人（3-6歲）</div>
+      </div>
+      <div class="summary-card">
+        <span class="s-icon">📅</span>
+        <div class="label">天數</div><div class="value">3</div><div class="unit">天 2 夜</div>
+      </div>
+      <div class="summary-card">
+        <span class="s-icon">🚂</span>
+        <div class="label">交通</div>
+        <div class="value" style="font-size:13px; line-height:1.5;">台鐵<br>小火車</div>
+      </div>
     </div>
 
     <div class="section-title">費用估算</div>
@@ -212,11 +301,12 @@
     <div class="tips-card" style="background:#fffbf0; border-color:#ffb300;">
       <h3 style="color:#e65100;">✨ 賞螢貼士</h3>
       <ul>
-        <li>2026 螢火蟲季至 <b>5/31</b> 止，現在去正是尾聲</li>
+        <li>2026 螢火蟲季至 <b>5/31</b> 止，現在去正是尾聲！</li>
         <li>賞螢時間：入夜後 <b>19:30-21:30</b>，天黑後才出現</li>
-        <li>賞螢不能開手電筒，帶紅色濾光手電筒或靜候</li>
-        <li>山上溫差大，幼童多帶一件外套</li>
+        <li>賞螢不能開白光手電筒，帶<b>紅色濾光手電筒</b>或靜候</li>
+        <li>山上夜間約 <b>15°C</b>，幼童多帶一件外套</li>
         <li>建議入住有安排螢火蟲導覽的民宿</li>
+        <li>雨天螢火蟲較少出現，出發前查好天氣</li>
       </ul>
     </div>
 
@@ -225,10 +315,11 @@
       <h3>🧒 幼童（3-6歲）注意</h3>
       <ul>
         <li>阿里山小火車需提早網路訂票（最多提前14天）</li>
-        <li>山路崎嶇，推車較難使用，建議背帶或讓孩子自走</li>
+        <li>山路崎嶇，推車較難使用，建議<b>背帶</b>或讓孩子自走</li>
         <li>6歲以下台鐵免費，高鐵依身高購票</li>
         <li>奮起湖老街地面平整，孩子走路沒問題</li>
-        <li>阿里山早晚涼，白天日曬強，帽子防曬必備</li>
+        <li>阿里山早晚涼，白天日曬強，<b>帽子防曬</b>必備</li>
+        <li>山上超商選擇少，建議<b>自備孩子零食飲水</b></li>
       </ul>
     </div>
 
@@ -255,9 +346,10 @@
 <!-- Edit/Add Modal -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal">
+    <div class="modal-handle"></div>
     <h3 id="modalTitle">編輯行程</h3>
     <label>時間</label>
-    <input type="text" id="fTime" placeholder="例：09:00">
+    <input type="text" id="fTime" placeholder="例：09:00" inputmode="numeric">
     <label>地點／活動名稱</label>
     <input type="text" id="fName" placeholder="例：奮起湖老街">
     <label>說明</label>
@@ -265,7 +357,7 @@
     <label>導航關鍵字（Google Maps 搜尋用）</label>
     <input type="text" id="fMap" placeholder="例：奮起湖車站 嘉義（留空則不顯示導航）">
     <label>時刻表連結（交通類可填，其他留空）</label>
-    <input type="text" id="fTimetable" placeholder="例：https://www.thsrc.com.tw">
+    <input type="url" id="fTimetable" placeholder="例：https://...">
     <label>類型</label>
     <select id="fTag">
       <option value="sight">景點</option>
@@ -289,7 +381,7 @@ const DATA_KEY = 'trip_data_v4';
 
 const defaultData = [
   {
-    title: "第一天｜高雄 → 嘉義 → 奮起湖", sub: "高鐵出發，搭阿里山小火車上山",
+    title: "第一天｜高雄 → 嘉義 → 奮起湖", sub: "台鐵出發，搭阿里山小火車上山",
     items: [
       { time: "07:30", name: "高雄車站搭台鐵自強號出發", desc: "台鐵高雄→嘉義約1小時10分，直達嘉義車站不用轉車", tag: "transport", map: "高雄車站", timetable: "https://tip.railway.gov.tw/tra-tip-web/tip/tip001/tipZ001/query" },
       { time: "08:50", name: "抵嘉義車站", desc: "嘉義車站就是阿里山小火車的起點站，超方便", tag: "transport", map: "嘉義車站", timetable: "" },
@@ -298,7 +390,7 @@ const defaultData = [
       { time: "12:30", name: "抵奮起湖，享用鐵路便當", desc: "奮起湖便當全台最有名，現點現做，坐在月台邊吃最有感覺", tag: "food", map: "奮起湖車站", timetable: "" },
       { time: "13:30", name: "奮起湖老街散步", desc: "手工愛玉凍、木製工藝品，小孩可跑跳，地面平整", tag: "sight", map: "奮起湖老街 嘉義", timetable: "" },
       { time: "15:00", name: "Check-in 奮起湖民宿", desc: "建議選有螢火蟲步道的民宿，提早確認晚上是否有導覽", tag: "hotel", map: "奮起湖民宿", timetable: "" },
-      { time: "20:00", name: "夜間賞螢火蟲", desc: "沿民宿附近步道慢走，入夜後大量螢火蟲出現，記得不要開白光手電筒", tag: "firefly", map: "奮起湖步道 嘉義縣", timetable: "" },
+      { time: "20:00", name: "夜間賞螢火蟲", desc: "沿民宿附近步道慢走，入夜後大量螢火蟲出現，記得不要開白光手電筒", tag: "firefly", map: "奮起湖步道 嘉義縣", timetable: "" }
     ]
   },
   {
@@ -311,7 +403,7 @@ const defaultData = [
       { time: "14:00", name: "姐妹潭、受鎮宮", desc: "湖景超美，繞湖一圈約30分鐘，孩子可餵魚", tag: "sight", map: "阿里山姐妹潭", timetable: "" },
       { time: "16:00", name: "Check-in 阿里山民宿", desc: "建議石棹地區民宿，性價比高，詢問是否有安排螢火蟲導覽", tag: "hotel", map: "阿里山石棹民宿", timetable: "" },
       { time: "18:30", name: "晚餐", desc: "民宿或附近餐廳用餐，山上天黑早，吃完準備看星星", tag: "food", map: "石棹 嘉義縣", timetable: "" },
-      { time: "20:00", name: "阿里山星空觀賞", desc: "海拔2000m以上無光害，銀河清晰可見，孩子第一次看這麼多星星保證驚嘆。民宿外空地仰頭就看得到", tag: "activity", map: "阿里山國家森林遊樂區", timetable: "" },
+      { time: "20:00", name: "阿里山星空觀賞", desc: "海拔2000m以上無光害，銀河清晰可見，孩子第一次看這麼多星星保證驚嘆。民宿外空地仰頭就看得到", tag: "activity", map: "阿里山國家森林遊樂區", timetable: "" }
     ]
   },
   {
@@ -323,61 +415,77 @@ const defaultData = [
       { time: "12:00", name: "抵嘉義，午餐", desc: "方圓廚坊或文化路周邊，嘉義在地美食收尾", tag: "food", map: "嘉義文化路夜市", timetable: "" },
       { time: "13:30", name: "嘉義文化路周邊伴手禮", desc: "林聰明沙鍋魚頭、方塊酥、阿里山高山茶當伴手禮", tag: "sight", map: "嘉義文化路", timetable: "" },
       { time: "15:00", name: "嘉義車站搭台鐵返高雄", desc: "台鐵嘉義→高雄約1小時10分，直達高雄車站", tag: "transport", map: "嘉義車站", timetable: "https://tip.railway.gov.tw/tra-tip-web/tip/tip001/tipZ001/query" },
-      { time: "16:20", name: "高雄車站抵達，旅程結束", desc: "帶著滿滿螢火蟲回憶平安到家", tag: "transport", map: "高雄車站", timetable: "" },
+      { time: "16:20", name: "高雄車站抵達，旅程結束", desc: "帶著滿滿螢火蟲回憶平安到家", tag: "transport", map: "高雄車站", timetable: "" }
     ]
   }
 ];
 
 let data = JSON.parse(localStorage.getItem(DATA_KEY) || 'null') || defaultData;
-let editingDay = 0, editingIdx = -1;
+let editingDay = 0, editingIdx = -1, currentDay = 0;
 
 const tagLabels = { food: '餐飲', sight: '景點', transport: '交通', hotel: '住宿', activity: '活動', firefly: '螢火蟲' };
 
 function save() { localStorage.setItem(DATA_KEY, JSON.stringify(data)); }
 
 function openNav(query) {
-  const url = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(query);
-  window.open(url, '_blank');
+  window.open('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(query), '_blank');
 }
 function openTimetable(url) { window.open(url, '_blank'); }
+
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
 
 function renderDay(dayIdx) {
   const panel = document.getElementById('day' + dayIdx);
   const d = data[dayIdx];
-  let html = `<div class="day-header"><h2>${d.title}</h2><p>${d.sub}</p></div>`;
+  let html = `<div class="day-header"><h2>${esc(d.title)}</h2><p>${esc(d.sub)}</p></div>`;
   d.items.forEach((item, i) => {
-    const hasMap = item.map && item.map.trim() !== '';
-    const hasTimetable = item.timetable && item.timetable.trim() !== '';
-    const mapQuery = (item.map || item.name).replace(/'/g, "\\'");
-    const timetableUrl = (item.timetable || '').replace(/'/g, "\\'");
+    const hasMap = item.map && item.map.trim();
+    const hasTimetable = item.timetable && item.timetable.trim();
+    const mapJs = JSON.stringify(item.map || item.name);
+    const ttJs  = JSON.stringify(item.timetable || '');
     html += `
-    <div class="item-card">
+    <div class="item-card tag-border-${item.tag}">
       <div class="item-main">
-        <div class="item-time"><span>${item.time}</span></div>
+        <div class="item-time"><span>${esc(item.time)}</span></div>
         <div class="item-divider"></div>
         <div class="item-body">
-          <div class="item-name">${item.name}</div>
-          ${item.desc ? `<div class="item-desc">${item.desc}</div>` : ''}
-          <span class="item-tag tag-${item.tag}">${tagLabels[item.tag] || item.tag}</span>
+          <div class="item-name">${esc(item.name)}</div>
+          ${item.desc ? `<div class="item-desc">${esc(item.desc)}</div>` : ''}
+          <span class="item-tag tag-${item.tag}">${tagLabels[item.tag] || esc(item.tag)}</span>
         </div>
       </div>
       <div class="item-actions">
-        ${hasMap ? `<button class="btn-action nav" onclick="openNav('${mapQuery}')">📍 導航</button>` : `<button class="btn-action" style="color:#ccc;" disabled>📍 無地點</button>`}
-        ${hasTimetable ? `<button class="btn-action timetable" onclick="openTimetable('${timetableUrl}')">🕐 時刻表</button>` : ''}
+        ${hasMap
+          ? `<button class="btn-action nav" onclick="openNav(${mapJs})">📍 導航</button>`
+          : `<button class="btn-action" disabled>📍 無地點</button>`}
+        ${hasTimetable
+          ? `<button class="btn-action timetable" onclick="openTimetable(${ttJs})">🕐 時刻</button>`
+          : ''}
         <button class="btn-action edit" onclick="openEdit(${dayIdx},${i})">✏️ 編輯</button>
-        <button class="btn-action del" onclick="deleteItem(${dayIdx},${i})">🗑 刪除</button>
+        <button class="btn-action del" onclick="askDelete(${dayIdx},${i})">🗑 刪除</button>
+      </div>
+      <div class="delete-confirm" id="dc-${dayIdx}-${i}">
+        <span>確定刪除此行程？</span>
+        <button class="btn-del-no"  onclick="cancelDelete(${dayIdx},${i})">取消</button>
+        <button class="btn-del-yes" onclick="confirmDelete(${dayIdx},${i})">刪除</button>
       </div>
     </div>`;
   });
   html += `<button class="add-btn" onclick="openAdd(${dayIdx})">＋ 新增行程</button>`;
   panel.innerHTML = html;
+  const el = document.getElementById('count' + dayIdx);
+  if (el) el.textContent = d.items.length;
 }
 
 function renderAll() { for (let i = 0; i < 3; i++) renderDay(i); }
 
 function switchDay(idx) {
+  currentDay = idx;
   document.querySelectorAll('.day-tab').forEach((t,i) => t.classList.toggle('active', i===idx));
   document.querySelectorAll('.day-panel').forEach((p,i) => p.classList.toggle('active', i===idx));
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function openEdit(dayIdx, itemIdx) {
@@ -396,11 +504,7 @@ function openEdit(dayIdx, itemIdx) {
 function openAdd(dayIdx) {
   editingDay = dayIdx; editingIdx = -1;
   document.getElementById('modalTitle').textContent = '新增行程';
-  document.getElementById('fTime').value = '';
-  document.getElementById('fName').value = '';
-  document.getElementById('fDesc').value = '';
-  document.getElementById('fMap').value = '';
-  document.getElementById('fTimetable').value = '';
+  ['fTime','fName','fDesc','fMap','fTimetable'].forEach(id => document.getElementById(id).value = '');
   document.getElementById('fTag').value = 'sight';
   document.getElementById('modalOverlay').classList.add('open');
 }
@@ -421,8 +525,13 @@ function saveItem() {
   save(); renderDay(editingDay); closeModal(); showToast('已儲存 ✓');
 }
 
-function deleteItem(dayIdx, itemIdx) {
-  if (!confirm('確定要刪除這個行程？')) return;
+function askDelete(dayIdx, itemIdx) {
+  document.getElementById(`dc-${dayIdx}-${itemIdx}`).classList.add('show');
+}
+function cancelDelete(dayIdx, itemIdx) {
+  document.getElementById(`dc-${dayIdx}-${itemIdx}`).classList.remove('show');
+}
+function confirmDelete(dayIdx, itemIdx) {
   data[dayIdx].items.splice(itemIdx, 1);
   save(); renderDay(dayIdx); showToast('已刪除');
 }
@@ -436,6 +545,23 @@ function showToast(msg) {
 document.getElementById('modalOverlay').addEventListener('click', function(e) {
   if (e.target === this) closeModal();
 });
+
+// 左右滑動切換天數
+(function() {
+  let sx = 0, sy = 0;
+  document.body.addEventListener('touchstart', e => {
+    sx = e.touches[0].clientX;
+    sy = e.touches[0].clientY;
+  }, { passive: true });
+  document.body.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - sx;
+    const dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      const next = currentDay + (dx < 0 ? 1 : -1);
+      if (next >= 0 && next <= 3) switchDay(next);
+    }
+  }, { passive: true });
+})();
 
 renderAll();
 </script>
