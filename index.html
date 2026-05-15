@@ -844,15 +844,17 @@ function toggleRec() {
 function renderRec() {
   const destDB = RESTAURANT_DB[settings.destination] || RESTAURANT_DB['嘉義×阿里山'];
   const list = destDB[editingDay] || destDB[0] || [];
-  document.getElementById('recList').innerHTML = list.map(r => `
-    <div class="rec-card" onclick="selectRestaurant(${JSON.stringify(r.name)},${JSON.stringify(r.desc)},${JSON.stringify(r.map)})">
+  document.getElementById('recList').innerHTML = list.map(r => {
+    const args = [r.name, r.desc, r.map].map(JSON.stringify).join(',');
+    return `<div class="rec-card" onclick='selectRestaurant(${args})'>
       <span class="rec-card-emoji">${r.emoji}</span>
       <div class="rec-card-body">
         <div class="rec-card-name">${esc(r.name)}</div>
         <div class="rec-card-desc">${esc(r.desc)}</div>
       </div>
       <span class="rec-card-price">${r.price}</span>
-    </div>`).join('');
+    </div>`;
+  }).join('');
 }
 
 function selectRestaurant(name, desc, map) {
@@ -904,13 +906,14 @@ function filterDest(q) {
     el.innerHTML = '<div class="dest-no-result">找不到符合的目的地</div>';
     return;
   }
-  el.innerHTML = matched.map(d =>
-    `<div class="dest-item" onclick="selectDest(${JSON.stringify(d.name)})">
+  el.innerHTML = matched.map(d => {
+    const badge = d.tmpl ? '<span style="font-size:10px;background:#d8f3dc;color:#2d6a4f;border-radius:8px;padding:1px 6px;font-weight:700;">有行程</span>' : '';
+    return `<div class="dest-item" onclick='selectDest(${JSON.stringify(d.name)})'>
        <span class="dest-icon">${d.icon}</span>
        <span style="flex:1">${d.name}</span>
-       ${d.tmpl ? '<span style="font-size:10px;background:#d8f3dc;color:#2d6a4f;border-radius:8px;padding:1px 6px;font-weight:700;">有行程</span>' : ''}
-     </div>`
-  ).join('');
+       ${badge}
+     </div>`;
+  }).join('');
 }
 
 function selectDest(name) {
@@ -1036,9 +1039,9 @@ function renderDay(dayIdx) {
       </div>
       <div class="item-actions">
         ${hasMap
-          ? `<button class="btn-action nav" onclick="openNav(${mapJs})">📍 導航</button>`
+          ? `<button class="btn-action nav" onclick='openNav(${mapJs})'>📍 導航</button>`
           : `<button class="btn-action" disabled>📍 無地點</button>`}
-        ${hasTT ? `<button class="btn-action timetable" onclick="openTimetable(${ttJs})">🕐 時刻</button>` : ''}
+        ${hasTT ? `<button class="btn-action timetable" onclick='openTimetable(${ttJs})'>🕐 時刻</button>` : ''}
         <button class="btn-action edit" onclick="openEdit(${dayIdx},${i})">✏️ 編輯</button>
         <button class="btn-action del"  onclick="askDelete(${dayIdx},${i})">🗑 刪除</button>
       </div>
