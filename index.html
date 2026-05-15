@@ -239,12 +239,11 @@
   .rec-card-price { font-size: 12px; font-weight: 700; color: #2d6a4f; flex-shrink: 0; background: #d8f3dc; border-radius: 6px; padding: 2px 6px; }
 
   /* Settings-specific */
-  .dest-wrap { position: relative; }
+  .dest-wrap { position: static; }
   .dest-suggestions {
-    position: absolute; left: 0; right: 0; top: calc(100% + 2px);
     background: white; border: 1.5px solid #c8e6c9; border-radius: 12px;
-    z-index: 10; max-height: 210px; overflow-y: auto;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    margin-top: 6px; max-height: 200px; overflow-y: auto;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   }
   .dest-item {
     padding: 11px 14px; font-size: 14px; cursor: pointer; color: #333;
@@ -917,6 +916,7 @@ function filterDest(q) {
 function selectDest(name) {
   document.getElementById('sDest').value = name;
   document.getElementById('destList').innerHTML = '';
+  document.getElementById('sDest').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
 // ── 設定 Modal ──────────────────────────────────────
@@ -947,21 +947,36 @@ function changeCount(field, delta) {
   }
 }
 
+function resolveDest(input) {
+  const q = input.trim().toLowerCase();
+  if (!q) return null;
+  // 完全匹配優先
+  const exact = DEST_LIST.find(d => d.name === input.trim());
+  if (exact) return exact.name;
+  // 模糊比對（有模板的優先）
+  const fuzzy = DEST_LIST.filter(d => d.name.toLowerCase().includes(q));
+  if (fuzzy.length) return fuzzy.sort((a,b) => (b.tmpl?1:0)-(a.tmpl?1:0))[0].name;
+  return input.trim();
+}
+
 function saveSettings() {
-  const newDest = document.getElementById('sDest').value.trim() || settings.destination;
+  const inputVal = document.getElementById('sDest').value;
+  const newDest  = resolveDest(inputVal) || settings.destination;
   const prevDest = settings.destination;
 
   // 切換目的地：儲存舊行程，載入新行程
   if (newDest !== prevDest) {
-    localStorage.setItem(getDataKey(prevDest), JSON.stringify(data));
-    const saved = localStorage.getItem(getDataKey(newDest));
-    if (saved) {
-      data = JSON.parse(saved);
-    } else {
-      const tmpl = getTemplate(newDest);
-      data = tmpl || JSON.parse(JSON.stringify(defaultData));
+    try {
+      localStorage.setItem(getDataKey(prevDest), JSON.stringify(data));
+      const saved = localStorage.getItem(getDataKey(newDest));
+      data = saved
+        ? JSON.parse(saved)
+        : (getTemplate(newDest) || JSON.parse(JSON.stringify(defaultData)));
+      renderAll();
+    } catch(e) {
+      data = JSON.parse(JSON.stringify(defaultData));
+      renderAll();
     }
-    renderAll();
   }
 
   settings.destination  = newDest;
@@ -973,7 +988,7 @@ function saveSettings() {
   updateHeader();
   closeSettings();
   switchDay(0);
-  showToast(newDest !== prevDest ? `已切換至${newDest}行程 ✓` : '設定已更新 ✓');
+  showToast(newDest !== prevDest ? `已切換至 ${newDest} ✓` : '設定已更新 ✓');
 }
 
 function updateHeader() {
