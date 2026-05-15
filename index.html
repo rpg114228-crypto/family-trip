@@ -213,6 +213,31 @@
   .btn-save   { flex: 2; padding: 13px; border: none; border-radius: 12px; background: #2d6a4f; color: white; font-size: 15px; font-weight: 700; cursor: pointer; }
   .btn-save:active { background: #1b4332; }
 
+  /* Restaurant recommendations */
+  .rec-section { margin-top: 14px; }
+  .rec-section-label {
+    font-size: 12px; font-weight: 600; color: #2d6a4f;
+    margin-bottom: 8px; display: flex; align-items: center; gap: 5px;
+  }
+  .rec-list {
+    display: flex; flex-direction: column; gap: 8px;
+    max-height: 230px; overflow-y: auto;
+    padding-right: 2px;
+  }
+  .rec-card {
+    display: flex; align-items: center; gap: 10px;
+    background: #f6fdf7; border: 1.5px solid #c8e6c9;
+    border-radius: 10px; padding: 10px 12px; cursor: pointer;
+    transition: background 0.12s, border-color 0.12s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .rec-card:active { background: #e8f5e9; border-color: #81c784; }
+  .rec-card-emoji { font-size: 20px; flex-shrink: 0; }
+  .rec-card-body { flex: 1; min-width: 0; }
+  .rec-card-name { font-size: 14px; font-weight: 600; color: #1b4332; }
+  .rec-card-desc { font-size: 12px; color: #666; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .rec-card-price { font-size: 12px; font-weight: 700; color: #2d6a4f; flex-shrink: 0; background: #d8f3dc; border-radius: 6px; padding: 2px 6px; }
+
   /* Settings-specific */
   .dest-wrap { position: relative; }
   .dest-suggestions {
@@ -399,6 +424,10 @@
     <input type="text" id="fTime" placeholder="例：09:00" inputmode="numeric">
     <label>地點／活動名稱</label>
     <input type="text" id="fName" placeholder="例：奮起湖老街">
+    <div class="rec-section" id="recSection" style="display:none;">
+      <div class="rec-section-label">🍽 推薦餐廳（點選即填入）</div>
+      <div class="rec-list" id="recList"></div>
+    </div>
     <label>說明</label>
     <textarea id="fDesc" placeholder="簡短說明..."></textarea>
     <label>導航關鍵字（Google Maps 搜尋用）</label>
@@ -406,7 +435,7 @@
     <label>時刻表連結（交通類可填，其他留空）</label>
     <input type="url" id="fTimetable" placeholder="例：https://...">
     <label>類型</label>
-    <select id="fTag">
+    <select id="fTag" onchange="toggleRec()">
       <option value="sight">景點</option>
       <option value="food">餐飲</option>
       <option value="transport">交通</option>
@@ -526,6 +555,63 @@ let editingDay = 0, editingIdx = -1, currentDay = 0;
 const tagLabels = { food:'餐飲', sight:'景點', transport:'交通', hotel:'住宿', activity:'活動', firefly:'螢火蟲' };
 
 function save() { localStorage.setItem(DATA_KEY, JSON.stringify(data)); }
+
+// ── 推薦餐廳資料庫 ──────────────────────────────────
+const RESTAURANT_DB = {
+  0: [ // Day 1：高雄 → 嘉義 → 奮起湖
+    { emoji:'🍚', name:'噴水火雞肉飯',   desc:'嘉義最知名雞肉飯，排隊名店',     map:'嘉義噴水雞肉飯',         price:'$' },
+    { emoji:'🍚', name:'劉里長雞肉飯',   desc:'在地人推薦，車站旁步行可達',     map:'劉里長雞肉飯 嘉義',      price:'$' },
+    { emoji:'🐟', name:'林聰明沙鍋魚頭', desc:'嘉義老字號，必吃招牌',           map:'林聰明沙鍋魚頭 嘉義',    price:'$$' },
+    { emoji:'🍱', name:'奮起湖鐵路便當', desc:'現點現做，月台邊吃超有感覺',     map:'奮起湖車站',             price:'$' },
+    { emoji:'☕', name:'阿里山茶咖啡',   desc:'嘉義特色高山咖啡，附近景觀好',   map:'嘉義阿里山咖啡',         price:'$' },
+    { emoji:'🌙', name:'嘉義文化路夜市', desc:'在地小吃一次嚐，飯後散步好選擇', map:'嘉義文化路夜市',         price:'$' },
+    { emoji:'🍜', name:'方圓廚坊',       desc:'嘉義創意台菜，適合家庭聚餐',     map:'方圓廚坊 嘉義',          price:'$$' },
+  ],
+  1: [ // Day 2：奮起湖 → 阿里山
+    { emoji:'🍽', name:'阿里山森林餐廳', desc:'園區內，景觀佳，建議早點去',     map:'阿里山國家森林遊樂區',   price:'$$' },
+    { emoji:'🐗', name:'石棹山豬肉料理', desc:'在地山產，道地原住民風味',       map:'石棹 嘉義縣',            price:'$$' },
+    { emoji:'🧊', name:'奮起湖愛玉冰',   desc:'手工愛玉，天然消暑，孩子最愛',   map:'奮起湖老街 嘉義',        price:'$' },
+    { emoji:'🥚', name:'阿里山茶葉蛋',   desc:'高山茶葉水煮，香氣十足',         map:'阿里山車站',             price:'$' },
+    { emoji:'🌿', name:'民宿附近小店',   desc:'石棹地區有幾間樸實山產料理',     map:'石棹村 嘉義縣',          price:'$' },
+  ],
+  2: [ // Day 3：阿里山 → 嘉義 → 高雄
+    { emoji:'🍜', name:'方圓廚坊',       desc:'嘉義創意台菜，返程午餐首選',     map:'方圓廚坊 嘉義',          price:'$$' },
+    { emoji:'🍚', name:'嘉義火雞肉飯',   desc:'離開前再吃一碗，念念不忘',       map:'嘉義噴水雞肉飯',         price:'$' },
+    { emoji:'🐟', name:'林聰明沙鍋魚頭', desc:'嘉義必吃，當午餐剛剛好',         map:'林聰明沙鍋魚頭 嘉義',    price:'$$' },
+    { emoji:'🌙', name:'嘉義文化路夜市', desc:'採買伴手禮順便吃小吃',           map:'嘉義文化路夜市',          price:'$' },
+    { emoji:'🥣', name:'阿里山民宿早餐', desc:'多數民宿含簡單早餐',             map:'',                       price:'$' },
+  ],
+};
+
+function toggleRec() {
+  const tag = document.getElementById('fTag').value;
+  const sec = document.getElementById('recSection');
+  if (tag === 'food') {
+    sec.style.display = '';
+    renderRec();
+  } else {
+    sec.style.display = 'none';
+  }
+}
+
+function renderRec() {
+  const list = RESTAURANT_DB[editingDay] || RESTAURANT_DB[0];
+  document.getElementById('recList').innerHTML = list.map(r => `
+    <div class="rec-card" onclick="selectRestaurant(${JSON.stringify(r.name)},${JSON.stringify(r.desc)},${JSON.stringify(r.map)})">
+      <span class="rec-card-emoji">${r.emoji}</span>
+      <div class="rec-card-body">
+        <div class="rec-card-name">${esc(r.name)}</div>
+        <div class="rec-card-desc">${esc(r.desc)}</div>
+      </div>
+      <span class="rec-card-price">${r.price}</span>
+    </div>`).join('');
+}
+
+function selectRestaurant(name, desc, map) {
+  document.getElementById('fName').value = name;
+  if (desc) document.getElementById('fDesc').value = desc;
+  if (map)  document.getElementById('fMap').value  = map;
+}
 
 // ── 旅遊目的地建議清單 ──────────────────────────────
 const DEST_LIST = [
@@ -706,6 +792,7 @@ function openEdit(dayIdx, itemIdx) {
   document.getElementById('fMap').value       = item.map||'';
   document.getElementById('fTimetable').value = item.timetable||'';
   document.getElementById('fTag').value       = item.tag;
+  toggleRec();
   document.getElementById('modalOverlay').classList.add('open');
 }
 
@@ -714,6 +801,7 @@ function openAdd(dayIdx) {
   document.getElementById('modalTitle').textContent = '新增行程';
   ['fTime','fName','fDesc','fMap','fTimetable'].forEach(id => document.getElementById(id).value='');
   document.getElementById('fTag').value='sight';
+  toggleRec();
   document.getElementById('modalOverlay').classList.add('open');
 }
 
