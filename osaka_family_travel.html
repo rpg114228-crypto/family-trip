@@ -488,11 +488,12 @@
       background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);
       border-radius:20px;padding:.28em .9em;font-size:.8em;color:#fff;
       margin-top:.45em;backdrop-filter:blur(4px);
+      user-select:none;-webkit-user-select:none;
     }
     .weather-badge .wtemp{font-weight:700;letter-spacing:.02em}
     .weather-badge .wref{opacity:.75;font-size:.88em}
     /* ── Google 翻譯浮動按鈕 ── */
-    .gt-fab{position:fixed;bottom:1.6em;right:1.6em;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:.55em}
+    .gt-fab{position:fixed;bottom:1.6em;left:1.6em;z-index:9999;display:flex;flex-direction:column;align-items:flex-start;gap:.55em}
     .gt-toggle{
       width:52px;height:52px;border-radius:50%;border:none;cursor:pointer;
       background:linear-gradient(135deg,#1a6fa0,#27ae60);color:#fff;
@@ -2432,7 +2433,7 @@ function showToast(msg) {
 </script>
 
 <!-- ── Google 翻譯浮動按鈕 ── -->
-<div class="gt-fab">
+<div class="gt-fab" id="gtFab">
   <div class="gt-panel" id="gtPanel">
     <h4>🌐 Google 翻譯捷徑</h4>
     <a class="gt-link gt-camera" href="https://translate.google.com/?op=images" target="_blank">
