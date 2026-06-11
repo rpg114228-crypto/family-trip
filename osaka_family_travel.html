@@ -456,6 +456,37 @@
       .route-panel{min-width:unset;max-width:unset;width:100%}
     }
 
+    /* ── DAY MAP (Leaflet) ── */
+    .day-map{
+      height:240px;border-radius:14px;overflow:hidden;
+      margin-bottom:1.6em;border:1px solid rgba(0,0,0,.08);
+      background:#eee;
+    }
+    .day-map.empty{display:none}
+    .leaflet-div-icon.dm-num{
+      background:var(--red);color:#fff;border:2px solid #fff;border-radius:50%;
+      width:24px!important;height:24px!important;
+      display:flex;align-items:center;justify-content:center;
+      font-size:.75em;font-weight:900;box-shadow:0 1px 4px rgba(0,0,0,.35);
+    }
+    .leaflet-popup-content{font-family:inherit;font-size:.85em;margin:.5em .8em}
+
+    /* ── DRAG HANDLES (SortableJS) ── */
+    .drag-handle{
+      display:none;cursor:grab;color:#aaa;font-size:1.05em;
+      user-select:none;flex-shrink:0;line-height:1;touch-action:none;
+    }
+    .drag-handle:active{cursor:grabbing}
+    body.edit-mode .drag-handle{display:inline-flex}
+    .sch-item .drag-handle{color:rgba(255,255,255,.45)}
+    .acard-handle{
+      position:absolute;top:8px;left:8px;z-index:21;
+      background:rgba(0,0,0,.55);
+      width:26px;height:26px;border-radius:50%;
+      align-items:center;justify-content:center;color:#fff;
+    }
+    .sortable-ghost{opacity:.35}
+
     @media print{
       .fab-edit,.edit-toolbar,.sticky-nav,.map-btns,.alink,
       .hcard-footer,.edit-notice,.scroll-down{display:none!important}
@@ -518,6 +549,7 @@
     .gt-ch-ja {background:linear-gradient(135deg,#2980b9,#16a085)}
     .gt-ja-ch {background:linear-gradient(135deg,#8e44ad,#2980b9)}
   </style>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 </head>
 <body>
 
@@ -551,6 +583,7 @@
   <a class="nav-btn" href="#day9">Day 9</a>
   <a class="nav-btn" href="#day10">Day 10</a>
   <a class="nav-btn" href="#transport">交通</a>
+  <a class="nav-btn" href="#backup">☂ 備用景點</a>
   <a class="nav-btn" href="#tips">小提醒</a>
   <a class="nav-btn" href="#budget">預算</a>
 </nav>
@@ -1067,8 +1100,19 @@
         </div>
       </div>
     </div>
+      <div class="acard" style="border-top:3px dashed #e67e22">
+        <img src="https://bobowin.blog/wp-content/uploads/20180328094559_62.jpg" alt="Kids Plaza Osaka" loading="lazy">
+        <div class="acard-body">
+          <h3>☂ 備用｜Kids Plaza Osaka 大阪兒童樂園</h3>
+          <div class="tags"><span class="tag t-child">幼童最佳</span><span class="tag t-indoor">全室內</span><span class="tag t-nature">避暑雨天</span></div>
+          <p>下雨或大晴天均適用的室內兒童樂園。白色巨型迷宮城堡跨兩層樓、2層高水管滑梯、科學動手玩設施、角色扮演超市，3–4歲玩大半天沒問題。從 Liz3 搭堺筋線兩站即達扇町駅。</p>
+          <p style="font-size:.8em;color:#888;margin-top:.4em">📍 大阪市北区扇町2-1-7｜堺筋線扇町駅2號出口即到<br>🕐 9:30–17:00｜每月第2・3週一公休（8月第4週一）<br>💴 大人¥1,400・3歲以上¥500・持大阪地鐵一日券9折</p>
+          <a class="alink" href="https://bobowin.blog/kids-plaza-osaka/" target="_blank">寶寶溫詳細攻略 →</a>
+        </div>
+      </div>
+    </div>
     <div class="day-note">
-      <b>動物園小技巧：</b>週二公休，請先確認日期。入場費大人600円，中學生以下免費，非常划算。帶孩子重點看大型動物，別想全部逛完，控制在2.5–3小時最舒適。
+      <b>動物園小技巧：</b>週二公休，請先確認日期。入場費大人600円，中學生以下免費，非常划算。帶孩子重點看大型動物，別想全部逛完，控制在2.5–3小時最舒適。若當天下雨，可改去 Kids Plaza Osaka（扇町），全室內不怕天氣。
     </div>
   </div>
 </section>
@@ -1225,6 +1269,122 @@
           <a class="alink" href="https://www.kansai-airport.or.jp/tw/" target="_blank">關西機場（繁中）→</a>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ BACKUP SPOTS ═══════════════════════════ -->
+<section id="backup">
+  <div class="container">
+    <h2 class="sec-title">☂ 備用景點｜下雨／太熱首選</h2>
+    <p style="text-align:center;color:var(--muted);font-size:.9em;margin-top:-.8em;margin-bottom:2em">全室內・幼童設施・不怕天氣　｜　3–4歲皆適合（Kids Plaza 見 Day 7）</p>
+
+    <div class="attractions">
+
+      <!-- 1. Kid-o-Kid -->
+      <div class="acard">
+        <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=600&h=370&q=80" alt="Kid-o-Kid" loading="lazy">
+        <div class="acard-body">
+          <h3>Kid-o-Kid（梅田 Grand Front）</h3>
+          <div class="tags"><span class="tag t-child">0–6歲最佳</span><span class="tag t-indoor">全室內</span></div>
+          <p>梅田 Grand Front Osaka 3F，是整趟旅行最適合幼兒的室內遊樂場。攀爬、球池、滑梯，18個月以下有獨立嬰兒區。從 Liz3 步行10分鐘即達，父母可輪流在周邊逛街。提早到有限量一日券，中午出去吃飯下午再進場。</p>
+          <p style="font-size:.8em;color:#888;margin-top:.4em">📍 Grand Front Osaka 北館 3F｜梅田駅即連結<br>🕐 10:00–20:00｜💴 按小時計費，一日券限量販售<br>🚶 從Liz3：步行約10分｜或谷町線1站→東梅田，再走5分</p>
+          <a class="alink" href="https://kidokid.bornelund.co.jp/grandfront-osaka/" target="_blank">官方網站 →</a>
+          <div class="map-btns">
+            <a class="mbtn mbtn-map" href="https://www.google.com/maps/search/?api=1&query=Kid-o-Kid+Grand+Front+Osaka+North+3F" target="_blank">📍 Google地圖</a>
+            <a class="mbtn mbtn-transit" href="https://www.google.com/maps/dir/?api=1&destination=34.7049,135.4970&travelmode=transit" target="_blank">🚇 交通路線</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. LEGOLAND Discovery Center -->
+      <div class="acard">
+        <img src="https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=600&h=370&q=80" alt="LEGOLAND" loading="lazy">
+        <div class="acard-body">
+          <h3>樂高樂園探索中心（天保山）</h3>
+          <div class="tags"><span class="tag t-child">3歲以上</span><span class="tag t-indoor">全室內</span></div>
+          <p>天保山購物中心內的室內樂高主題樂園，可搭配海遊館同一天逛。4D電影、樂高城市組裝區、小型雲霄飛車、迷你大阪模型，3–4歲拼積木區最適合。不怕日曬雨淋，親子都玩得開心。</p>
+          <p style="font-size:.8em;color:#888;margin-top:.4em">📍 天保山マーケットプレース 3F｜Osaka Metro大阪港駅徒步5分<br>🕐 10:00–19:00｜💴 大人¥2,400・3歲以上¥1,800<br>🚇 從Liz3：谷町線→谷町四丁目換中央線→大阪港，約30分・1次換車</p>
+          <a class="alink" href="https://www.legolanddiscoverycenter.com/osaka/" target="_blank">官方網站 →</a>
+          <div class="map-btns">
+            <a class="mbtn mbtn-map" href="https://www.google.com/maps/search/?api=1&query=LEGOLAND+Discovery+Center+Osaka+天保山" target="_blank">📍 Google地圖</a>
+            <a class="mbtn mbtn-transit" href="https://www.google.com/maps/dir/?api=1&destination=34.6551,135.4299&travelmode=transit" target="_blank">🚇 交通路線</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. 大丸梅田13F -->
+      <div class="acard">
+        <img src="https://images.unsplash.com/photo-1612404730960-5c71577fca11?auto=format&fit=crop&w=600&h=370&q=80" alt="大丸梅田13F" loading="lazy">
+        <div class="acard-body">
+          <h3>大丸梅田 13F｜任天堂・寶可夢・TOMICA</h3>
+          <div class="tags"><span class="tag t-child">2歲以上</span><span class="tag t-indoor">百貨</span><span class="tag t-culture">玩具</span></div>
+          <p>梅田大丸百貨13樓是大阪最強玩具聖地：任天堂官方專賣店（含Switch周邊）、寶可夢中心、TOMICA 組合工廠（讓孩子自己打造小車車）三館集中。逛街順路必訪，下雨天塞進行程完全不占空間。</p>
+          <p style="font-size:.8em;color:#888;margin-top:.4em">📍 大丸百貨梅田店 13F｜JR大阪駅即連結<br>🕐 10:00–20:00｜💴 入場免費（消費自費）<br>🚶 從Liz3：步行約12分｜或谷町線1站→東梅田，再走6分</p>
+          <a class="alink" href="https://www.daimaru.co.jp/umeda/" target="_blank">大丸梅田官網 →</a>
+          <div class="map-btns">
+            <a class="mbtn mbtn-map" href="https://www.google.com/maps/search/?api=1&query=大丸梅田店+大阪" target="_blank">📍 Google地圖</a>
+            <a class="mbtn mbtn-transit" href="https://www.google.com/maps/dir/?api=1&destination=34.7022,135.4976&travelmode=transit" target="_blank">🚇 交通路線</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. 大阪生活今昔館 -->
+      <div class="acard">
+        <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=600&h=370&q=80" alt="大阪生活今昔館" loading="lazy">
+        <div class="acard-body">
+          <h3>大阪生活今昔館（天神橋）</h3>
+          <div class="tags"><span class="tag t-child">2歲以上</span><span class="tag t-indoor">全室內</span><span class="tag t-culture">江戶街道</span></div>
+          <p>天神橋6丁目大樓8樓，完整重現江戶時代大阪街道，屋頂有真實天空（晨昏變換燈光效果）。可額外租借浴衣在古街拍照，孩子穿上浴衣走石板路超可愛。從 Liz3 搭谷町線2站即達天神橋筋六丁目。</p>
+          <p style="font-size:.8em;color:#888;margin-top:.4em">📍 大阪市北区天神橋6-4-20 8F｜地鉄天神橋筋六丁目駅即連結<br>🕐 10:00–17:00（週二休）｜💴 大人¥600・高中以下免費<br>🚇 從Liz3：谷町線2站→天神橋筋六丁目，約4分・0次換車 ⭐最近</p>
+          <a class="alink" href="https://www.osaka-angenet.jp/konjyakukan/" target="_blank">官方網站 →</a>
+          <div class="map-btns">
+            <a class="mbtn mbtn-map" href="https://www.google.com/maps/search/?api=1&query=大阪生活今昔館+天神橋" target="_blank">📍 Google地圖</a>
+            <a class="mbtn mbtn-transit" href="https://www.google.com/maps/dir/?api=1&destination=34.7163,135.5112&travelmode=transit" target="_blank">🚇 交通路線</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. 童書之森中之島 -->
+      <div class="acard">
+        <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=600&h=370&q=80" alt="童書之森中之島" loading="lazy">
+        <div class="acard-body">
+          <h3>童書之森中之島（安藤忠雄設計）</h3>
+          <div class="tags"><span class="tag t-child">2歲以上</span><span class="tag t-indoor">圖書館</span><span class="tag t-culture">免費</span></div>
+          <p>安藤忠雄設計的兒童圖書館，三層樓挑高書牆令人震撼。全日文繪本但圖畫精美，3–4歲孩子可自由翻閱。免費入場但需事先官網預約（平日較容易搶到）。旁邊是中之島公園玫瑰園，天晴可在草地放電。</p>
+          <p style="font-size:.8em;color:#888;margin-top:.4em">📍 大阪市北区中之島1-1-28｜Osaka Metro大江橋駅徒步5分<br>🕐 9:30–17:00（週一休）｜💴 免費（需官網預約）<br>🚇 從Liz3：谷町線→天満橋（3站・6分），步行過橋約10分，共約20分</p>
+          <a class="alink" href="https://kodomohonnomori.osaka/" target="_blank">官方網站（預約）→</a>
+          <div class="map-btns">
+            <a class="mbtn mbtn-map" href="https://www.google.com/maps/search/?api=1&query=こども本の森中之島+大阪" target="_blank">📍 Google地圖</a>
+            <a class="mbtn mbtn-transit" href="https://www.google.com/maps/dir/?api=1&destination=34.6927,135.5006&travelmode=transit" target="_blank">🚇 交通路線</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. 日清泡麵發明紀念館 -->
+      <div class="acard">
+        <img src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?auto=format&fit=crop&w=600&h=370&q=80" alt="日清泡麵博物館" loading="lazy">
+        <div class="acard-body">
+          <h3>日清泡麵發明紀念館（池田市）</h3>
+          <div class="tags"><span class="tag t-child">4歲以上</span><span class="tag t-indoor">DIY體驗</span><span class="tag t-culture">親子必玩</span></div>
+          <p>從梅田搭阪急寶塚線約20分鐘，免費入館。最精彩是「我的杯麵工廠」——孩子自己設計杯子外觀、選麵條和配料，做出世界唯一的泡麵帶回家。需現場排隊領取DIY體驗票（名額有限，建議開館即前往）。</p>
+          <p style="font-size:.8em;color:#888;margin-top:.4em">📍 大阪府池田市満壽美町8-25｜阪急池田駅徒步7分<br>🕐 9:30–16:00（週二休）｜💴 入館免費・杯麵DIY¥500/人<br>🚇 從Liz3：步行10分→梅田，阪急宝塚線→池田（約22分），步行7分，共約40分・1次換車</p>
+          <a class="alink" href="https://www.cupnoodles-museum.jp/ja/osaka_ikeda/" target="_blank">官方網站 →</a>
+          <div class="map-btns">
+            <a class="mbtn mbtn-map" href="https://www.google.com/maps/search/?api=1&query=カップヌードルミュージアム大阪池田" target="_blank">📍 Google地圖</a>
+            <a class="mbtn mbtn-transit" href="https://www.google.com/maps/dir/?api=1&destination=34.8233,135.4327&travelmode=transit" target="_blank">🚇 交通路線</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="hotel-note" style="margin-top:2em">
+      <b>使用時機建議：</b><br>
+      ☂ <b>突然下雨</b> → Kid-o-Kid（梅田即達）或 Kids Plaza（扇町2站）<br>
+      🌡 <b>大晴天太熱不想曬</b> → LEGOLAND（搭配海遊館）、大丸梅田13F<br>
+      😴 <b>孩子體力低、需要靜態行程</b> → 童書之森（免費）、今昔館（近Liz3）<br>
+      🍜 <b>想要DIY親子體驗</b> → 日清泡麵博物館（半天行程，梅田出發20分）
     </div>
   </div>
 </section>
@@ -1581,6 +1741,8 @@
   <p style="margin-top:.5em;font-size:.8em">景點資訊以各官方網站公告為準 · 票價可能隨時調整</p>
 </footer>
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
 <script>
 // ════════════════════════════════
 //  1. Sticky nav highlight
@@ -1688,7 +1850,13 @@ const SECTION_IDS  = ['accommodation','hotels','day1','day2','day3','day4','day5
 
 function getCleanHTML(el) {
   const c = el.cloneNode(true);
-  c.querySelectorAll('.map-btns,.tcard-mapbtn,.del-btn,.add-sch-btn,.add-card-btn').forEach(n => n.remove());
+  c.querySelectorAll('.map-btns,.tcard-mapbtn,.del-btn,.add-sch-btn,.add-card-btn,.drag-handle,.route-panel,.day-map')
+    .forEach(n => n.remove());
+  // .day-row 是注入用的包裝層，還原成單純的 .schedule，讓 injectRoutePanels() 重新建立路線面板與地圖
+  c.querySelectorAll('.day-row').forEach(row => {
+    const sched = row.querySelector('.schedule');
+    if (sched) row.replaceWith(sched); else row.remove();
+  });
   c.querySelectorAll('[contenteditable]').forEach(n => n.removeAttribute('contenteditable'));
   return c.innerHTML;
 }
@@ -1754,12 +1922,15 @@ function toggleEdit() {
     addDeleteBtns();
     addAddBtns();
     addImageOverlays();
-    showToast('✏️ 點擊文字修改 · 點圖片換圖/連結 · × 刪除');
+    addDragHandles();
+    initSortables();
+    showToast('✏️ 點擊文字修改 · 拖曳⠿排序 · 點圖片換圖/連結 · × 刪除');
   } else {
     document.querySelectorAll('[contenteditable="true"]').forEach(el =>
       el.removeAttribute('contenteditable')
     );
-    document.querySelectorAll('.del-btn,.add-sch-btn,.add-card-btn,.img-edit-overlay').forEach(el => el.remove());
+    document.querySelectorAll('.del-btn,.add-sch-btn,.add-card-btn,.img-edit-overlay,.drag-handle').forEach(el => el.remove());
+    destroySortables();
     closeCardModal();
   }
 }
@@ -1844,6 +2015,55 @@ function addAddBtns() {
     };
     grid.appendChild(btn);
   });
+}
+
+// ════════════════════════════════
+//  4b. 拖曳排序（SortableJS）
+// ════════════════════════════════
+function addDragHandles() {
+  document.querySelectorAll('.sch-item').forEach(item => {
+    if (item.querySelector('.drag-handle')) return;
+    const h = document.createElement('span');
+    h.className = 'drag-handle';
+    h.textContent = '⠿';
+    h.title = '拖曳排序';
+    item.insertBefore(h, item.firstChild);
+  });
+  document.querySelectorAll('.acard').forEach(card => {
+    if (card.querySelector('.acard-handle')) return;
+    const h = document.createElement('span');
+    h.className = 'drag-handle acard-handle';
+    h.textContent = '⠿';
+    h.title = '拖曳排序';
+    card.appendChild(h);
+  });
+}
+
+let _sortables = [];
+function initSortables() {
+  if (typeof Sortable === 'undefined') return;
+  document.querySelectorAll('.schedule').forEach(sched => {
+    _sortables.push(new Sortable(sched, {
+      handle: '.drag-handle',
+      animation: 150,
+      filter: '.add-sch-btn',
+      preventOnFilter: false,
+      onEnd: autoSave,
+    }));
+  });
+  document.querySelectorAll('.attractions').forEach(grid => {
+    _sortables.push(new Sortable(grid, {
+      handle: '.acard-handle',
+      animation: 150,
+      filter: '.add-card-btn',
+      preventOnFilter: false,
+      onEnd: autoSave,
+    }));
+  });
+}
+function destroySortables() {
+  _sortables.forEach(s => s.destroy());
+  _sortables = [];
 }
 
 // Auto-save 1.5s after typing
@@ -1951,6 +2171,80 @@ function buildRouteUrl(stops) {
   return `https://www.google.com/maps/dir/${parts.join('/')}/?travelmode=transit&hl=zh-TW`;
 }
 
+// ════════════════════════════════
+//  5a. 每日路線地圖（Leaflet + OpenStreetMap，免API金鑰）
+// ════════════════════════════════
+// 預先查好的座標表（精確到城市等級即可，不需即時geocoding）
+const coordsDB = {
+  '関西国際空港 泉佐野市':                          [34.4347, 135.2440],
+  '難波駅 大阪市浪速区':                            [34.6659, 135.5008],
+  'ESLEAD HOTEL Osaka Nipponbashi 大阪市中央区日本橋': [34.6657, 135.5066],
+  '道頓堀 大阪市中央区':                            [34.6687, 135.5013],
+  'ユニバーサル・スタジオ・ジャパン 此花区 大阪':      [34.6654, 135.4323],
+  '海遊館 大阪市港区':                              [34.6546, 135.4290],
+  '天保山大観覧車 大阪市港区':                       [34.6553, 135.4281],
+  '大阪城公園 大阪市中央区':                         [34.6873, 135.5262],
+  '住吉大社 大阪市住吉区':                          [34.6125, 135.4933],
+  '黒門市場 大阪市中央区':                          [34.6656, 135.5066],
+  '奈良公園 奈良市':                                [34.6851, 135.8430],
+  '東大寺 奈良市':                                  [34.6889, 135.8398],
+  'Liz3 Guest House 大阪市北区中崎1-5-13':           [34.7050, 135.5106],
+  '嵐山竹林の道 京都市右京区':                       [35.0170, 135.6720],
+  '渡月橋 京都市右京区嵐山':                         [35.0094, 135.6777],
+  '嵐山モンキーパーク岩田山 京都市西京区':            [35.0089, 135.6786],
+  '天王寺動物園 大阪市天王寺区':                     [34.6486, 135.5145],
+  'あべのハルカス300 大阪市阿倍野区':                [34.6459, 135.5135],
+  'ニフレル 吹田市千里万博公園':                     [34.8038, 135.5260],
+  'EXPOCITY 吹田市千里万博公園':                     [34.8050, 135.5270],
+  '南京町 神戸市中央区':                            [34.6885, 135.1900],
+  '神戸ハーバーランド 神戸市中央区':                  [34.6816, 135.1809],
+  '三宮センタープラザ 神戸市中央区':                  [34.6940, 135.1955],
+  '阪急百貨店梅田本店 大阪市北区':                    [34.7025, 135.4959],
+};
+
+const dayMaps = {};
+
+// 渲染某一天的路線地圖（標記 + 連線）
+function renderDayMap(dayId) {
+  const el = document.getElementById(`dmap-${dayId}`);
+  if (!el || typeof L === 'undefined') return;
+  const route = dayRoutesState[dayId];
+  if (!route) return;
+
+  if (dayMaps[dayId]) { dayMaps[dayId].remove(); delete dayMaps[dayId]; }
+
+  const points = route.stops
+    .map(s => ({ c: coordsDB[s.q] || coordsDB[s.n], n: s.n }))
+    .filter(p => p.c);
+
+  if (points.length === 0) {
+    el.classList.add('empty');
+    el.innerHTML = '';
+    return;
+  }
+  el.classList.remove('empty');
+  el.innerHTML = '';
+
+  const map = L.map(el, { scrollWheelZoom: false });
+  dayMaps[dayId] = map;
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap',
+    maxZoom: 19,
+  }).addTo(map);
+
+  const latlngs = points.map(p => p.c);
+  points.forEach((p, idx) => {
+    const icon = L.divIcon({ className: 'dm-num', html: String(idx + 1), iconSize: [24, 24] });
+    L.marker(p.c, { icon }).addTo(map).bindPopup(`${idx + 1}. ${p.n}`);
+  });
+  if (latlngs.length > 1) {
+    L.polyline(latlngs, { color: '#c0392b', weight: 3, opacity: .7, dashArray: '6,6' }).addTo(map);
+    map.fitBounds(latlngs, { padding: [24, 24], maxZoom: 16 });
+  } else {
+    map.setView(latlngs[0], 14);
+  }
+}
+
 // 渲染某一天的路線面板
 function renderRoutePanel(dayId) {
   const panel = document.querySelector(`.route-panel[data-day="${dayId}"]`);
@@ -1980,6 +2274,8 @@ function renderRoutePanel(dayId) {
     `<h4>🗺️ 今日路線</h4>` + stopsHtml +
     `<button class="rs-add-btn" onclick="addRouteStop('${dayId}')">＋ 新增停靠站</button>` +
     `<a class="route-all-btn" id="ra-${dayId}" href="${buildRouteUrl(route.stops)}" target="_blank">▶ Google地圖全程路線</a>`;
+
+  renderDayMap(dayId);
 }
 
 // 注入面板（初始化）
@@ -1999,6 +2295,12 @@ function injectRoutePanels() {
     sched.parentNode.insertBefore(row, sched);
     row.appendChild(sched);
     row.appendChild(panel);
+
+    const mapDiv = document.createElement('div');
+    mapDiv.className = 'day-map';
+    mapDiv.id = `dmap-${id}`;
+    row.parentNode.insertBefore(mapDiv, row.nextSibling);
+
     renderRoutePanel(id);
   });
 }
@@ -2028,7 +2330,7 @@ function liveUpdateRoute(dayId, idx, val) {
   const btn = document.getElementById(`ra-${dayId}`);
   if (btn) btn.href = buildRouteUrl(dayRoutesState[dayId].stops);
   clearTimeout(window._rSave);
-  window._rSave = setTimeout(saveRouteState, 1200);
+  window._rSave = setTimeout(() => { saveRouteState(); renderDayMap(dayId); }, 1200);
 }
 
 // ── 站點編輯 Popup ──
