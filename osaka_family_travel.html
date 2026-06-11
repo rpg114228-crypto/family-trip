@@ -456,21 +456,6 @@
       .route-panel{min-width:unset;max-width:unset;width:100%}
     }
 
-    /* ── DAY MAP (Leaflet) ── */
-    .day-map{
-      height:240px;border-radius:14px;overflow:hidden;
-      margin-bottom:1.6em;border:1px solid rgba(0,0,0,.08);
-      background:#eee;
-    }
-    .day-map.empty{display:none}
-    .leaflet-div-icon.dm-num{
-      background:var(--red);color:#fff;border:2px solid #fff;border-radius:50%;
-      width:24px!important;height:24px!important;
-      display:flex;align-items:center;justify-content:center;
-      font-size:.75em;font-weight:900;box-shadow:0 1px 4px rgba(0,0,0,.35);
-    }
-    .leaflet-popup-content{font-family:inherit;font-size:.85em;margin:.5em .8em}
-
     /* ── DRAG HANDLES (SortableJS) ── */
     .drag-handle{
       display:none;cursor:grab;color:#aaa;font-size:1.05em;
@@ -549,7 +534,6 @@
     .gt-ch-ja {background:linear-gradient(135deg,#2980b9,#16a085)}
     .gt-ja-ch {background:linear-gradient(135deg,#8e44ad,#2980b9)}
   </style>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 </head>
 <body>
 
@@ -1741,7 +1725,6 @@
   <p style="margin-top:.5em;font-size:.8em">景點資訊以各官方網站公告為準 · 票價可能隨時調整</p>
 </footer>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
 <script>
 // ════════════════════════════════
@@ -1850,9 +1833,9 @@ const SECTION_IDS  = ['accommodation','hotels','day1','day2','day3','day4','day5
 
 function getCleanHTML(el) {
   const c = el.cloneNode(true);
-  c.querySelectorAll('.map-btns,.tcard-mapbtn,.del-btn,.add-sch-btn,.add-card-btn,.drag-handle,.route-panel,.day-map')
+  c.querySelectorAll('.map-btns,.tcard-mapbtn,.del-btn,.add-sch-btn,.add-card-btn,.drag-handle,.route-panel')
     .forEach(n => n.remove());
-  // .day-row 是注入用的包裝層，還原成單純的 .schedule，讓 injectRoutePanels() 重新建立路線面板與地圖
+  // .day-row 是注入用的包裝層，還原成單純的 .schedule，讓 injectRoutePanels() 重新建立路線面板
   c.querySelectorAll('.day-row').forEach(row => {
     const sched = row.querySelector('.schedule');
     if (sched) row.replaceWith(sched); else row.remove();
@@ -2171,80 +2154,6 @@ function buildRouteUrl(stops) {
   return `https://www.google.com/maps/dir/${parts.join('/')}/?travelmode=transit&hl=zh-TW`;
 }
 
-// ════════════════════════════════
-//  5a. 每日路線地圖（Leaflet + OpenStreetMap，免API金鑰）
-// ════════════════════════════════
-// 預先查好的座標表（精確到城市等級即可，不需即時geocoding）
-const coordsDB = {
-  '関西国際空港 泉佐野市':                          [34.4347, 135.2440],
-  '難波駅 大阪市浪速区':                            [34.6659, 135.5008],
-  'ESLEAD HOTEL Osaka Nipponbashi 大阪市中央区日本橋': [34.6657, 135.5066],
-  '道頓堀 大阪市中央区':                            [34.6687, 135.5013],
-  'ユニバーサル・スタジオ・ジャパン 此花区 大阪':      [34.6654, 135.4323],
-  '海遊館 大阪市港区':                              [34.6546, 135.4290],
-  '天保山大観覧車 大阪市港区':                       [34.6553, 135.4281],
-  '大阪城公園 大阪市中央区':                         [34.6873, 135.5262],
-  '住吉大社 大阪市住吉区':                          [34.6125, 135.4933],
-  '黒門市場 大阪市中央区':                          [34.6656, 135.5066],
-  '奈良公園 奈良市':                                [34.6851, 135.8430],
-  '東大寺 奈良市':                                  [34.6889, 135.8398],
-  'Liz3 Guest House 大阪市北区中崎1-5-13':           [34.7050, 135.5106],
-  '嵐山竹林の道 京都市右京区':                       [35.0170, 135.6720],
-  '渡月橋 京都市右京区嵐山':                         [35.0094, 135.6777],
-  '嵐山モンキーパーク岩田山 京都市西京区':            [35.0089, 135.6786],
-  '天王寺動物園 大阪市天王寺区':                     [34.6486, 135.5145],
-  'あべのハルカス300 大阪市阿倍野区':                [34.6459, 135.5135],
-  'ニフレル 吹田市千里万博公園':                     [34.8038, 135.5260],
-  'EXPOCITY 吹田市千里万博公園':                     [34.8050, 135.5270],
-  '南京町 神戸市中央区':                            [34.6885, 135.1900],
-  '神戸ハーバーランド 神戸市中央区':                  [34.6816, 135.1809],
-  '三宮センタープラザ 神戸市中央区':                  [34.6940, 135.1955],
-  '阪急百貨店梅田本店 大阪市北区':                    [34.7025, 135.4959],
-};
-
-const dayMaps = {};
-
-// 渲染某一天的路線地圖（標記 + 連線）
-function renderDayMap(dayId) {
-  const el = document.getElementById(`dmap-${dayId}`);
-  if (!el || typeof L === 'undefined') return;
-  const route = dayRoutesState[dayId];
-  if (!route) return;
-
-  if (dayMaps[dayId]) { dayMaps[dayId].remove(); delete dayMaps[dayId]; }
-
-  const points = route.stops
-    .map(s => ({ c: coordsDB[s.q] || coordsDB[s.n], n: s.n }))
-    .filter(p => p.c);
-
-  if (points.length === 0) {
-    el.classList.add('empty');
-    el.innerHTML = '';
-    return;
-  }
-  el.classList.remove('empty');
-  el.innerHTML = '';
-
-  const map = L.map(el, { scrollWheelZoom: false });
-  dayMaps[dayId] = map;
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; OpenStreetMap',
-    maxZoom: 19,
-  }).addTo(map);
-
-  const latlngs = points.map(p => p.c);
-  points.forEach((p, idx) => {
-    const icon = L.divIcon({ className: 'dm-num', html: String(idx + 1), iconSize: [24, 24] });
-    L.marker(p.c, { icon }).addTo(map).bindPopup(`${idx + 1}. ${p.n}`);
-  });
-  if (latlngs.length > 1) {
-    L.polyline(latlngs, { color: '#c0392b', weight: 3, opacity: .7, dashArray: '6,6' }).addTo(map);
-    map.fitBounds(latlngs, { padding: [24, 24], maxZoom: 16 });
-  } else {
-    map.setView(latlngs[0], 14);
-  }
-}
-
 // 渲染某一天的路線面板
 function renderRoutePanel(dayId) {
   const panel = document.querySelector(`.route-panel[data-day="${dayId}"]`);
@@ -2274,8 +2183,6 @@ function renderRoutePanel(dayId) {
     `<h4>🗺️ 今日路線</h4>` + stopsHtml +
     `<button class="rs-add-btn" onclick="addRouteStop('${dayId}')">＋ 新增停靠站</button>` +
     `<a class="route-all-btn" id="ra-${dayId}" href="${buildRouteUrl(route.stops)}" target="_blank">▶ Google地圖全程路線</a>`;
-
-  renderDayMap(dayId);
 }
 
 // 注入面板（初始化）
@@ -2295,11 +2202,6 @@ function injectRoutePanels() {
     sched.parentNode.insertBefore(row, sched);
     row.appendChild(sched);
     row.appendChild(panel);
-
-    const mapDiv = document.createElement('div');
-    mapDiv.className = 'day-map';
-    mapDiv.id = `dmap-${id}`;
-    row.parentNode.insertBefore(mapDiv, row.nextSibling);
 
     renderRoutePanel(id);
   });
@@ -2330,7 +2232,7 @@ function liveUpdateRoute(dayId, idx, val) {
   const btn = document.getElementById(`ra-${dayId}`);
   if (btn) btn.href = buildRouteUrl(dayRoutesState[dayId].stops);
   clearTimeout(window._rSave);
-  window._rSave = setTimeout(() => { saveRouteState(); renderDayMap(dayId); }, 1200);
+  window._rSave = setTimeout(() => { saveRouteState(); }, 1200);
 }
 
 // ── 站點編輯 Popup ──
