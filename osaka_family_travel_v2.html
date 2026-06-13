@@ -112,6 +112,22 @@ body{font-family:'Microsoft JhengHei','PingFang TC',Arial,sans-serif;background:
 #favs-section{display:none}
 #favs-section.show{display:block}
 
+/* ── MUST-VISIT BADGE ── */
+.tl-badge{display:inline-block;background:linear-gradient(135deg,#ffd166,#ff9f43);color:#fff;font-size:.68em;font-weight:800;padding:.15em .55em;border-radius:8px;margin-left:.4em;vertical-align:middle}
+
+/* ── BUDGET CHART (總覽頁預算分布) ── */
+.bchart{display:flex;flex-direction:column;gap:.55em;margin:.6em 0}
+.bchart-row{display:flex;align-items:center;gap:.6em;font-size:.78em}
+.bchart-label{width:5.4em;flex-shrink:0;color:#555}
+.bchart-bar{flex:1;height:10px;background:var(--gray);border-radius:6px;overflow:hidden}
+.bchart-bar-fill{height:100%;background:linear-gradient(90deg,var(--pink),#ffb199);border-radius:6px}
+.bchart-pct{width:3em;flex-shrink:0;text-align:right;font-weight:700;color:var(--text)}
+
+/* ── BACKUP FILTER TABS ── */
+.filter-tabs{display:flex;gap:.5em;flex-wrap:wrap;margin:.6em 0 1em}
+.filter-tab{border:1px solid var(--border);background:#fff;color:var(--muted);font-size:.78em;font-weight:700;padding:.4em 1em;border-radius:20px;cursor:pointer;font-family:inherit}
+.filter-tab.active{background:var(--pink);color:#fff;border-color:var(--pink)}
+
 /* ── BOTTOM BAR ── */
 .v2-bottombar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--border);display:flex;gap:.7em;padding:.65em 1em;align-items:center;z-index:200;max-width:600px;margin:0 auto}
 .v2-like{width:44px;height:44px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.15em;flex-shrink:0;background:#fff;cursor:pointer}
@@ -221,6 +237,17 @@ body{font-family:'Microsoft JhengHei','PingFang TC',Arial,sans-serif;background:
         <div class="mdesc">第5–9晚｜中崎町駅1分鐘・評分9.5，往奈良・京都・神戶轉乘方便</div>
       </div>
     </div>
+  </div>
+
+  <div class="panel-h">💰 預算分布（粗估）</div>
+  <div class="bchart">
+    <div class="bchart-row"><span class="bchart-label">✈️ 機票</span><div class="bchart-bar"><div class="bchart-bar-fill" style="width:33%"></div></div><span class="bchart-pct">33%</span></div>
+    <div class="bchart-row"><span class="bchart-label">🏨 住宿</span><div class="bchart-bar"><div class="bchart-bar-fill" style="width:17%"></div></div><span class="bchart-pct">17%</span></div>
+    <div class="bchart-row"><span class="bchart-label">🍜 餐費</span><div class="bchart-bar"><div class="bchart-bar-fill" style="width:17%"></div></div><span class="bchart-pct">17%</span></div>
+    <div class="bchart-row"><span class="bchart-label">🎢 USJ門票</span><div class="bchart-bar"><div class="bchart-bar-fill" style="width:11%"></div></div><span class="bchart-pct">11%</span></div>
+    <div class="bchart-row"><span class="bchart-label">🛍 伴手禮</span><div class="bchart-bar"><div class="bchart-bar-fill" style="width:9%"></div></div><span class="bchart-pct">9%</span></div>
+    <div class="bchart-row"><span class="bchart-label">🐟 海遊館等</span><div class="bchart-bar"><div class="bchart-bar-fill" style="width:7%"></div></div><span class="bchart-pct">7%</span></div>
+    <div class="bchart-row"><span class="bchart-label">🚇 交通</span><div class="bchart-bar"><div class="bchart-bar-fill" style="width:7%"></div></div><span class="bchart-pct">7%</span></div>
   </div>
 
   <div class="tip-box">
@@ -333,7 +360,7 @@ body{font-family:'Microsoft JhengHei','PingFang TC',Arial,sans-serif;background:
       <img class="tl-thumb" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=160&h=160&q=80" alt="環球奇境" loading="lazy">
       <div class="tl-body">
         <div class="tl-time">🎠 09:00</div>
-        <div class="tl-name">環球奇境（Universal Wonderland）</div>
+        <div class="tl-name">環球奇境（Universal Wonderland）<span class="tl-badge">🌟必訪</span></div>
         <div class="tl-sub">Hello Kitty・芝麻街4D，無身高限制最適合3–4歲</div>
       </div>
       <div class="tl-heart">♡</div>
@@ -422,7 +449,7 @@ body{font-family:'Microsoft JhengHei','PingFang TC',Arial,sans-serif;background:
       <img class="tl-thumb" src="https://images.unsplash.com/photo-1501426026826-31c667bdf23d?auto=format&fit=crop&w=160&h=160&q=80" alt="海遊館" loading="lazy">
       <div class="tl-body">
         <div class="tl-time">🐋 10:00</div>
-        <div class="tl-name">海遊館（Kaiyukan）</div>
+        <div class="tl-name">海遊館（Kaiyukan）<span class="tl-badge">🌟必訪</span></div>
         <div class="tl-sub">建議至少3小時，鯨鯊從頭頂游過是記憶最深畫面</div>
       </div>
       <div class="tl-heart">♡</div>
@@ -576,7 +603,7 @@ body{font-family:'Microsoft JhengHei','PingFang TC',Arial,sans-serif;background:
       <img class="tl-thumb" src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=160&h=160&q=80" alt="奈良公園餵鹿" loading="lazy">
       <div class="tl-body">
         <div class="tl-time">🦌 10:00</div>
-        <div class="tl-name">奈良公園餵鹿（重頭戲）</div>
+        <div class="tl-name">奈良公園餵鹿（重頭戲）<span class="tl-badge">🌟必訪</span></div>
         <div class="tl-sub">1,200頭野生鹿自由漫步，整趟旅行最珍貴的照片</div>
       </div>
       <div class="tl-heart">♡</div>
@@ -692,7 +719,7 @@ body{font-family:'Microsoft JhengHei','PingFang TC',Arial,sans-serif;background:
       <img class="tl-thumb" src="https://images.unsplash.com/photo-1578632292335-df3abbb0d586?auto=format&fit=crop&w=160&h=160&q=80" alt="岩田山野猿公苑" loading="lazy">
       <div class="tl-body">
         <div class="tl-time">🐒 11:00</div>
-        <div class="tl-name">岩田山野猿公苑</div>
+        <div class="tl-name">岩田山野猿公苑<span class="tl-badge">🌟必訪</span></div>
         <div class="tl-sub">步行20分上山，170隻以上野生猴子，大人需抱孩子上坡</div>
       </div>
       <div class="tl-heart">♡</div>
@@ -1158,8 +1185,16 @@ body{font-family:'Microsoft JhengHei','PingFang TC',Arial,sans-serif;background:
   <div class="day-title">☂ 備用景點</div>
   <div class="day-sub">下雨/太熱首選・全室內・3–4歲皆適合</div>
 
+  <div class="filter-tabs">
+    <button class="filter-tab active" data-filter="全部">全部</button>
+    <button class="filter-tab" data-filter="室內遊樂">室內遊樂</button>
+    <button class="filter-tab" data-filter="購物">購物</button>
+    <button class="filter-tab" data-filter="文化體驗">文化體驗</button>
+    <button class="filter-tab" data-filter="免費">免費</button>
+  </div>
+
   <div class="mini-grid">
-    <div class="mini-card">
+    <div class="mini-card" data-cat="室內遊樂">
       <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=160&h=160&q=80" alt="Kid-o-Kid" loading="lazy">
       <div class="mbody">
         <div class="mtitle">Kid-o-Kid（梅田 Grand Front）</div>
@@ -1167,7 +1202,7 @@ body{font-family:'Microsoft JhengHei','PingFang TC',Arial,sans-serif;background:
         <div class="mtags"><span class="mtag">0–6歲最佳</span><span class="mtag">全室內</span></div>
       </div>
     </div>
-    <div class="mini-card">
+    <div class="mini-card" data-cat="室內遊樂">
       <img src="https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=160&h=160&q=80" alt="LEGOLAND" loading="lazy">
       <div class="mbody">
         <div class="mtitle">樂高樂園探索中心（天保山）</div>
@@ -1175,7 +1210,7 @@ body{font-family:'Microsoft JhengHei','PingFang TC',Arial,sans-serif;background:
         <div class="mtags"><span class="mtag">3歲以上</span><span class="mtag">全室內</span></div>
       </div>
     </div>
-    <div class="mini-card">
+    <div class="mini-card" data-cat="購物">
       <img src="https://images.unsplash.com/photo-1612404730960-5c71577fca11?auto=format&fit=crop&w=160&h=160&q=80" alt="大丸梅田13F" loading="lazy">
       <div class="mbody">
         <div class="mtitle">大丸梅田13F｜任天堂・寶可夢・TOMICA</div>
@@ -1183,7 +1218,7 @@ body{font-family:'Microsoft JhengHei','PingFang TC',Arial,sans-serif;background:
         <div class="mtags"><span class="mtag">2歲以上</span><span class="mtag">百貨</span></div>
       </div>
     </div>
-    <div class="mini-card">
+    <div class="mini-card" data-cat="文化體驗">
       <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=160&h=160&q=80" alt="大阪生活今昔館" loading="lazy">
       <div class="mbody">
         <div class="mtitle">大阪生活今昔館（天神橋）</div>
@@ -1191,7 +1226,7 @@ body{font-family:'Microsoft JhengHei','PingFang TC',Arial,sans-serif;background:
         <div class="mtags"><span class="mtag">2歲以上</span><span class="mtag">全室內</span></div>
       </div>
     </div>
-    <div class="mini-card">
+    <div class="mini-card" data-cat="文化體驗 免費">
       <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=160&h=160&q=80" alt="童書之森中之島" loading="lazy">
       <div class="mbody">
         <div class="mtitle">童書之森中之島（安藤忠雄設計）</div>
@@ -1199,7 +1234,7 @@ body{font-family:'Microsoft JhengHei','PingFang TC',Arial,sans-serif;background:
         <div class="mtags"><span class="mtag">2歲以上</span><span class="mtag">免費</span></div>
       </div>
     </div>
-    <div class="mini-card">
+    <div class="mini-card" data-cat="文化體驗 免費">
       <img src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?auto=format&fit=crop&w=160&h=160&q=80" alt="日清泡麵博物館" loading="lazy">
       <div class="mbody">
         <div class="mtitle">日清泡麵發明紀念館（池田市）</div>
@@ -1351,6 +1386,19 @@ document.getElementById('v2share').addEventListener('click', ()=>{
       done();
     });
   }
+});
+
+/* 備用景點分類篩選 */
+document.querySelectorAll('#backup .filter-tab').forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    document.querySelectorAll('#backup .filter-tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    const filter = tab.dataset.filter;
+    document.querySelectorAll('#backup .mini-card').forEach(card=>{
+      const cats = (card.dataset.cat || '').split(' ');
+      card.style.display = (filter === '全部' || cats.includes(filter)) ? '' : 'none';
+    });
+  });
 });
 </script>
 </body>
