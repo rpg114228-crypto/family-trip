@@ -1323,13 +1323,68 @@ document.querySelectorAll('.tl-card').forEach(card=>{
   body.appendChild(link);
 });
 
+/* 真實地點查詢字串對照表（取自完整版行程的飯店地址與景點查詢字串） */
+const ESLEAD_Q = 'ESLEAD HOTEL Osaka Nipponbashi 大阪市中央区日本橋';
+const LIZ3_Q   = 'Liz3 Guest House 大阪市北区中崎1-5-13';
+const PLACE_QUERIES = [
+  ['ESLEAD', ESLEAD_Q],
+  ['Liz3', LIZ3_Q],
+  ['中崎町', LIZ3_Q],
+  ['關西機場', '関西国際空港 泉佐野市'],
+  ['道頓堀', '道頓堀 大阪市中央区'],
+  ['環球', 'ユニバーサル・スタジオ・ジャパン 此花区 大阪'],
+  ['USJ', 'ユニバーサル・スタジオ・ジャパン 此花区 大阪'],
+  ['主動撤退', 'ユニバーサル・スタジオ・ジャパン 此花区 大阪'],
+  ['海遊館', '海遊館 大阪市港区'],
+  ['天保山', '天保山大観覧車 大阪市港区'],
+  ['大阪城', '大阪城公園 大阪市中央区'],
+  ['住吉大社', '住吉大社 大阪市住吉区'],
+  ['黑門市場', '黒門市場 大阪市中央区'],
+  ['奈良公園', '奈良公園 奈良市'],
+  ['東大寺', '東大寺 奈良市'],
+  ['奈良町', '奈良公園 奈良市'],
+  ['嵐山竹林', '嵐山竹林の道 京都市右京区'],
+  ['渡月橋', '渡月橋 京都市右京区嵐山'],
+  ['岩田山', '嵐山モンキーパーク岩田山 京都市西京区'],
+  ['天王寺動物園', '天王寺動物園 大阪市天王寺区'],
+  ['HARUKAS', 'あべのハルカス300 大阪市阿倍野区'],
+  ['NIFREL', 'ニフレル 吹田市千里万博公園'],
+  ['EXPOCITY', 'EXPOCITY 吹田市千里万博公園'],
+  ['商場採購', 'EXPOCITY 吹田市千里万博公園'],
+  ['南京町', '南京町 神戸市中央区'],
+  ['ハーバーランド', '神戸ハーバーランド 神戸市中央区'],
+  ['三宮', '三宮センタープラザ 神戸市中央区'],
+  ['難波', '難波駅 大阪市浪速区'],
+  ['梅田阪急', '阪急百貨店梅田本店 大阪市北区'],
+];
+/* 較模糊的地標關鍵字：僅在「出發/回飯店」等判斷都不命中時才當作備援 */
+const FALLBACK_QUERIES = [
+  ['嵐山', '嵐山駅 京都市右京区'],
+  ['天王寺', '天王寺動物園 大阪市天王寺区'],
+];
+const HOTEL_BY_DAY = {day1:ESLEAD_Q, day2:ESLEAD_Q, day3:ESLEAD_Q, day4:ESLEAD_Q, day5:LIZ3_Q, day6:LIZ3_Q, day7:LIZ3_Q, day8:LIZ3_Q, day9:LIZ3_Q, day10:LIZ3_Q};
+
+function resolveQuery(text, dayId){
+  for (const [kw, q] of PLACE_QUERIES) {
+    if (text.includes(kw)) return q;
+  }
+  if (/回飯店|回梅田|回難波|休息|午睡|晚餐|採購|出發|準備|退房|Check-?in|Check-?out/i.test(text)) {
+    return HOTEL_BY_DAY[dayId] || text;
+  }
+  for (const [kw, q] of FALLBACK_QUERIES) {
+    if (text.includes(kw)) return q;
+  }
+  return text;
+}
+
 /* 交通連接線：產生Google地圖路線連結(可即時看時刻表/其他交通方式) */
 document.querySelectorAll('.timeline').forEach(timeline=>{
+  const dayId = timeline.closest('.v2-panel').id;
   const children = Array.from(timeline.children);
-  const getName = card => {
-    let name = card.querySelector('.tl-name').textContent.replace(/🌟必訪/,'').trim();
-    if (name.includes('｜')) name = name.split('｜').pop().trim();
-    return name;
+  const getPlaceText = card => {
+    const name = card.querySelector('.tl-name').textContent.replace(/🌟必訪/,'').trim();
+    const sub = (card.querySelector('.tl-sub') || {}).textContent || '';
+    return name + ' ' + sub;
   };
   children.forEach((el,i)=>{
     if (!el.classList.contains('tl-connector')) return;
@@ -1343,9 +1398,12 @@ document.querySelectorAll('.timeline').forEach(timeline=>{
     const prevCard = children[i-1];
     const nextCard = children[i+1];
     if (!prevCard || !nextCard) return;
-    const origin = getName(prevCard);
+
+    const origin = resolveQuery(getPlaceText(prevCard), dayId);
     const arrowMatch = text.match(/→\s*(.+)$/);
-    const dest = arrowMatch ? arrowMatch[1].trim() : getName(nextCard);
+    const isLineDesc = arrowMatch && /線|\d+分/.test(arrowMatch[1]);
+    const destText = (arrowMatch && !isLineDesc) ? arrowMatch[1].trim() : getPlaceText(nextCard);
+    const dest = resolveQuery(destText, dayId);
 
     const link = document.createElement('a');
     link.className = 'tl-route';
