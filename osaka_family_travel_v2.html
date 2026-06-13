@@ -108,6 +108,9 @@ body{font-family:'Microsoft JhengHei','PingFang TC',Arial,sans-serif;background:
 /* ── MAP LINK on timeline cards ── */
 .tl-map{display:inline-block;margin-top:.3em;font-size:.72em;color:var(--blue);text-decoration:none;font-weight:700}
 
+/* ── ROUTE LINK on connectors (即時路線/時刻表) ── */
+.tl-route{margin-left:auto;padding-left:.6em;color:var(--blue);text-decoration:none;font-weight:700;font-size:.74em;flex-shrink:0;white-space:nowrap}
+
 /* ── FAVORITES (我的收藏) ── */
 #favs-section{display:none}
 #favs-section.show{display:block}
@@ -1318,6 +1321,40 @@ document.querySelectorAll('.tl-card').forEach(card=>{
   link.rel = 'noopener';
   link.textContent = '📍 在地圖開啟';
   body.appendChild(link);
+});
+
+/* 交通連接線：產生Google地圖路線連結(可即時看時刻表/其他交通方式) */
+document.querySelectorAll('.timeline').forEach(timeline=>{
+  const children = Array.from(timeline.children);
+  const getName = card => {
+    let name = card.querySelector('.tl-name').textContent.replace(/🌟必訪/,'').trim();
+    if (name.includes('｜')) name = name.split('｜').pop().trim();
+    return name;
+  };
+  children.forEach((el,i)=>{
+    if (!el.classList.contains('tl-connector')) return;
+    const text = el.textContent.trim();
+    let mode;
+    if (/🚆|🚇|🚝|🚅|🚌/.test(text)) mode = 'transit';
+    else if (/🚶/.test(text)) mode = 'walking';
+    else if (/🚕|🚗/.test(text)) mode = 'driving';
+    if (!mode) return;
+
+    const prevCard = children[i-1];
+    const nextCard = children[i+1];
+    if (!prevCard || !nextCard) return;
+    const origin = getName(prevCard);
+    const arrowMatch = text.match(/→\s*(.+)$/);
+    const dest = arrowMatch ? arrowMatch[1].trim() : getName(nextCard);
+
+    const link = document.createElement('a');
+    link.className = 'tl-route';
+    link.href = 'https://www.google.com/maps/dir/?api=1&origin=' + encodeURIComponent(origin) + '&destination=' + encodeURIComponent(dest) + '&travelmode=' + mode;
+    link.target = '_blank';
+    link.rel = 'noopener';
+    link.textContent = '🕐 路線/時刻表';
+    el.appendChild(link);
+  });
 });
 
 /* 收藏愛心：點擊切換 + localStorage 記住狀態 */
