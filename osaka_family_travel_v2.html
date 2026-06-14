@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
@@ -144,6 +144,45 @@ body{font-family:'Microsoft JhengHei','PingFang TC',Arial,sans-serif;background:
 @media (min-width:700px){
   body{max-width:480px;margin:0 auto;box-shadow:0 0 40px rgba(0,0,0,.1);min-height:100vh}
 }
+
+/* ── EDIT MODE ── */
+body.edit-mode .editable-field{
+  outline:2px dashed rgba(255,79,129,.45);
+  outline-offset:3px;
+  border-radius:8px;
+  background:rgba(255,230,238,.55);
+}
+body.edit-mode .editable-field:focus{
+  outline:2px solid var(--pink);
+  background:#fff;
+  box-shadow:0 0 0 4px rgba(255,79,129,.12);
+}
+.v2-editbar{
+  position:fixed;left:0;right:0;bottom:64px;z-index:230;
+  display:none;gap:.5em;align-items:center;justify-content:center;
+  max-width:600px;margin:0 auto;padding:.55em .75em;
+  background:rgba(255,255,255,.96);border-top:1px solid var(--border);
+  box-shadow:0 -2px 12px rgba(0,0,0,.08);
+}
+.v2-editbar.show{display:flex}
+.v2-editbar button{
+  border:1px solid var(--border);background:#fff;color:var(--text);
+  border-radius:20px;padding:.5em .85em;font-weight:800;font-size:.78em;
+  font-family:inherit;cursor:pointer;
+}
+.v2-editbar .primary{background:var(--pink);border-color:var(--pink);color:#fff}
+.v2-editbar .danger{color:#c0392b}
+.edit-status{font-size:.74em;color:var(--muted);min-width:4.5em;text-align:center}
+.transport-actions{display:flex;flex-wrap:wrap;gap:.4em;margin-top:.45em}
+.transport-actions a,.transport-actions button{
+  border:1px solid var(--border);background:#fff;color:var(--blue);
+  border-radius:16px;padding:.28em .65em;font-size:.72em;font-weight:800;
+  text-decoration:none;font-family:inherit;cursor:pointer;
+}
+.route-summary{
+  display:block;margin-top:.25em;color:#777;font-size:.72em;line-height:1.55;
+}
+body.edit-mode .tl-route, body.edit-mode .tl-map{pointer-events:none;opacity:.45}
 </style>
 </head>
 <body>
@@ -1282,9 +1321,16 @@ body{font-family:'Microsoft JhengHei','PingFang TC',Arial,sans-serif;background:
 
 <!-- ═══════ BOTTOM BAR ═══════ -->
 <div class="v2-bottombar">
-  <button class="v2-like" title="收藏">🤍</button>
+  <button class="v2-like" id="v2edit" title="編輯">編</button>
   <button class="v2-like" id="v2share" title="分享">🔗</button>
   <a class="v2-cta" href="osaka_family_travel.html">📋 查看完整版（含編輯功能）</a>
+</div>
+
+<div class="v2-editbar" id="v2editbar">
+  <button class="primary" id="v2saveEdits">儲存</button>
+  <button id="v2exitEdit">完成</button>
+  <button class="danger" id="v2resetEdits">還原</button>
+  <span class="edit-status" id="v2editStatus">編輯中</span>
 </div>
 
 <!-- ═══════ BACK TO TOP ═══════ -->
@@ -1495,6 +1541,140 @@ document.querySelectorAll('#backup .filter-tab').forEach(tab=>{
     });
   });
 });
+
+/* 交通資訊強化：交通頁卡片自動產生 Google Maps 路線與搜尋入口 */
+(function enhanceTransportCards(){
+  const cards = document.querySelectorAll('#transport .mini-card');
+  cards.forEach(card=>{
+    const title = card.querySelector('.mtitle');
+    const desc = card.querySelector('.mdesc');
+    const body = card.querySelector('.mbody');
+    if (!title || !body || body.querySelector('.transport-actions')) return;
+
+    const text = title.textContent.trim();
+    const parts = text.split(/→|↔/).map(s=>s.trim()).filter(Boolean);
+    const actions = document.createElement('div');
+    actions.className = 'transport-actions';
+
+    if (parts.length >= 2) {
+      const origin = resolveQuery(parts[0], 'transport');
+      const dest = resolveQuery(parts[1], 'transport');
+      const route = document.createElement('a');
+      route.href = 'https://www.google.com/maps/dir/?api=1&origin=' + encodeURIComponent(origin) + '&destination=' + encodeURIComponent(dest) + '&travelmode=transit';
+      route.target = '_blank';
+      route.rel = 'noopener';
+      route.textContent = '開啟路線';
+      actions.appendChild(route);
+
+      const summary = document.createElement('span');
+      summary.className = 'route-summary';
+      summary.textContent = '建議出發前用 Google Maps 重查即時班次；推車優先找電梯出口。';
+      body.appendChild(summary);
+    }
+
+    const search = document.createElement('a');
+    search.href = 'https://www.google.com/search?q=' + encodeURIComponent(text + ' 最新 票價 時刻表');
+    search.target = '_blank';
+    search.rel = 'noopener';
+    search.textContent = '查最新資訊';
+    actions.appendChild(search);
+
+    if (desc) {
+      const copy = document.createElement('button');
+      copy.type = 'button';
+      copy.textContent = '複製交通說明';
+      copy.addEventListener('click', ()=>{
+        const value = title.textContent.trim() + '｜' + desc.textContent.trim();
+        const done = ()=>{ const old = copy.textContent; copy.textContent = '已複製'; setTimeout(()=>copy.textContent = old, 1000); };
+        if (navigator.clipboard) navigator.clipboard.writeText(value).then(done).catch(done);
+        else done();
+      });
+      actions.appendChild(copy);
+    }
+    body.appendChild(actions);
+  });
+})();
+
+/* v2 編輯模式：修改行程文字並存到本機 localStorage */
+const EDIT_KEY = 'osaka_v2_text_edits';
+const EDIT_SELECTORS = [
+  '.v2-info h2', '.v2-info .meta', '.ov-desc', '.ov-tag', '.day-title', '.day-sub',
+  '.tl-time', '.tl-name', '.tl-sub', '.tl-connector', '.mini-card .mtitle', '.mini-card .mdesc',
+  '.tip-box', '.tip-card2 h4', '.tip-card2 p', '.budget-row .lbl', '.budget-row .amt'
+].join(',');
+let editDirty = false;
+let editableElements = [];
+
+function loadEditStore(){
+  try { return JSON.parse(localStorage.getItem(EDIT_KEY) || '{}'); }
+  catch { return {}; }
+}
+function saveEditStore(store){
+  localStorage.setItem(EDIT_KEY, JSON.stringify(store));
+}
+function initEditableElements(){
+  editableElements = Array.from(document.querySelectorAll(EDIT_SELECTORS)).filter(el=>{
+    return !el.closest('.v2-bottombar') && !el.closest('.v2-editbar') && !el.closest('script') && !el.closest('style');
+  });
+  editableElements.forEach((el, index)=>{
+    if (!el.dataset.editId) el.dataset.editId = 'e' + index;
+  });
+}
+function applySavedEdits(){
+  const store = loadEditStore();
+  editableElements.forEach(el=>{
+    if (Object.prototype.hasOwnProperty.call(store, el.dataset.editId)) {
+      el.innerHTML = store[el.dataset.editId];
+    }
+  });
+}
+function setEditStatus(text){
+  const status = document.getElementById('v2editStatus');
+  if (status) status.textContent = text;
+}
+function persistEdits(){
+  const store = {};
+  editableElements.forEach(el=>{
+    store[el.dataset.editId] = el.innerHTML.trim();
+  });
+  saveEditStore(store);
+  editDirty = false;
+  setEditStatus('已儲存');
+}
+function setEditMode(enabled){
+  document.body.classList.toggle('edit-mode', enabled);
+  document.getElementById('v2editbar').classList.toggle('show', enabled);
+  editableElements.forEach(el=>{
+    el.contentEditable = enabled ? 'true' : 'false';
+    el.classList.toggle('editable-field', enabled);
+  });
+  setEditStatus(enabled ? '編輯中' : '');
+}
+
+initEditableElements();
+applySavedEdits();
+editableElements.forEach(el=>{
+  el.addEventListener('input', ()=>{
+    editDirty = true;
+    setEditStatus('未儲存');
+  });
+});
+document.getElementById('v2edit').addEventListener('click', ()=>setEditMode(true));
+document.getElementById('v2saveEdits').addEventListener('click', persistEdits);
+document.getElementById('v2exitEdit').addEventListener('click', ()=>{
+  if (editDirty) persistEdits();
+  setEditMode(false);
+});
+document.getElementById('v2resetEdits').addEventListener('click', ()=>{
+  if (!confirm('確定還原 v2 所有本機編輯內容？')) return;
+  localStorage.removeItem(EDIT_KEY);
+  location.reload();
+});
+window.addEventListener('beforeunload', ()=>{
+  if (editDirty) persistEdits();
+});
 </script>
 </body>
 </html>
+
+
