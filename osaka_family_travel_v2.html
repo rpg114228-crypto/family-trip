@@ -183,6 +183,13 @@ body.edit-mode .editable-field:focus{
   display:block;margin-top:.25em;color:#777;font-size:.72em;line-height:1.55;
 }
 body.edit-mode .tl-route, body.edit-mode .tl-map{pointer-events:none;opacity:.45}
+
+.tl-thumb.loading-photo{
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#f5f7fa,#e4e8ef);
+  color:var(--muted);font-size:.68em;text-align:center;padding:.4em;
+}
+.tl-place-full{display:block;margin-top:.25em;color:#555;font-size:.72em;line-height:1.5}
 </style>
 </head>
 <body>
@@ -1542,6 +1549,97 @@ document.querySelectorAll('#backup .filter-tab').forEach(tab=>{
   });
 });
 
+
+/* 實景照片與完整地點名稱：將表情符號縮圖改成 Wikimedia 現場照片 */
+const PLACE_MEDIA_RULES = [
+  {kw:'關西機場抵達', full:'關西國際機場 第1航廈（Kansai International Airport Terminal 1）', query:'Kansai International Airport Terminal 1'},
+  {kw:'搭機回台灣', full:'關西國際機場 第1航廈（Kansai International Airport Terminal 1）', query:'Kansai International Airport Terminal 1'},
+  {kw:'關西機場辦理登機', full:'關西國際機場 第1航廈 免稅店區', query:'Kansai International Airport Terminal 1 departure hall'},
+  {kw:'Check-in｜ESLEAD', full:'ESLEAD HOTEL Osaka Nipponbashi（エスリードホテル大阪日本橋）', query:'Nipponbashi Osaka'},
+  {kw:'回飯店休息', full:'ESLEAD HOTEL Osaka Nipponbashi 周邊・日本橋/難波', query:'Nipponbashi Osaka'},
+  {kw:'出發｜難波', full:'難波站 / 大阪難波站（Namba Station / Osaka-Namba Station）', query:'Namba Station Osaka'},
+  {kw:'主動撤退', full:'日本環球影城 出入口（Universal Studios Japan Entrance）', query:'Universal Studios Japan entrance'},
+  {kw:'回飯店午睡補眠', full:'ESLEAD HOTEL Osaka Nipponbashi 周邊・日本橋/難波', query:'Nipponbashi Osaka'},
+  {kw:'難波附近晚餐', full:'難波・道頓堀周邊晚餐區', query:'Dotonbori Namba Osaka'},
+  {kw:'出發｜難波搭Osaka Metro中央線', full:'大阪地下鐵 難波站 / 本町轉乘中央線', query:'Osaka Metro Namba Station'},
+  {kw:'天保山 MARKETPLACE 午餐', full:'天保山 Marketplace（Tempozan Marketplace）', query:'Tempozan Marketplace Osaka'},
+  {kw:'回飯店，孩子午睡', full:'ESLEAD HOTEL Osaka Nipponbashi 周邊・日本橋/難波', query:'Nipponbashi Osaka'},
+  {kw:'午餐＋回飯店午睡', full:'大阪城公園 / 森之宮・谷町四丁目周邊午餐區', query:'Osaka Castle Park'},
+  {kw:'寄放行李・準備出發', full:'ESLEAD HOTEL Osaka Nipponbashi / 日本橋站周邊', query:'Nipponbashi Osaka'},
+  {kw:'奈良町午餐', full:'奈良町（Naramachi）傳統街區', query:'Naramachi Nara'},
+  {kw:'返回梅田，辦理 Check-in', full:'Liz3 Guest House 中崎町 / 中崎町站周邊', query:'Nakazakicho Osaka'},
+  {kw:'梅田阪急百貨地下美食街晚餐', full:'阪急百貨店梅田本店 地下食品街', query:'Hankyu Department Store Umeda'},
+  {kw:'梅田搭阪急出發', full:'阪急大阪梅田站（Hankyu Osaka-Umeda Station）', query:'Hankyu Osaka Umeda Station'},
+  {kw:'嵐山午餐', full:'京都嵐山 渡月橋周邊午餐區', query:'Arashiyama Kyoto'},
+  {kw:'返回梅田，孩子車上補眠', full:'阪急嵐山站 → 阪急大阪梅田站', query:'Hankyu Arashiyama Station'},
+  {kw:'梅田搭Osaka Metro出發', full:'大阪地下鐵 梅田站（Osaka Metro Umeda Station）', query:'Osaka Metro Umeda Station'},
+  {kw:'天王寺附近午餐', full:'天王寺公園 / 天王寺站周邊午餐區', query:'Tennoji Park Osaka'},
+  {kw:'回飯店午睡', full:'Liz3 Guest House 中崎町 / 中崎町站周邊', query:'Nakazakicho Osaka'},
+  {kw:'梅田晚餐', full:'大阪梅田站周邊晚餐區', query:'Umeda Osaka'},
+  {kw:'梅田搭御堂筋線 + 大阪モノレール', full:'大阪梅田站 → 萬博記念公園站（大阪單軌電車）', query:'Bampaku-kinen-koen Station Osaka Monorail'},
+  {kw:'EXPOCITY 商場午餐', full:'EXPOCITY 大型複合商場（吹田市萬博記念公園）', query:'EXPOCITY Suita Osaka'},
+  {kw:'商場採購伴手禮', full:'EXPOCITY 大型複合商場（吹田市萬博記念公園）', query:'EXPOCITY Suita Osaka'},
+  {kw:'回梅田，悠閒晚餐', full:'大阪梅田站周邊晚餐區', query:'Umeda Osaka'},
+  {kw:'Liz3出發', full:'Liz3 Guest House 中崎町 / 中崎町站周邊', query:'Nakazakicho Osaka'},
+  {kw:'モザイク商場午餐', full:'神戶 Harborland umie MOSAIC 海景商場', query:'Kobe Harborland Mosaic'},
+  {kw:'行李整理・最後採購', full:'中崎町商店街 / 大阪梅田周邊', query:'Nakazakicho Osaka'},
+  {kw:'Liz3退房', full:'Liz3 Guest House 中崎町 / 中崎町站周邊', query:'Nakazakicho Osaka'},
+  {kw:'梅田阪急百貨地下街最後採購', full:'阪急百貨店梅田本店 地下食品街', query:'Hankyu Department Store Umeda'}
+];
+const PHOTO_CACHE_KEY = 'osaka_v2_wikimedia_photos';
+const photoCache = (()=>{ try { return JSON.parse(localStorage.getItem(PHOTO_CACHE_KEY) || '{}'); } catch { return {}; } })();
+function savePhotoCache(){ localStorage.setItem(PHOTO_CACHE_KEY, JSON.stringify(photoCache)); }
+function matchPlaceRule(name){ return PLACE_MEDIA_RULES.find(rule => name.includes(rule.kw)); }
+async function fetchCommonsPhoto(query){
+  if (photoCache[query]) return photoCache[query];
+  const url = 'https://commons.wikimedia.org/w/api.php?origin=*&action=query&generator=search&gsrnamespace=6&gsrlimit=1&gsrsearch=' + encodeURIComponent(query) + '&prop=imageinfo&iiprop=url&iiurlwidth=160&format=json';
+  const res = await fetch(url);
+  const data = await res.json();
+  const pages = data.query && data.query.pages ? Object.values(data.query.pages) : [];
+  const image = pages[0] && pages[0].imageinfo && pages[0].imageinfo[0];
+  const src = image && (image.thumburl || image.url);
+  if (src) { photoCache[query] = src; savePhotoCache(); }
+  return src;
+}
+function addFullPlaceName(card, fullName){
+  const sub = card.querySelector('.tl-sub');
+  if (!sub || sub.querySelector('.tl-place-full')) return;
+  const line = document.createElement('span');
+  line.className = 'tl-place-full';
+  line.textContent = '完整地點：' + fullName;
+  sub.appendChild(line);
+}
+function replaceEmojiThumb(card, fullName, query){
+  const thumb = card.querySelector('.tl-thumb.ph');
+  if (!thumb) return;
+  const fallback = thumb.textContent.trim();
+  thumb.textContent = '照片載入中';
+  thumb.classList.add('loading-photo');
+  fetchCommonsPhoto(query).then(src=>{
+    if (!src) { thumb.textContent = fallback; thumb.classList.remove('loading-photo'); return; }
+    const img = document.createElement('img');
+    img.className = 'tl-thumb';
+    img.src = src;
+    img.alt = fullName;
+    img.loading = 'lazy';
+    thumb.replaceWith(img);
+  }).catch(()=>{
+    thumb.textContent = fallback;
+    thumb.classList.remove('loading-photo');
+  });
+}
+function enhancePlacePhotos(){
+  document.querySelectorAll('.tl-card').forEach(card=>{
+    const nameEl = card.querySelector('.tl-name');
+    if (!nameEl) return;
+    const name = nameEl.textContent.trim();
+    const rule = matchPlaceRule(name);
+    if (!rule) return;
+    addFullPlaceName(card, rule.full);
+    replaceEmojiThumb(card, rule.full, rule.query);
+  });
+}
+enhancePlacePhotos();
 /* 交通資訊強化：交通頁卡片自動產生 Google Maps 路線與搜尋入口 */
 (function enhanceTransportCards(){
   const cards = document.querySelectorAll('#transport .mini-card');
@@ -1676,5 +1774,6 @@ window.addEventListener('beforeunload', ()=>{
 </script>
 </body>
 </html>
+
 
 
