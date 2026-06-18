@@ -354,7 +354,7 @@ body.edit-mode .tl-route, body.edit-mode .tl-map{pointer-events:none;opacity:.45
   </div>
 
   <div class="panel-h">順遊景點</div>
-  <div class="mini-grid">
+  <div class="mini-grid side-trip">
     <div class="mini-card">
       <img src="https://images.unsplash.com/photo-1764069138714-bcc6783b8e48?auto=format&fit=crop&w=160&h=160&q=80" alt="心齋橋" loading="lazy">
       <div class="mbody">
@@ -613,7 +613,7 @@ body.edit-mode .tl-route, body.edit-mode .tl-map{pointer-events:none;opacity:.45
   </div>
 
   <div class="panel-h">順遊景點</div>
-  <div class="mini-grid">
+  <div class="mini-grid side-trip">
     <div class="mini-card">
       <img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=160&h=160&q=80" alt="法善寺横丁" loading="lazy">
       <div class="mbody">
@@ -701,7 +701,7 @@ body.edit-mode .tl-route, body.edit-mode .tl-map{pointer-events:none;opacity:.45
   </div>
 
   <div class="panel-h">順遊景點</div>
-  <div class="mini-grid">
+  <div class="mini-grid side-trip">
     <div class="mini-card">
       <img src="https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=160&h=160&q=80" alt="春日大社" loading="lazy">
       <div class="mbody">
@@ -797,7 +797,7 @@ body.edit-mode .tl-route, body.edit-mode .tl-map{pointer-events:none;opacity:.45
   </div>
 
   <div class="panel-h">順遊景點</div>
-  <div class="mini-grid">
+  <div class="mini-grid side-trip">
     <div class="mini-card">
       <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=160&h=160&q=80" alt="天神橋筋商店街" loading="lazy">
       <div class="mbody">
@@ -885,7 +885,7 @@ body.edit-mode .tl-route, body.edit-mode .tl-map{pointer-events:none;opacity:.45
   </div>
 
   <div class="panel-h">順遊景點</div>
-  <div class="mini-grid">
+  <div class="mini-grid side-trip">
     <div class="mini-card">
       <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=160&h=160&q=80" alt="NU茶屋町" loading="lazy">
       <div class="mbody">
@@ -973,7 +973,7 @@ body.edit-mode .tl-route, body.edit-mode .tl-map{pointer-events:none;opacity:.45
   </div>
 
   <div class="panel-h">順遊景點</div>
-  <div class="mini-grid">
+  <div class="mini-grid side-trip">
     <div class="mini-card">
       <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=160&h=160&q=80" alt="中崎町夜晚" loading="lazy">
       <div class="mbody">
@@ -1369,6 +1369,21 @@ document.querySelectorAll('.tl-card').forEach(card=>{
   const name = card.querySelector('.tl-name').textContent.trim();
   const link = document.createElement('a');
   link.className = 'tl-map';
+  link.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(name);
+  link.target = '_blank';
+  link.rel = 'noopener';
+  link.textContent = '📍 在地圖開啟';
+  body.appendChild(link);
+});
+
+/* 順遊景點地圖連結：依名稱產生Google地圖搜尋連結 */
+document.querySelectorAll('.mini-grid.side-trip .mini-card').forEach(card=>{
+  const body = card.querySelector('.mbody');
+  const titleEl = card.querySelector('.mtitle');
+  if (!body || !titleEl) return;
+  const name = titleEl.textContent.trim();
+  const link = document.createElement('a');
+  link.className = 'mlink';
   link.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(name);
   link.target = '_blank';
   link.rel = 'noopener';
