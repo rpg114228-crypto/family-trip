@@ -1,0 +1,1779 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大阪親子旅遊行程｜9天8夜 3-4歲版（行程靈感版）</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --pink:#ff4f81;--pink-light:#ffe6ee;--blue:#1a73e8;
+  --bg:#f6f6f8;--card:#fff;--gray:#f1f2f5;
+  --text:#222;--muted:#9a9aa2;--border:#ececef;
+}
+body{font-family:'Microsoft JhengHei','PingFang TC',Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;padding-bottom:74px}
+
+/* ── APP BAR ── */
+.v2-appbar{position:sticky;top:0;z-index:100;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:.75em 1em;border-bottom:1px solid var(--border)}
+.v2-appbar .back{font-size:1.1em;color:var(--text);text-decoration:none;font-weight:700}
+.v2-appbar .title{font-size:.9em;font-weight:700;color:var(--muted)}
+.v2-appbar .icons{display:flex;gap:.8em;font-size:1.05em;color:var(--muted)}
+
+/* ── HERO ── */
+.v2-hero{height:170px;background:linear-gradient(160deg,rgba(10,10,30,.2),rgba(255,79,129,.35)),url('https://images.unsplash.com/photo-1590559899731-a382839e5549?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;position:relative}
+.v2-hero-text{position:absolute;left:1em;bottom:1.2em;color:#fff;z-index:1;text-shadow:0 2px 8px rgba(0,0,0,.4)}
+.v2-hero-text .jp{font-size:.78em;letter-spacing:.2em;opacity:.85}
+.v2-hero-text h1{font-size:1.3em;margin-top:.2em}
+
+/* ── INFO CARD ── */
+.v2-info{background:#fff;margin-top:-18px;border-radius:18px 18px 0 0;position:relative;z-index:2;padding:1.1em 1em .4em;max-width:600px;margin-left:auto;margin-right:auto}
+.v2-info .author{display:flex;align-items:center;gap:.5em;font-size:.82em;color:var(--muted);margin-bottom:.4em}
+.v2-info .author .av{width:24px;height:24px;border-radius:50%;background:var(--pink-light);display:flex;align-items:center;justify-content:center;font-size:.9em}
+.v2-info h2{font-size:1.15em;margin-bottom:.25em}
+.v2-info .meta{font-size:.78em;color:var(--muted)}
+
+/* ── TABS ── */
+.v2-tabs{display:flex;gap:1.3em;overflow-x:auto;padding:0 1em;border-bottom:1px solid var(--border);background:#fff;position:sticky;top:0;z-index:90;scrollbar-width:none;max-width:600px;margin:0 auto}
+.v2-tabs::-webkit-scrollbar{display:none}
+.v2-tab{flex-shrink:0;padding:.8em 0;font-size:.9em;color:var(--muted);font-weight:700;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit}
+.v2-tab.active{color:var(--pink);border-bottom-color:var(--pink)}
+
+/* ── PANELS ── */
+.v2-panel{display:none;padding:1em;max-width:600px;margin:0 auto}
+.v2-panel.active{display:block;animation:panelIn .3s ease}
+@keyframes panelIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.day-title{font-size:1.35em;font-weight:800;margin-bottom:.1em}
+.day-sub{font-size:.85em;color:var(--muted);margin-bottom:1.2em}
+.panel-h{display:flex;align-items:center;gap:.45em;font-size:1em;font-weight:800;margin:1.3em 0 .6em;color:var(--text)}
+.panel-h::before{content:'';width:4px;height:1em;background:var(--pink);border-radius:2px}
+
+/* ── OVERVIEW STATS ── */
+.ov-stats{display:flex;gap:.5em;margin:1em 0}
+.ov-stat{flex:1;background:var(--gray);border-radius:12px;padding:.7em;text-align:center}
+.ov-stat .lbl{font-size:.7em;color:var(--muted)}
+.ov-stat .val{font-size:.95em;font-weight:800;margin-top:.25em}
+.ov-tags{display:flex;flex-wrap:wrap;gap:.4em;margin:.6em 0 0}
+.ov-tag{background:var(--pink-light);color:var(--pink);font-size:.78em;font-weight:700;padding:.32em .85em;border-radius:20px}
+.ov-desc{font-size:.85em;color:#555;margin:.8em 0;line-height:1.8}
+
+/* ── TIMELINE ── */
+.timeline{margin-top:.4em}
+.tl-card{display:flex;gap:.8em;background:var(--gray);border-radius:14px;padding:.7em;position:relative;margin-bottom:.55em;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.tl-thumb{width:62px;height:62px;border-radius:10px;object-fit:cover;flex-shrink:0;display:block}
+.tl-thumb.ph{display:flex;align-items:center;justify-content:center;font-size:1.7em;color:#fff;background:linear-gradient(135deg,#ffb199,#ff4f81)}
+.tl-num{position:absolute;top:-6px;left:-6px;background:var(--pink);color:#fff;font-size:.7em;font-weight:800;width:22px;height:22px;border-radius:50% 50% 50% 4px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(255,79,129,.4);z-index:1}
+.tl-body{flex:1;min-width:0;padding-right:1.6em}
+.tl-time{color:var(--pink);font-weight:800;font-size:.82em;display:flex;align-items:center;gap:.3em}
+.tl-name{font-weight:700;font-size:.95em;margin:.18em 0 .15em;color:var(--text)}
+.tl-sub{font-size:.76em;color:var(--muted);line-height:1.5}
+.tl-heart{position:absolute;top:.75em;right:.75em;color:#d8d8de;font-size:1.1em;cursor:pointer;transition:color .15s,transform .15s}
+.tl-heart.active{color:var(--pink)}
+.tl-heart.pulse{animation:heartPulse .3s ease}
+@keyframes heartPulse{0%{transform:scale(1)}50%{transform:scale(1.4)}100%{transform:scale(1)}}
+.tl-connector{display:flex;align-items:center;gap:.4em;color:var(--muted);font-size:.78em;margin:0 0 .55em 1.6em;padding:.25em 0 .25em 1.3em;border-left:2px dashed #e2e2e6;min-height:1.4em}
+
+/* ── MINI CARDS (景點推薦/住宿/交通/備用) ── */
+.mini-grid{display:flex;flex-direction:column;gap:.6em}
+.mini-card{display:flex;gap:.8em;background:var(--gray);border-radius:14px;padding:.7em;align-items:flex-start;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.mini-card img{width:64px;height:64px;border-radius:10px;object-fit:cover;flex-shrink:0;background:#ddd}
+.mini-card .mph{width:64px;height:64px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.6em;color:#fff;background:linear-gradient(135deg,#a18cd1,#fbc2eb)}
+.mini-card .mbody{flex:1;min-width:0}
+.mini-card .mtitle{font-weight:700;font-size:.9em}
+.mini-card .mdesc{font-size:.78em;color:var(--muted);margin-top:.25em;line-height:1.6}
+.mini-card .mtags{display:flex;gap:.3em;margin-top:.35em;flex-wrap:wrap}
+.mini-card .mtag{font-size:.68em;background:#fff;color:var(--muted);padding:.15em .55em;border-radius:8px;border:1px solid var(--border)}
+.mini-card .mlink{display:inline-block;margin-top:.35em;font-size:.76em;color:var(--blue);font-weight:700;text-decoration:none}
+
+/* ── TIP BOX ── */
+.tip-box{background:var(--pink-light);border-radius:12px;padding:.8em 1em;font-size:.82em;color:#a23a5b;line-height:1.8;margin-top:.8em}
+.tip-box b{color:var(--pink)}
+
+/* ── BUDGET ── */
+.budget-row{display:flex;justify-content:space-between;align-items:center;background:var(--gray);border-radius:12px;padding:.8em 1.1em;margin-bottom:.5em;font-size:.88em}
+.budget-row .amt{font-weight:800;color:var(--pink)}
+.budget-row.total{background:var(--pink);color:#fff}
+.budget-row.total .amt{color:#fff}
+
+/* ── TIP CARD2 (提醒) ── */
+.tip-card2{display:flex;gap:.7em;background:var(--gray);border-radius:12px;padding:.8em;margin-bottom:.5em;align-items:flex-start}
+.tip-card2 .ico{font-size:1.4em;flex-shrink:0}
+.tip-card2 h4{font-size:.88em;margin-bottom:.2em}
+.tip-card2 p{font-size:.78em;color:var(--muted);line-height:1.7}
+
+/* ── DAY NAV (上一天/下一天) ── */
+.day-nav{display:flex;gap:.6em;margin-top:1.3em}
+.day-nav button{flex:1;border:none;border-radius:12px;padding:.85em;font-weight:700;font-size:.85em;font-family:inherit;cursor:pointer;background:var(--gray);color:var(--text)}
+.day-nav button.next{background:var(--pink);color:#fff}
+
+/* ── MAP LINK on timeline cards ── */
+.tl-map{display:inline-block;margin-top:.3em;font-size:.72em;color:var(--blue);text-decoration:none;font-weight:700}
+
+/* ── ROUTE LINK on connectors (即時路線/時刻表) ── */
+.tl-route{margin-left:auto;padding-left:.6em;color:var(--blue);text-decoration:none;font-weight:700;font-size:.74em;flex-shrink:0;white-space:nowrap}
+
+/* ── FAVORITES (我的收藏) ── */
+#favs-section{display:none}
+#favs-section.show{display:block}
+
+/* ── MUST-VISIT BADGE ── */
+.tl-badge{display:inline-block;background:linear-gradient(135deg,#ffd166,#ff9f43);color:#fff;font-size:.68em;font-weight:800;padding:.15em .55em;border-radius:8px;margin-left:.4em;vertical-align:middle}
+
+/* ── BUDGET CHART (總覽頁預算分布) ── */
+.bchart{display:flex;flex-direction:column;gap:.55em;margin:.6em 0}
+.bchart-row{display:flex;align-items:center;gap:.6em;font-size:.78em}
+.bchart-label{width:5.4em;flex-shrink:0;color:#555}
+.bchart-bar{flex:1;height:10px;background:var(--gray);border-radius:6px;overflow:hidden}
+.bchart-bar-fill{height:100%;background:linear-gradient(90deg,var(--pink),#ffb199);border-radius:6px}
+.bchart-pct{width:3em;flex-shrink:0;text-align:right;font-weight:700;color:var(--text)}
+
+/* ── BACKUP FILTER TABS ── */
+.filter-tabs{display:flex;gap:.5em;flex-wrap:wrap;margin:.6em 0 1em}
+.filter-tab{border:1px solid var(--border);background:#fff;color:var(--muted);font-size:.78em;font-weight:700;padding:.4em 1em;border-radius:20px;cursor:pointer;font-family:inherit}
+.filter-tab.active{background:var(--pink);color:#fff;border-color:var(--pink)}
+
+/* ── BOTTOM BAR ── */
+.v2-bottombar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--border);display:flex;gap:.7em;padding:.65em 1em;align-items:center;z-index:200;max-width:600px;margin:0 auto}
+.v2-like{width:44px;height:44px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.15em;flex-shrink:0;background:#fff;cursor:pointer}
+.v2-cta{flex:1;background:var(--blue);color:#fff;border:none;border-radius:24px;padding:.85em;font-weight:800;font-size:.9em;text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:.4em}
+
+/* ── BACK TO TOP ── */
+.v2-totop{position:fixed;right:1em;bottom:78px;width:42px;height:42px;border-radius:50%;background:#fff;border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.12);display:flex;align-items:center;justify-content:center;font-size:1.1em;color:var(--pink);cursor:pointer;z-index:199;opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s}
+.v2-totop.show{opacity:1;visibility:visible}
+
+/* ── DESKTOP：置中卡片，避免大螢幕兩側空白過多 ── */
+@media (min-width:700px){
+  body{max-width:480px;margin:0 auto;box-shadow:0 0 40px rgba(0,0,0,.1);min-height:100vh}
+}
+
+/* ── EDIT MODE ── */
+body.edit-mode .editable-field{
+  outline:2px dashed rgba(255,79,129,.45);
+  outline-offset:3px;
+  border-radius:8px;
+  background:rgba(255,230,238,.55);
+}
+body.edit-mode .editable-field:focus{
+  outline:2px solid var(--pink);
+  background:#fff;
+  box-shadow:0 0 0 4px rgba(255,79,129,.12);
+}
+.v2-editbar{
+  position:fixed;left:0;right:0;bottom:64px;z-index:230;
+  display:none;gap:.5em;align-items:center;justify-content:center;
+  max-width:600px;margin:0 auto;padding:.55em .75em;
+  background:rgba(255,255,255,.96);border-top:1px solid var(--border);
+  box-shadow:0 -2px 12px rgba(0,0,0,.08);
+}
+.v2-editbar.show{display:flex}
+.v2-editbar button{
+  border:1px solid var(--border);background:#fff;color:var(--text);
+  border-radius:20px;padding:.5em .85em;font-weight:800;font-size:.78em;
+  font-family:inherit;cursor:pointer;
+}
+.v2-editbar .primary{background:var(--pink);border-color:var(--pink);color:#fff}
+.v2-editbar .danger{color:#c0392b}
+.edit-status{font-size:.74em;color:var(--muted);min-width:4.5em;text-align:center}
+.transport-actions{display:flex;flex-wrap:wrap;gap:.4em;margin-top:.45em}
+.transport-actions a,.transport-actions button{
+  border:1px solid var(--border);background:#fff;color:var(--blue);
+  border-radius:16px;padding:.28em .65em;font-size:.72em;font-weight:800;
+  text-decoration:none;font-family:inherit;cursor:pointer;
+}
+.route-summary{
+  display:block;margin-top:.25em;color:#777;font-size:.72em;line-height:1.55;
+}
+body.edit-mode .tl-route, body.edit-mode .tl-map{pointer-events:none;opacity:.45}
+
+.tl-thumb.loading-photo{
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#f5f7fa,#e4e8ef);
+  color:var(--muted);font-size:.68em;text-align:center;padding:.4em;
+}
+.tl-place-full{display:block;margin-top:.25em;color:#555;font-size:.72em;line-height:1.5}
+</style>
+</head>
+<body>
+
+<!-- ═══════ APP BAR ═══════ -->
+<div class="v2-appbar">
+  <span class="back">‹ 行程靈感</span>
+  <span class="title">大阪親子旅遊</span>
+  <span class="icons">⤴ ✕</span>
+</div>
+
+<!-- ═══════ HERO ═══════ -->
+<div class="v2-hero">
+  <div class="v2-hero-text">
+    <div class="jp">OSAKA · 親子旅遊</div>
+    <h1>大阪 9天8夜親子旅遊行程</h1>
+  </div>
+</div>
+
+<!-- ═══════ INFO CARD ═══════ -->
+<div class="v2-info">
+  <div class="author"><span class="av">👨‍👩‍👧</span> 溫梧淮的行程規劃　·　專為 3–4 歲幼童設計</div>
+  <h2>大阪・奈良・嵐山・神戶 親子慢遊</h2>
+  <div class="meta">9天8夜・輕鬆節奏・景點不重複</div>
+</div>
+
+<!-- ═══════ TABS ═══════ -->
+<div class="v2-tabs" id="v2tabs">
+  <button class="v2-tab active" data-tab="overview">總覽頁</button>
+  <button class="v2-tab" data-tab="day1">第1天</button>
+  <button class="v2-tab" data-tab="day2">第2天</button>
+  <button class="v2-tab" data-tab="day3">第3天</button>
+  <button class="v2-tab" data-tab="day4">第4天</button>
+  <button class="v2-tab" data-tab="day5">第5天</button>
+  <button class="v2-tab" data-tab="day6">第6天</button>
+  <button class="v2-tab" data-tab="day7">第7天</button>
+  <button class="v2-tab" data-tab="day8">第8天</button>
+  <button class="v2-tab" data-tab="day9">第9天</button>
+  <button class="v2-tab" data-tab="day10">第10天</button>
+  <button class="v2-tab" data-tab="hotels">住宿</button>
+  <button class="v2-tab" data-tab="transport">交通</button>
+  <button class="v2-tab" data-tab="backup">備用景點</button>
+  <button class="v2-tab" data-tab="tips">小提醒</button>
+  <button class="v2-tab" data-tab="budget">預算</button>
+</div>
+
+<!-- ═══════ 總覽頁 ═══════ -->
+<div class="v2-panel active" id="overview">
+  <div class="ov-stats">
+    <div class="ov-stat"><div class="lbl">行程</div><div class="val">9天8夜</div></div>
+    <div class="ov-stat"><div class="lbl">適合年齡</div><div class="val">3–4歲</div></div>
+    <div class="ov-stat"><div class="lbl">目的地</div><div class="val">大阪/奈良/京都/神戶</div></div>
+  </div>
+  <p class="ov-desc">3大3小家庭行程，第1–4晚住難波（ESLEAD日本橋），第5–9晚住梅田北（Liz3中崎町）。每天安排13:00–15:00午睡時間，景點以「室內、推車友善、不重複」為主軸，重頭戲是 USJ 環球奇境、海遊館鯨鯊、奈良餵鹿、嵐山猴子山。</p>
+
+  <div id="favs-section">
+    <div class="panel-h">⭐ 我的收藏</div>
+    <div class="mini-grid" id="favs-list"></div>
+  </div>
+
+  <div class="panel-h">途經地區</div>
+  <div class="ov-tags">
+    <span class="ov-tag">難波・道頓堀</span>
+    <span class="ov-tag">梅田・中崎町</span>
+    <span class="ov-tag">奈良</span>
+    <span class="ov-tag">京都嵐山</span>
+    <span class="ov-tag">神戶</span>
+    <span class="ov-tag">吹田EXPOCITY</span>
+    <span class="ov-tag">天王寺</span>
+  </div>
+
+  <div class="panel-h">行程亮點標籤</div>
+  <div class="ov-tags">
+    <span class="ov-tag">👨‍👩‍👧 親子友善</span>
+    <span class="ov-tag">🏠 室內活動多</span>
+    <span class="ov-tag">🍱 吃吃喝喝</span>
+    <span class="ov-tag">🚼 推車全程可用</span>
+    <span class="ov-tag">😴 每日午睡</span>
+  </div>
+
+  <div class="panel-h">住宿摘要</div>
+  <div class="mini-grid">
+    <div class="mini-card">
+      <div class="mph">🏨</div>
+      <div class="mbody">
+        <div class="mtitle">ESLEAD酒店大阪日本橋</div>
+        <div class="mdesc">第1–4晚｜日本橋駅近，步行難波・道頓堀5–8分，可訂相鄰2房</div>
+      </div>
+    </div>
+    <div class="mini-card">
+      <div class="mph">🏠</div>
+      <div class="mbody">
+        <div class="mtitle">Liz3 Guest House 中崎町</div>
+        <div class="mdesc">第5–9晚｜中崎町駅1分鐘・評分9.5，往奈良・京都・神戶轉乘方便</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel-h">💰 預算分布（粗估）</div>
+  <div class="bchart">
+    <div class="bchart-row"><span class="bchart-label">✈️ 機票</span><div class="bchart-bar"><div class="bchart-bar-fill" style="width:33%"></div></div><span class="bchart-pct">33%</span></div>
+    <div class="bchart-row"><span class="bchart-label">🏨 住宿</span><div class="bchart-bar"><div class="bchart-bar-fill" style="width:17%"></div></div><span class="bchart-pct">17%</span></div>
+    <div class="bchart-row"><span class="bchart-label">🍜 餐費</span><div class="bchart-bar"><div class="bchart-bar-fill" style="width:17%"></div></div><span class="bchart-pct">17%</span></div>
+    <div class="bchart-row"><span class="bchart-label">🎢 USJ門票</span><div class="bchart-bar"><div class="bchart-bar-fill" style="width:11%"></div></div><span class="bchart-pct">11%</span></div>
+    <div class="bchart-row"><span class="bchart-label">🛍 伴手禮</span><div class="bchart-bar"><div class="bchart-bar-fill" style="width:9%"></div></div><span class="bchart-pct">9%</span></div>
+    <div class="bchart-row"><span class="bchart-label">🐟 海遊館等</span><div class="bchart-bar"><div class="bchart-bar-fill" style="width:7%"></div></div><span class="bchart-pct">7%</span></div>
+    <div class="bchart-row"><span class="bchart-label">🚇 交通</span><div class="bchart-bar"><div class="bchart-bar-fill" style="width:7%"></div></div><span class="bchart-pct">7%</span></div>
+  </div>
+
+  <div class="tip-box">
+    <b>路線總覽：</b>Day1 抵達難波 → Day2 USJ → Day3 海遊館/天保山 → Day4 大阪城/住吉大社 → Day5 奈良 + 換宿梅田 → Day6 嵐山 → Day7 天王寺/HARUKAS → Day8 EXPOCITY/NIFREL → Day9 神戶 → Day10 回程
+  </div>
+</div>
+
+<!-- DAY PANELS -->
+<div class="v2-panel" id="day1">
+  <div class="day-title">第1天・抵達大阪・輕鬆開場</div>
+  <div class="day-sub">關西機場入境 → 難波 → 道頓堀夜遊</div>
+  <div class="timeline">
+    <div class="tl-card">
+      <div class="tl-num">1</div>
+      <div class="tl-thumb ph">✈️</div>
+      <div class="tl-body">
+        <div class="tl-time">🛫 15:00</div>
+        <div class="tl-name">關西機場抵達・入境</div>
+        <div class="tl-sub">第一天時差調整，孩子容易疲累</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-connector">🚆 南海特急ラピート・45分 → 難波</div>
+    <div class="tl-card">
+      <div class="tl-num">2</div>
+      <div class="tl-thumb ph">🏨</div>
+      <div class="tl-body">
+        <div class="tl-time">🛎️ 17:30</div>
+        <div class="tl-name">Check-in｜ESLEAD酒店大阪日本橋</div>
+        <div class="tl-sub">日本橋駅近，步行難波・道頓堀5–8分</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-card">
+      <div class="tl-num">3</div>
+      <img class="tl-thumb" src="https://images.unsplash.com/photo-1590559899731-a382839e5549?auto=format&fit=crop&w=160&h=160&q=80" alt="道頓堀" loading="lazy">
+      <div class="tl-body">
+        <div class="tl-time">🍢 18:30</div>
+        <div class="tl-name">道頓堀散步 + 章魚燒</div>
+        <div class="tl-sub">霓虹招牌、旋轉螃蟹，章魚燒現炸必吃</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-connector">🚶 步行返回飯店</div>
+    <div class="tl-card">
+      <div class="tl-num">4</div>
+      <div class="tl-thumb ph">🌙</div>
+      <div class="tl-body">
+        <div class="tl-time">😴 20:00</div>
+        <div class="tl-name">回飯店休息</div>
+        <div class="tl-sub">熱水澡幫助孩子入睡，第一天輕鬆為主</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+  </div>
+
+  <div class="panel-h">順遊景點</div>
+  <div class="mini-grid">
+    <div class="mini-card">
+      <img src="https://images.unsplash.com/photo-1764069138714-bcc6783b8e48?auto=format&fit=crop&w=160&h=160&q=80" alt="心齋橋" loading="lazy">
+      <div class="mbody">
+        <div class="mtitle">心齋橋商店街</div>
+        <div class="mdesc">遮頂拱廊商店街，下雨也能逛。藥妝、零食、伴手禮一次採購，推車無障礙。</div>
+        <div class="mtags"><span class="mtag">購物</span><span class="mtag">室內</span></div>
+      </div>
+    </div>
+    <div class="mini-card">
+      <img src="https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?auto=format&fit=crop&w=160&h=160&q=80" alt="黑門市場" loading="lazy">
+      <div class="mbody">
+        <div class="mtitle">黑門市場</div>
+        <div class="mdesc">大阪廚房，海鮮、串炸、草莓邊走邊吃，傍晚前往人潮較少。</div>
+        <div class="mtags"><span class="mtag">美食</span><span class="mtag">文化</span></div>
+      </div>
+    </div>
+    <div class="mini-card">
+      <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=160&h=160&q=80" alt="でんでんタウン" loading="lazy">
+      <div class="mbody">
+        <div class="mtitle">でんでんタウン（電器街）</div>
+        <div class="mdesc">ESLEAD飯店步行1分鐘，扭蛋機超多，買家電・玩具比梅田便宜。</div>
+        <div class="mtags"><span class="mtag">逛街</span><span class="mtag">採購</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-box"><b>幼童注意：</b>第一天時差調整，孩子容易疲累，行程刻意輕安排，切勿塞太多景點。飯店選有浴缸的房型，熱水澡幫助孩子入睡。</div>
+
+  <div class="day-nav">
+    <button data-goto="overview">← 總覽頁</button>
+    <button data-goto="day2" class="next">第2天 →</button>
+  </div>
+</div>
+
+<div class="v2-panel" id="day2">
+  <div class="day-title">第2天・環球影城 USJ（幼童策略版）</div>
+  <div class="day-sub">半天精攻兒童區，下午兩點主動撤退</div>
+  <div class="timeline">
+    <div class="tl-card">
+      <div class="tl-num">1</div>
+      <div class="tl-thumb ph">🚉</div>
+      <div class="tl-body">
+        <div class="tl-time">🚉 08:00</div>
+        <div class="tl-name">出發｜難波搭JR環狀線</div>
+        <div class="tl-sub">前往ユニバーサルシティ站</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-connector">🚆 JR大阪環狀線・約30分 → ユニバーサルシティ</div>
+    <div class="tl-card">
+      <div class="tl-num">2</div>
+      <img class="tl-thumb" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=160&h=160&q=80" alt="環球奇境" loading="lazy">
+      <div class="tl-body">
+        <div class="tl-time">🎠 09:00</div>
+        <div class="tl-name">環球奇境（Universal Wonderland）<span class="tl-badge">🌟必訪</span></div>
+        <div class="tl-sub">Hello Kitty・芝麻街4D，無身高限制最適合3–4歲</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-card">
+      <div class="tl-num">3</div>
+      <img class="tl-thumb" src="https://images.unsplash.com/photo-1519861531473-9200262188bf?auto=format&fit=crop&w=160&h=160&q=80" alt="小小兵樂園" loading="lazy">
+      <div class="tl-body">
+        <div class="tl-time">🟡 11:30</div>
+        <div class="tl-name">小小兵樂園 + 午餐</div>
+        <div class="tl-sub">旋轉杯、吹氣槍體驗，部分設施需92cm</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-connector">🎫 主動撤退・整理回程</div>
+    <div class="tl-card">
+      <div class="tl-num">4</div>
+      <div class="tl-thumb ph">🚪</div>
+      <div class="tl-body">
+        <div class="tl-time">⏰ 14:00</div>
+        <div class="tl-name">主動撤退</div>
+        <div class="tl-sub">孩子體力到此為止，不硬撐</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-connector">🚆 JR環狀線返回難波・約30分</div>
+    <div class="tl-card">
+      <div class="tl-num">5</div>
+      <div class="tl-thumb ph">😴</div>
+      <div class="tl-body">
+        <div class="tl-time">🛏️ 15:30</div>
+        <div class="tl-name">回飯店午睡補眠</div>
+        <div class="tl-sub">回ESLEAD日本橋休息</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-card">
+      <div class="tl-num">6</div>
+      <div class="tl-thumb ph">🍜</div>
+      <div class="tl-body">
+        <div class="tl-time">🍽️ 18:00</div>
+        <div class="tl-name">難波附近晚餐</div>
+        <div class="tl-sub">步行範圍內覓食，輕鬆收尾</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+  </div>
+
+  <div class="panel-h">行前準備</div>
+  <div class="mini-grid">
+    <div class="mini-card">
+      <img src="https://images.unsplash.com/photo-1745508823954-f478efc8b731?auto=format&fit=crop&w=160&h=160&q=80" alt="USJ票券" loading="lazy">
+      <div class="mbody">
+        <div class="mtitle">票券攻略</div>
+        <div class="mdesc">⚠️ 務必提前線上購票，現場售罄機率極高。可加購「時間指定快速通關券」節省排隊時間。</div>
+        <div class="mtags"><span class="mtag">注意事項</span></div>
+        <a class="mlink" href="https://www.usj.co.jp/web/zh-tw/buy-tickets" target="_blank">線上購票 →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-box"><b>幼童注意：</b>哈利波特、任天堂世界人多排隊久，3–4歲等不住，這次<b>完全跳過</b>。帶折疊推車入場，USJ園區內坡道多，推車很重要。自備零食進場可節省餐費。</div>
+
+  <div class="day-nav">
+    <button data-goto="day1">← 第1天</button>
+    <button data-goto="day3" class="next">第3天 →</button>
+  </div>
+</div>
+
+<div class="v2-panel" id="day3">
+  <div class="day-title">第3天・海遊館 + 天保山</div>
+  <div class="day-sub">日本最大水族館，室內涼爽，全日幼童友善</div>
+  <div class="timeline">
+    <div class="tl-card">
+      <div class="tl-num">1</div>
+      <div class="tl-thumb ph">🚇</div>
+      <div class="tl-body">
+        <div class="tl-time">🚇 09:30</div>
+        <div class="tl-name">出發｜難波搭Osaka Metro中央線</div>
+        <div class="tl-sub">前往大阪港站</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-card">
+      <div class="tl-num">2</div>
+      <img class="tl-thumb" src="https://images.unsplash.com/photo-1501426026826-31c667bdf23d?auto=format&fit=crop&w=160&h=160&q=80" alt="海遊館" loading="lazy">
+      <div class="tl-body">
+        <div class="tl-time">🐋 10:00</div>
+        <div class="tl-name">海遊館（Kaiyukan）<span class="tl-badge">🌟必訪</span></div>
+        <div class="tl-sub">建議至少3小時，鯨鯊從頭頂游過是記憶最深畫面</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-card">
+      <div class="tl-num">3</div>
+      <div class="tl-thumb ph">🍽️</div>
+      <div class="tl-body">
+        <div class="tl-time">🍽️ 13:00</div>
+        <div class="tl-name">天保山 MARKETPLACE 午餐</div>
+        <div class="tl-sub">海遊館旁商場用餐</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-card">
+      <div class="tl-num">4</div>
+      <img class="tl-thumb" src="https://images.unsplash.com/photo-1757059221115-36448e083d39?auto=format&fit=crop&w=160&h=160&q=80" alt="天保山摩天輪" loading="lazy">
+      <div class="tl-body">
+        <div class="tl-time">🎡 14:30</div>
+        <div class="tl-name">天保山摩天輪</div>
+        <div class="tl-sub">透明車廂眺望大阪灣，孩子直喊「好高好高」</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-connector">🚇 Osaka Metro中央線返回難波</div>
+    <div class="tl-card">
+      <div class="tl-num">5</div>
+      <div class="tl-thumb ph">😴</div>
+      <div class="tl-body">
+        <div class="tl-time">🛏️ 15:30</div>
+        <div class="tl-name">回飯店，孩子午睡</div>
+        <div class="tl-sub">休息補體力</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-card">
+      <div class="tl-num">6</div>
+      <img class="tl-thumb" src="https://images.unsplash.com/photo-1537153960513-344d9f2e8216?auto=format&fit=crop&w=160&h=160&q=80" alt="Donki" loading="lazy">
+      <div class="tl-body">
+        <div class="tl-time">🛍️ 18:00</div>
+        <div class="tl-name">難波 Donki 驚安殿堂採購</div>
+        <div class="tl-sub">24小時營業，扭蛋區和零食牆要小心失控購物</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+  </div>
+
+  <div class="tip-box"><b>海遊館小技巧：</b>週末人潮大，建議平日前往或一開館就進場。館內有哺乳室和兒童廁所，設備完善。鯨鯊水槽在4樓，多停留幾分鐘讓孩子慢慢看。</div>
+
+  <div class="day-nav">
+    <button data-goto="day2">← 第2天</button>
+    <button data-goto="day4" class="next">第4天 →</button>
+  </div>
+</div>
+
+<div class="v2-panel" id="day4">
+  <div class="day-title">第4天・大阪城 + 住吉大社</div>
+  <div class="day-sub">戶外放電日，草坪奔跑 + 神社石橋跳跳</div>
+  <div class="timeline">
+    <div class="tl-card">
+      <div class="tl-num">1</div>
+      <img class="tl-thumb" src="https://images.unsplash.com/photo-1580060839134-75a5edca2e99?auto=format&fit=crop&w=160&h=160&q=80" alt="大阪城公園" loading="lazy">
+      <div class="tl-body">
+        <div class="tl-time">🌳 09:30</div>
+        <div class="tl-name">大阪城公園（大草坪放電）</div>
+        <div class="tl-sub">免費入場，帶一顆球讓孩子奔跑一上午</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-card">
+      <div class="tl-num">2</div>
+      <img class="tl-thumb" src="https://images.unsplash.com/photo-1759203100463-00df1601d11c?auto=format&fit=crop&w=160&h=160&q=80" alt="大阪城天守閣" loading="lazy">
+      <div class="tl-body">
+        <div class="tl-time">🏯 11:00</div>
+        <div class="tl-name">大阪城天守閣參觀</div>
+        <div class="tl-sub">電梯排隊久時可只逛外部公園</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-card">
+      <div class="tl-num">3</div>
+      <div class="tl-thumb ph">🍱</div>
+      <div class="tl-body">
+        <div class="tl-time">🍽️ 13:00</div>
+        <div class="tl-name">午餐＋回飯店午睡</div>
+        <div class="tl-sub">回ESLEAD補體力</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-connector">🚕 計程車・約15分 → 住吉大社</div>
+    <div class="tl-card">
+      <div class="tl-num">4</div>
+      <img class="tl-thumb" src="https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=160&h=160&q=80" alt="住吉大社" loading="lazy">
+      <div class="tl-body">
+        <div class="tl-time">⛩️ 15:00</div>
+        <div class="tl-name">住吉大社（石橋 + 神社散步）</div>
+        <div class="tl-sub">太鼓橋孩子最愛跑上跑下，坡陡需手牽手</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-connector">🚇 Osaka Metro返回難波</div>
+    <div class="tl-card">
+      <div class="tl-num">5</div>
+      <img class="tl-thumb" src="https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?auto=format&fit=crop&w=160&h=160&q=80" alt="黑門市場" loading="lazy">
+      <div class="tl-body">
+        <div class="tl-time">🛒 17:00</div>
+        <div class="tl-name">黑門市場晚餐食材</div>
+        <div class="tl-sub">海鮮、串炸邊走邊吃</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+  </div>
+
+  <div class="panel-h">順遊景點</div>
+  <div class="mini-grid">
+    <div class="mini-card">
+      <img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=160&h=160&q=80" alt="法善寺横丁" loading="lazy">
+      <div class="mbody">
+        <div class="mtitle">法善寺横丁・でんでんタウン</div>
+        <div class="mdesc">石板小巷、苔蘚水掛不動尊，夜晚氣氛絕佳。往南5分鐘即でんでんタウン，孩子必停扭蛋機。</div>
+        <div class="mtags"><span class="mtag">逛街</span><span class="mtag">美食</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-box"><b>幼童注意：</b>住吉大社太鼓橋坡度陡，帶孩子手牽手慢慢走，勿抱推車上橋。大阪城電梯大排長龍時可考慮只逛外部公園即可。</div>
+
+  <div class="day-nav">
+    <button data-goto="day3">← 第3天</button>
+    <button data-goto="day5" class="next">第5天 →</button>
+  </div>
+</div>
+
+<div class="v2-panel" id="day5">
+  <div class="day-title">第5天・搬梅田 + 奈良一日遊</div>
+  <div class="day-sub">本次旅程最適合幼童的景點 — 餵鹿</div>
+  <div class="timeline">
+    <div class="tl-card">
+      <div class="tl-num">1</div>
+      <div class="tl-thumb ph">🧳</div>
+      <div class="tl-body">
+        <div class="tl-time">🧳 09:00</div>
+        <div class="tl-name">寄放行李・準備出發</div>
+        <div class="tl-sub">ESLEAD Check-out，行李寄放</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-connector">🚆 近鐵奈良線急行・40分 → 近鐵奈良</div>
+    <div class="tl-card">
+      <div class="tl-num">2</div>
+      <img class="tl-thumb" src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=160&h=160&q=80" alt="奈良公園餵鹿" loading="lazy">
+      <div class="tl-body">
+        <div class="tl-time">🦌 10:00</div>
+        <div class="tl-name">奈良公園餵鹿（重頭戲）<span class="tl-badge">🌟必訪</span></div>
+        <div class="tl-sub">1,200頭野生鹿自由漫步，整趟旅行最珍貴的照片</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-card">
+      <div class="tl-num">3</div>
+      <img class="tl-thumb" src="https://images.unsplash.com/photo-1578639755533-2c52ba911914?auto=format&fit=crop&w=160&h=160&q=80" alt="東大寺" loading="lazy">
+      <div class="tl-body">
+        <div class="tl-time">🛕 12:00</div>
+        <div class="tl-name">東大寺大佛殿</div>
+        <div class="tl-sub">15公尺高盧舍那佛像，柱洞鑽過據說能增長智慧</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-card">
+      <div class="tl-num">4</div>
+      <div class="tl-thumb ph">🍱</div>
+      <div class="tl-body">
+        <div class="tl-time">🍽️ 13:30</div>
+        <div class="tl-name">奈良町午餐</div>
+        <div class="tl-sub">老街午餐補體力</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-connector">🚆 近鐵返回梅田・約40分</div>
+    <div class="tl-card">
+      <div class="tl-num">5</div>
+      <div class="tl-thumb ph">🏠</div>
+      <div class="tl-body">
+        <div class="tl-time">🛎️ 15:00</div>
+        <div class="tl-name">返回梅田，辦理 Check-in</div>
+        <div class="tl-sub">Liz3 Guest House 中崎町，後5晚住宿</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-card">
+      <div class="tl-num">6</div>
+      <div class="tl-thumb ph">🍽️</div>
+      <div class="tl-body">
+        <div class="tl-time">🍜 17:00</div>
+        <div class="tl-name">梅田阪急百貨地下美食街晚餐</div>
+        <div class="tl-sub">迴轉壽司、烏龍麵、親子丼，孩子接受度高</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+  </div>
+
+  <div class="panel-h">順遊景點</div>
+  <div class="mini-grid">
+    <div class="mini-card">
+      <img src="https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=160&h=160&q=80" alt="春日大社" loading="lazy">
+      <div class="mbody">
+        <div class="mtitle">春日大社</div>
+        <div class="mdesc">石燈籠步道穿越古老森林。若孩子體力允許可順道走，否則奈良公園就足夠。</div>
+        <div class="mtags"><span class="mtag">神社</span><span class="mtag">森林</span></div>
+      </div>
+    </div>
+    <div class="mini-card">
+      <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=160&h=160&q=80" alt="中崎町商店街" loading="lazy">
+      <div class="mbody">
+        <div class="mtitle">中崎町商店街（飯店旁）</div>
+        <div class="mdesc">Liz3步行1分鐘。大正・昭和老屋改建咖啡廳、雜貨、古著街，極安靜。</div>
+        <div class="mtags"><span class="mtag">文青</span><span class="mtag">逛街</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-box"><b>鹿的注意事項：</b>鹿雖可愛，偶爾會搶食物或用頭頂撞人，大人要隨時護住孩子。手中仙貝要全部餵完再放手。春日大社後山較陡，有推車時建議到東大寺即可。</div>
+
+  <div class="day-nav">
+    <button data-goto="day4">← 第4天</button>
+    <button data-goto="day6" class="next">第6天 →</button>
+  </div>
+</div>
+
+<div class="v2-panel" id="day6">
+  <div class="day-title">第6天・京都嵐山（精簡版）</div>
+  <div class="day-sub">竹林 + 渡月橋 + 野生猴子山</div>
+  <div class="timeline">
+    <div class="tl-card">
+      <div class="tl-num">1</div>
+      <div class="tl-thumb ph">🚉</div>
+      <div class="tl-body">
+        <div class="tl-time">🚉 08:30</div>
+        <div class="tl-name">梅田搭阪急出發</div>
+        <div class="tl-sub">前往嵐山</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-connector">🚆 阪急京都線→嵐山線・約40分</div>
+    <div class="tl-card">
+      <div class="tl-num">2</div>
+      <img class="tl-thumb" src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=160&h=160&q=80" alt="嵐山竹林" loading="lazy">
+      <div class="tl-body">
+        <div class="tl-time">🎍 09:30</div>
+        <div class="tl-name">嵐山竹林小徑</div>
+        <div class="tl-sub">高聳翠竹夾道，建議9點前入內人潮少</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-card">
+      <div class="tl-num">3</div>
+      <img class="tl-thumb" src="https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=160&h=160&q=80" alt="渡月橋" loading="lazy">
+      <div class="tl-body">
+        <div class="tl-time">🌉 10:30</div>
+        <div class="tl-name">渡月橋拍照 + 桂川河岸散步</div>
+        <div class="tl-sub">河邊沙灘讓孩子玩石頭玩水</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-card">
+      <div class="tl-num">4</div>
+      <img class="tl-thumb" src="https://images.unsplash.com/photo-1578632292335-df3abbb0d586?auto=format&fit=crop&w=160&h=160&q=80" alt="岩田山野猿公苑" loading="lazy">
+      <div class="tl-body">
+        <div class="tl-time">🐒 11:00</div>
+        <div class="tl-name">岩田山野猿公苑<span class="tl-badge">🌟必訪</span></div>
+        <div class="tl-sub">步行20分上山，170隻以上野生猴子，大人需抱孩子上坡</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-card">
+      <div class="tl-num">5</div>
+      <div class="tl-thumb ph">🍱</div>
+      <div class="tl-body">
+        <div class="tl-time">🍵 13:00</div>
+        <div class="tl-name">嵐山午餐</div>
+        <div class="tl-sub">湯豆腐 or 抹茶甜點</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-connector">🚆 阪急返回梅田・約40分</div>
+    <div class="tl-card">
+      <div class="tl-num">6</div>
+      <div class="tl-thumb ph">😴</div>
+      <div class="tl-body">
+        <div class="tl-time">🚃 15:00</div>
+        <div class="tl-name">返回梅田，孩子車上補眠</div>
+        <div class="tl-sub">回Liz3休息</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+  </div>
+
+  <div class="panel-h">順遊景點</div>
+  <div class="mini-grid">
+    <div class="mini-card">
+      <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=160&h=160&q=80" alt="天神橋筋商店街" loading="lazy">
+      <div class="mbody">
+        <div class="mtitle">天神橋筋商店街（返程順路）</div>
+        <div class="mdesc">日本最長商店街（約2.6km），從中崎町搭谷町線1站即達。平價食堂・百元商店一字排開，夜市感十足。</div>
+        <div class="mtags"><span class="mtag">逛街</span><span class="mtag">庶民</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-box"><b>行程精簡說明：</b>金閣寺、伏見稻荷千本鳥居走路量太大，3–4歲難以配合。這次選嵐山是因為竹林短、猴子公苑有目標性。京都交通較複雜，全程建議搭計程車移動。</div>
+
+  <div class="day-nav">
+    <button data-goto="day5">← 第5天</button>
+    <button data-goto="day7" class="next">第7天 →</button>
+  </div>
+</div>
+
+<div class="v2-panel" id="day7">
+  <div class="day-title">第7天・天王寺動物園 + HARUKAS展望台</div>
+  <div class="day-sub">大象長頸鹿 + 日本第一高樓</div>
+  <div class="timeline">
+    <div class="tl-card">
+      <div class="tl-num">1</div>
+      <div class="tl-thumb ph">🚇</div>
+      <div class="tl-body">
+        <div class="tl-time">🚇 09:30</div>
+        <div class="tl-name">梅田搭Osaka Metro出發</div>
+        <div class="tl-sub">前往天王寺</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-connector">🚇 Osaka Metro谷町線・約20分</div>
+    <div class="tl-card">
+      <div class="tl-num">2</div>
+      <img class="tl-thumb" src="https://images.unsplash.com/photo-1534567153574-2b12153a87f0?auto=format&fit=crop&w=160&h=160&q=80" alt="天王寺動物園" loading="lazy">
+      <div class="tl-body">
+        <div class="tl-time">🦁 10:00</div>
+        <div class="tl-name">天王寺動物園</div>
+        <div class="tl-sub">大象、長頸鹿、北極熊，100種以上動物，推車友善</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-card">
+      <div class="tl-num">3</div>
+      <div class="tl-thumb ph">🍱</div>
+      <div class="tl-body">
+        <div class="tl-time">🍽️ 12:30</div>
+        <div class="tl-name">天王寺附近午餐</div>
+        <div class="tl-sub">用餐補體力</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-connector">🚇 Osaka Metro返回梅田</div>
+    <div class="tl-card">
+      <div class="tl-num">4</div>
+      <div class="tl-thumb ph">😴</div>
+      <div class="tl-body">
+        <div class="tl-time">🛏️ 14:00</div>
+        <div class="tl-name">回飯店午睡</div>
+        <div class="tl-sub">回Liz3休息</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-card">
+      <div class="tl-num">5</div>
+      <img class="tl-thumb" src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=160&h=160&q=80" alt="HARUKAS" loading="lazy">
+      <div class="tl-body">
+        <div class="tl-time">🏙️ 16:00</div>
+        <div class="tl-name">阿倍野 HARUKAS 300 展望台</div>
+        <div class="tl-sub">日本最高摩天大樓60層，天氣好可看到六甲山</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-card">
+      <div class="tl-num">6</div>
+      <img class="tl-thumb" src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=160&h=160&q=80" alt="梅田晚餐" loading="lazy">
+      <div class="tl-body">
+        <div class="tl-time">🍜 18:30</div>
+        <div class="tl-name">梅田晚餐</div>
+        <div class="tl-sub">阪急百貨地下街，日本料理選擇多</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+  </div>
+
+  <div class="panel-h">順遊景點</div>
+  <div class="mini-grid">
+    <div class="mini-card">
+      <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=160&h=160&q=80" alt="NU茶屋町" loading="lazy">
+      <div class="mbody">
+        <div class="mtitle">NU茶屋町・梅田地下街</div>
+        <div class="mdesc">Liz3步行12分鐘，露天時尚商場適合晚餐後散步。梅田地下街是下雨天最佳備案，全室內推車暢行。</div>
+        <div class="mtags"><span class="mtag">購物</span><span class="mtag">室內</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-box"><b>動物園小技巧：</b>週二公休請先確認日期。入場費大人600円，中學生以下免費。重點看大型動物，控制在2.5–3小時最舒適。若下雨可改去 Kids Plaza Osaka（扇町），全室內不怕天氣。</div>
+
+  <div class="day-nav">
+    <button data-goto="day6">← 第6天</button>
+    <button data-goto="day8" class="next">第8天 →</button>
+  </div>
+</div>
+
+<div class="v2-panel" id="day8">
+  <div class="day-title">第8天・EXPOCITY + NIFREL</div>
+  <div class="day-sub">動物×水族×藝術三合一，幼童評價最高的景點</div>
+  <div class="timeline">
+    <div class="tl-card">
+      <div class="tl-num">1</div>
+      <div class="tl-thumb ph">🚝</div>
+      <div class="tl-body">
+        <div class="tl-time">🚝 10:00</div>
+        <div class="tl-name">梅田搭御堂筋線 + 大阪モノレール</div>
+        <div class="tl-sub">前往EXPOCITY</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-connector">🚝 御堂筋線+モノレール・約30分</div>
+    <div class="tl-card">
+      <div class="tl-num">2</div>
+      <img class="tl-thumb" src="https://images.unsplash.com/photo-1485083269755-a7b559a4fe5e?auto=format&fit=crop&w=160&h=160&q=80" alt="NIFREL" loading="lazy">
+      <div class="tl-body">
+        <div class="tl-time">🐬 10:30</div>
+        <div class="tl-name">NIFREL（にふれる）</div>
+        <div class="tl-sub">水族館+動物園+藝術裝置三合一，2–3小時體驗</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-card">
+      <div class="tl-num">3</div>
+      <div class="tl-thumb ph">🍱</div>
+      <div class="tl-body">
+        <div class="tl-time">🍽️ 13:00</div>
+        <div class="tl-name">EXPOCITY 商場午餐</div>
+        <div class="tl-sub">商場內用餐</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-card">
+      <div class="tl-num">4</div>
+      <img class="tl-thumb" src="https://images.unsplash.com/photo-1757059244828-b02c637d41c7?auto=format&fit=crop&w=160&h=160&q=80" alt="OSAKA WHEEL" loading="lazy">
+      <div class="tl-body">
+        <div class="tl-time">🎡 14:00</div>
+        <div class="tl-name">Redhorse OSAKA WHEEL 摩天輪</div>
+        <div class="tl-sub">豪華冷氣車廂，旁邊兒童遊樂設施排隊時可先玩</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-card">
+      <div class="tl-num">5</div>
+      <img class="tl-thumb" src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=160&h=160&q=80" alt="伴手禮採購" loading="lazy">
+      <div class="tl-body">
+        <div class="tl-time">🛍️ 15:30</div>
+        <div class="tl-name">商場採購伴手禮</div>
+        <div class="tl-sub">補齊清單上剩下的東西</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-connector">🚝 大阪モノレール+御堂筋線返回梅田</div>
+    <div class="tl-card">
+      <div class="tl-num">6</div>
+      <div class="tl-thumb ph">🍽️</div>
+      <div class="tl-body">
+        <div class="tl-time">🌆 18:00</div>
+        <div class="tl-name">回梅田，悠閒晚餐</div>
+        <div class="tl-sub">行程最後一個悠閒晚餐</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+  </div>
+
+  <div class="panel-h">順遊景點</div>
+  <div class="mini-grid">
+    <div class="mini-card">
+      <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=160&h=160&q=80" alt="中崎町夜晚" loading="lazy">
+      <div class="mbody">
+        <div class="mtitle">中崎町散步（返回後）</div>
+        <div class="mdesc">Liz3步行1分鐘的昭和街區。許多咖啡廳有室外位置，點份甜點讓孩子最後一晚玩得盡興。</div>
+        <div class="mtags"><span class="mtag">文青</span><span class="mtag">咖啡廳</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-box"><b>輕鬆玩不趕行程：</b>NIFREL 節奏慢、全程室內、孩子不用走路，是整趟旅遊最輕鬆的景點之一。明天還有神戶一日遊，保留體力別讓孩子太晚睡。</div>
+
+  <div class="day-nav">
+    <button data-goto="day7">← 第7天</button>
+    <button data-goto="day9" class="next">第9天 →</button>
+  </div>
+</div>
+
+<div class="v2-panel" id="day9">
+  <div class="day-title">第9天・神戶一日遊</div>
+  <div class="day-sub">南京町中華美食 + 港口景觀 + モザイク商場</div>
+  <div class="timeline">
+    <div class="tl-card">
+      <div class="tl-num">1</div>
+      <div class="tl-thumb ph">🚆</div>
+      <div class="tl-body">
+        <div class="tl-time">🚆 09:00</div>
+        <div class="tl-name">Liz3出發</div>
+        <div class="tl-sub">中崎町搭谷町線→梅田，換阪急至三宮</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-connector">🚆 谷町線→阪急神戶線・約35分</div>
+    <div class="tl-card">
+      <div class="tl-num">2</div>
+      <img class="tl-thumb" src="https://images.unsplash.com/photo-1566438480900-0609be27a4be?auto=format&fit=crop&w=160&h=160&q=80" alt="南京町" loading="lazy">
+      <div class="tl-body">
+        <div class="tl-time">🥟 10:00</div>
+        <div class="tl-name">南京町散步・中華饅頭早餐</div>
+        <div class="tl-sub">日本三大中華街之一，色彩鮮豔牌樓和紅燈籠</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-card">
+      <div class="tl-num">3</div>
+      <img class="tl-thumb" src="https://images.unsplash.com/photo-1587595431973-160d0d94add1?auto=format&fit=crop&w=160&h=160&q=80" alt="神戶港" loading="lazy">
+      <div class="tl-body">
+        <div class="tl-time">⚓ 11:30</div>
+        <div class="tl-name">神戶ハーバーランド・海邊散步</div>
+        <div class="tl-sub">大型摩天輪・觀光船・廣場噴水，推車暢行</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-card">
+      <div class="tl-num">4</div>
+      <div class="tl-thumb ph">🍱</div>
+      <div class="tl-body">
+        <div class="tl-time">🍽️ 13:00</div>
+        <div class="tl-name">モザイク商場午餐（海景位置）</div>
+        <div class="tl-sub">面海餐廳，孩子可以看船邊吃飯</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-card">
+      <div class="tl-num">5</div>
+      <img class="tl-thumb" src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=160&h=160&q=80" alt="三宮センター街" loading="lazy">
+      <div class="tl-body">
+        <div class="tl-time">🛍️ 15:00</div>
+        <div class="tl-name">三宮センター街採購</div>
+        <div class="tl-sub">最後一個對外旅遊日，補完購物清單尾巴</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-connector">🚆 搭阪急返回梅田 → Liz3</div>
+    <div class="tl-card">
+      <div class="tl-num">6</div>
+      <div class="tl-thumb ph">🧳</div>
+      <div class="tl-body">
+        <div class="tl-time">🧳 18:00</div>
+        <div class="tl-name">行李整理・最後採購（中崎町周邊）</div>
+        <div class="tl-sub">明天一早退房，今晚提早洗澡休息</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+  </div>
+
+  <div class="tip-box"><b>幼童注意：</b>神戶市區比大阪寬敞，步行距離較長。建議三宮→南京町→ハーバーランド用計程車（約¥800），不讓孩子走太遠。回梅田後早點讓孩子洗澡休息。</div>
+
+  <div class="day-nav">
+    <button data-goto="day8">← 第8天</button>
+    <button data-goto="day10" class="next">第10天 →</button>
+  </div>
+</div>
+
+<div class="v2-panel" id="day10">
+  <div class="day-title">第10天・採購收尾 → 回程</div>
+  <div class="day-sub">梅田最後掃貨 → 關西機場</div>
+  <div class="timeline">
+    <div class="tl-card">
+      <div class="tl-num">1</div>
+      <div class="tl-thumb ph">🧳</div>
+      <div class="tl-body">
+        <div class="tl-time">🧳 08:00</div>
+        <div class="tl-name">Liz3退房</div>
+        <div class="tl-sub">行李寄放或直接帶走</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-card">
+      <div class="tl-num">2</div>
+      <img class="tl-thumb" src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=160&h=160&q=80" alt="梅田採購" loading="lazy">
+      <div class="tl-body">
+        <div class="tl-time">🛍️ 09:00</div>
+        <div class="tl-name">梅田阪急百貨地下街最後採購</div>
+        <div class="tl-sub">B2美食街是大阪最強伴手禮集中地，9點開門要趁早</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-connector">🚆 JRはるか／利木津巴士・約60–75分 → 關西機場</div>
+    <div class="tl-card">
+      <div class="tl-num">3</div>
+      <img class="tl-thumb" src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=160&h=160&q=80" alt="關西機場" loading="lazy">
+      <div class="tl-body">
+        <div class="tl-time">🛂 13:00</div>
+        <div class="tl-name">關西機場辦理登機、最後免稅店購物</div>
+        <div class="tl-sub">有嬰幼兒記得提前3小時到機場，航廈內有兒童遊戲區</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+    <div class="tl-card">
+      <div class="tl-num">4</div>
+      <div class="tl-thumb ph">✈️</div>
+      <div class="tl-body">
+        <div class="tl-time">🛫 15:00+</div>
+        <div class="tl-name">搭機回台灣</div>
+        <div class="tl-sub">9天8夜行程圓滿結束</div>
+      </div>
+      <div class="tl-heart">♡</div>
+    </div>
+  </div>
+
+  <div class="tip-box"><b>回程提醒：</b>免稅店在出境後，最後補買酒類、保養品。出發前再次確認護照、機票與孩子隨身藥品都已準備好。</div>
+
+  <div class="day-nav">
+    <button data-goto="day9">← 第9天</button>
+    <button data-goto="hotels" class="next">住宿資訊 →</button>
+  </div>
+</div>
+
+<div class="v2-panel" id="hotels">
+  <div class="day-title">住宿｜已確認方案</div>
+  <div class="day-sub">難波4晚 + 中崎町5晚</div>
+
+  <div class="panel-h">第1–4晚・難波/道頓堀</div>
+  <div class="mini-grid">
+    <div class="mini-card">
+      <img src="https://www.eslead-hotel.com/web/wp-content/uploads/2024/10/main_nipponbashi.jpg" alt="ESLEAD酒店" loading="lazy">
+      <div class="mbody">
+        <div class="mtitle">✅ ESLEAD酒店大阪日本橋</div>
+        <div class="mdesc">日本橋駅近，難波徒步5–8分，可訂相鄰2房，3大3小分兩房最自然。Day2 USJ、Day3 海遊館、Day4 大阪城皆方便出發。</div>
+        <div class="mtags"><span class="mtag">已確認</span><span class="mtag">可訂相鄰房</span></div>
+        <a class="mlink" href="https://www.agoda.com/sp/pYW6LUUIBUK" target="_blank">Agoda 查看 →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel-h">第5–9晚・梅田北/中崎町</div>
+  <div class="mini-grid">
+    <div class="mini-card">
+      <img src="https://q-xx.bstatic.com/xdata/images/hotel/608x352/231794131.webp?k=c58ce0b2421127432b2181414293856b0abd29f5ecc8093fc5d9743386ebcd55&o=" alt="Liz3 Guest House" loading="lazy">
+      <div class="mbody">
+        <div class="mtitle">✅ Liz3 Guest House（中崎町）</div>
+        <div class="mdesc">中崎町駅1分，評分9.5，有廚房・免費停車。文青街安靜安全，帶推車最舒適，往奈良/京都/神戶換乘梅田站方便。NT$4,490/晚，5晚約NT$23,826。</div>
+        <div class="mtags"><span class="mtag">已確認</span><span class="mtag">⭐9.5</span><span class="mtag">附廚房</span></div>
+        <a class="mlink" href="https://www.booking.com/Share-0ctODV" target="_blank">Booking.com 查看 →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-box"><b>2房預訂建議：</b>備註「隣接した部屋を希望」（希望相鄰房間）；訂1間雙床房（大人）+1間雙床房（孩子與1位大人，6歲以下同床通常免加收）；建議出發前2–3個月訂房並選可免費取消方案。<br><br><b>💰 住宿總費用試算：</b>ESLEAD 4晚 + Liz3 5晚 ≈ <b>NT$22,450–42,900</b>（依實際房型而定）</div>
+</div>
+
+<div class="v2-panel" id="transport">
+  <div class="day-title">日本交通完整指南</div>
+  <div class="day-sub">ICOCA一卡通用，幼童推車友善</div>
+
+  <div class="tip-box"><b>🃏 ICOCA 交通IC卡 — 全程必備：</b>關西地區通用，可搭Osaka Metro、近鐵、JR、阪急、阪神、南海，也能在超商付款。關西機場、梅田、難波等大站均可購買加值，押金500円（可退），建議初始加值3,000円。</div>
+
+  <div class="panel-h">市區與跨城交通</div>
+  <div class="mini-grid">
+    <div class="mini-card">
+      <div class="mph">✈️</div>
+      <div class="mbody">
+        <div class="mtitle">關西機場 → 難波</div>
+        <div class="mdesc">南海特急ラピート：45分・¥1,450（推車空間大）／南海急行：60分・¥920（可用ICOCA）</div>
+      </div>
+    </div>
+    <div class="mini-card">
+      <div class="mph">✈️</div>
+      <div class="mbody">
+        <div class="mtitle">關西機場 → 梅田</div>
+        <div class="mdesc">JRはるか：75分・¥1,910／利木津巴士：50–70分・¥1,800（孩子半價，有大行李廂方便推車）</div>
+      </div>
+    </div>
+    <div class="mini-card">
+      <div class="mph">🚇</div>
+      <div class="mbody">
+        <div class="mtitle">大阪市內（Osaka Metro）</div>
+        <div class="mdesc">御堂筋線 難波↔梅田4分・¥180／中央線 難波→大阪港15分／谷町線 梅田↔天王寺16分。6歲以下免費，推車可用電梯</div>
+      </div>
+    </div>
+    <div class="mini-card">
+      <div class="mph">🦌</div>
+      <div class="mbody">
+        <div class="mtitle">難波・梅田 → 奈良</div>
+        <div class="mdesc">近鐵奈良線急行：40分・¥690，直通不換車。近鐵奈良站步行12分到奈良公園，站內有電梯</div>
+      </div>
+    </div>
+    <div class="mini-card">
+      <div class="mph">⛩</div>
+      <div class="mbody">
+        <div class="mtitle">梅田 → 嵐山（京都）</div>
+        <div class="mdesc">阪急京都線→嵐山線：約40分・¥400，梅田→桂（換車）→嵐山。出站即景點</div>
+      </div>
+    </div>
+    <div class="mini-card">
+      <div class="mph">⚓</div>
+      <div class="mbody">
+        <div class="mtitle">梅田 → 神戶三宮</div>
+        <div class="mdesc">阪急神戶線特急：28分・¥330／阪神本線：30分・¥330（可用ICOCA）／JR新快速：20分・¥420最快</div>
+      </div>
+    </div>
+    <div class="mini-card">
+      <div class="mph">🎡</div>
+      <div class="mbody">
+        <div class="mtitle">梅田 → EXPOCITY</div>
+        <div class="mdesc">御堂筋線→千里中央約15分，換大阪モノレール→万博記念公園10分，總計約30分・¥520</div>
+      </div>
+    </div>
+    <div class="mini-card">
+      <div class="mph">🎢</div>
+      <div class="mbody">
+        <div class="mtitle">難波 → 環球影城 USJ</div>
+        <div class="mdesc">JR夢咲線（西九条換車）：約18分・¥180，入口就在車站旁步行3分</div>
+      </div>
+    </div>
+    <div class="mini-card">
+      <div class="mph">🚕</div>
+      <div class="mbody">
+        <div class="mtitle">攜幼推薦：計程車</div>
+        <div class="mdesc">起跳約¥700，市區景點間¥1,000–2,500。推車可折疊放後車廂，孩子疲累或下雨時最值得花的錢，可用GO APP叫車</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="v2-panel" id="backup">
+  <div class="day-title">☂ 備用景點</div>
+  <div class="day-sub">下雨/太熱首選・全室內・3–4歲皆適合</div>
+
+  <div class="filter-tabs">
+    <button class="filter-tab active" data-filter="全部">全部</button>
+    <button class="filter-tab" data-filter="室內遊樂">室內遊樂</button>
+    <button class="filter-tab" data-filter="購物">購物</button>
+    <button class="filter-tab" data-filter="文化體驗">文化體驗</button>
+    <button class="filter-tab" data-filter="免費">免費</button>
+  </div>
+
+  <div class="mini-grid">
+    <div class="mini-card" data-cat="室內遊樂">
+      <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=160&h=160&q=80" alt="Kid-o-Kid" loading="lazy">
+      <div class="mbody">
+        <div class="mtitle">Kid-o-Kid（梅田 Grand Front）</div>
+        <div class="mdesc">3F全室內遊樂場，攀爬、球池、滑梯，18個月以下有獨立嬰兒區。Liz3步行10分即達。</div>
+        <div class="mtags"><span class="mtag">0–6歲最佳</span><span class="mtag">全室內</span></div>
+      </div>
+    </div>
+    <div class="mini-card" data-cat="室內遊樂">
+      <img src="https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=160&h=160&q=80" alt="LEGOLAND" loading="lazy">
+      <div class="mbody">
+        <div class="mtitle">樂高樂園探索中心（天保山）</div>
+        <div class="mdesc">4D電影、樂高城市區、小型雲霄飛車，可搭配海遊館同一天逛。大人¥2,400・3歲以上¥1,800。</div>
+        <div class="mtags"><span class="mtag">3歲以上</span><span class="mtag">全室內</span></div>
+      </div>
+    </div>
+    <div class="mini-card" data-cat="購物">
+      <img src="https://images.unsplash.com/photo-1612404730960-5c71577fca11?auto=format&fit=crop&w=160&h=160&q=80" alt="大丸梅田13F" loading="lazy">
+      <div class="mbody">
+        <div class="mtitle">大丸梅田13F｜任天堂・寶可夢・TOMICA</div>
+        <div class="mdesc">大阪最強玩具聖地三館集中，JR大阪駅即連結，入場免費，逛街順路必訪。</div>
+        <div class="mtags"><span class="mtag">2歲以上</span><span class="mtag">百貨</span></div>
+      </div>
+    </div>
+    <div class="mini-card" data-cat="文化體驗">
+      <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=160&h=160&q=80" alt="大阪生活今昔館" loading="lazy">
+      <div class="mbody">
+        <div class="mtitle">大阪生活今昔館（天神橋）</div>
+        <div class="mdesc">完整重現江戶時代街道，屋頂有真實天空燈光效果，可租浴衣拍照。Liz3搭谷町線2站即達，大人¥600。</div>
+        <div class="mtags"><span class="mtag">2歲以上</span><span class="mtag">全室內</span></div>
+      </div>
+    </div>
+    <div class="mini-card" data-cat="文化體驗 免費">
+      <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=160&h=160&q=80" alt="童書之森中之島" loading="lazy">
+      <div class="mbody">
+        <div class="mtitle">童書之森中之島（安藤忠雄設計）</div>
+        <div class="mdesc">三層樓挑高書牆，全日文繪本但圖畫精美。免費入場需官網預約，旁邊是中之島公園玫瑰園。</div>
+        <div class="mtags"><span class="mtag">2歲以上</span><span class="mtag">免費</span></div>
+      </div>
+    </div>
+    <div class="mini-card" data-cat="文化體驗 免費">
+      <img src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?auto=format&fit=crop&w=160&h=160&q=80" alt="日清泡麵博物館" loading="lazy">
+      <div class="mbody">
+        <div class="mtitle">日清泡麵發明紀念館（池田市）</div>
+        <div class="mdesc">免費入館，「我的杯麵工廠」DIY體驗最精彩，孩子自己設計世界唯一的泡麵。梅田搭阪急約40分。</div>
+        <div class="mtags"><span class="mtag">4歲以上</span><span class="mtag">DIY體驗</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-box"><b>使用時機建議：</b><br>☂ 突然下雨 → Kid-o-Kid（梅田即達）或 Kids Plaza（扇町2站）<br>🌡 大晴天太熱 → LEGOLAND（搭配海遊館）、大丸梅田13F<br>😴 孩子體力低 → 童書之森（免費）、今昔館（近Liz3）<br>🍜 想要DIY體驗 → 日清泡麵博物館（梅田出發20分）</div>
+</div>
+
+<div class="v2-panel" id="tips">
+  <div class="day-title">3–4歲幼童旅遊提醒</div>
+  <div class="day-sub">行前準備檢查清單</div>
+
+  <div class="tip-card2"><div class="ico">🛒</div><div><h4>折疊推車必帶</h4><p>大阪Metro、近鐵各站均有電梯，推車全程可用。孩子累了就坐、睡著就推，親子旅遊必備。</p></div></div>
+  <div class="tip-card2"><div class="ico">😴</div><div><h4>每天午睡時間</h4><p>固定13:00–15:00回飯店午睡，孩子睡飽下午才有體力。省略午睡的那天晚上必定崩潰。</p></div></div>
+  <div class="tip-card2"><div class="ico">🍙</div><div><h4>便利商店是救星</h4><p>7-11、全家的飯糰、茶碗蒸、布丁、香蕉牛奶，孩子幾乎都接受。每天出門備2–3樣備用零食。</p></div></div>
+  <div class="tip-card2"><div class="ico">💊</div><div><h4>必備藥品</h4><p>兒童退燒藥（栓劑備份）、止瀉藥、防蚊貼、外傷消毒藥。日本藥好但看不懂日文，自備更安心。</p></div></div>
+  <div class="tip-card2"><div class="ico">👕</div><div><h4>多帶換洗衣物</h4><p>每人多備2套。餵鹿弄髒、玩水濕透是常態。飯店洗衣機通常¥200一次，也可送外洗服務。</p></div></div>
+  <div class="tip-card2"><div class="ico">📱</div><div><h4>離線地圖＋翻譯</h4><p>Google Maps離線下載大阪區域。日文看不懂時，Google翻譯相機功能拍一下即時翻譯。</p></div></div>
+  <div class="tip-card2"><div class="ico">☀️</div><div><h4>防曬不能少</h4><p>5月日本紫外線強，孩子嫩皮膚更要做好防護。防曬乳SPF50+、帽子、薄外套缺一不可。</p></div></div>
+  <div class="tip-card2"><div class="ico">🎫</div><div><h4>USJ＆海遊館提前訂</h4><p>黃金週或週末一定賣光，最少提前2週線上購票。海遊館也可事先訂票避免排隊。</p></div></div>
+</div>
+
+<div class="v2-panel" id="budget">
+  <div class="day-title">預算粗估（台幣）</div>
+  <div class="day-sub">以6人同行估算</div>
+
+  <div class="budget-row"><span class="lbl">✈️ 機票（來回 6人）</span><span class="amt">6–9萬</span></div>
+  <div class="budget-row"><span class="lbl">🏨 住宿（8晚）</span><span class="amt">3–5萬</span></div>
+  <div class="budget-row"><span class="lbl">🎢 USJ門票（6人）</span><span class="amt">2–3萬</span></div>
+  <div class="budget-row"><span class="lbl">🐟 海遊館 + NIFREL</span><span class="amt">1–2萬</span></div>
+  <div class="budget-row"><span class="lbl">🍜 餐費（9天）</span><span class="amt">3–5萬</span></div>
+  <div class="budget-row"><span class="lbl">🚇 交通（市區+日遊）</span><span class="amt">1–2萬</span></div>
+  <div class="budget-row"><span class="lbl">🛍 伴手禮採購</span><span class="amt">1–3萬</span></div>
+  <div class="budget-row total"><span class="lbl">💰 總計預估</span><span class="amt">17–29萬</span></div>
+
+  <div class="tip-box">※ 6歲以下孩童多數景點免費或半價｜淡季（5月）住宿較優惠｜匯率以 1日幣 ≈ 0.22台幣 計算</div>
+</div>
+
+<!-- ═══════ BOTTOM BAR ═══════ -->
+<div class="v2-bottombar">
+  <button class="v2-like" id="v2edit" title="編輯">編</button>
+  <button class="v2-like" id="v2share" title="分享">🔗</button>
+  <a class="v2-cta" href="osaka_family_travel.html">📋 查看完整版（含編輯功能）</a>
+</div>
+
+<div class="v2-editbar" id="v2editbar">
+  <button class="primary" id="v2saveEdits">儲存</button>
+  <button id="v2exitEdit">完成</button>
+  <button class="danger" id="v2resetEdits">還原</button>
+  <span class="edit-status" id="v2editStatus">編輯中</span>
+</div>
+
+<!-- ═══════ BACK TO TOP ═══════ -->
+<button class="v2-totop" id="v2totop" title="回到頂部">↑</button>
+
+<script>
+document.querySelectorAll('.v2-tab').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.v2-tab').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.v2-panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+    document.querySelector('.v2-panel.active').scrollIntoView({behavior:'instant',block:'start'});
+    window.scrollTo({top:0,behavior:'instant'});
+    btn.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});
+  });
+});
+
+/* 上一天／下一天導航：直接觸發對應分頁按鈕 */
+document.querySelectorAll('.day-nav [data-goto]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelector(`.v2-tab[data-tab="${btn.dataset.goto}"]`).click();
+  });
+});
+
+/* 景點地圖連結：依名稱產生Google地圖搜尋連結 */
+document.querySelectorAll('.tl-card').forEach(card=>{
+  const body = card.querySelector('.tl-body');
+  const name = card.querySelector('.tl-name').textContent.trim();
+  const link = document.createElement('a');
+  link.className = 'tl-map';
+  link.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(name);
+  link.target = '_blank';
+  link.rel = 'noopener';
+  link.textContent = '📍 在地圖開啟';
+  body.appendChild(link);
+});
+
+/* 真實地點查詢字串對照表（取自完整版行程的飯店地址與景點查詢字串） */
+const ESLEAD_Q = 'ESLEAD HOTEL Osaka Nipponbashi 大阪市中央区日本橋';
+const LIZ3_Q   = 'Liz3 Guest House 大阪市北区中崎1-5-13';
+const PLACE_QUERIES = [
+  ['ESLEAD', ESLEAD_Q],
+  ['Liz3', LIZ3_Q],
+  ['中崎町', LIZ3_Q],
+  ['關西機場', '関西国際空港 泉佐野市'],
+  ['道頓堀', '道頓堀 大阪市中央区'],
+  ['環球', 'ユニバーサル・スタジオ・ジャパン 此花区 大阪'],
+  ['USJ', 'ユニバーサル・スタジオ・ジャパン 此花区 大阪'],
+  ['主動撤退', 'ユニバーサル・スタジオ・ジャパン 此花区 大阪'],
+  ['海遊館', '海遊館 大阪市港区'],
+  ['天保山', '天保山大観覧車 大阪市港区'],
+  ['大阪城', '大阪城公園 大阪市中央区'],
+  ['住吉大社', '住吉大社 大阪市住吉区'],
+  ['黑門市場', '黒門市場 大阪市中央区'],
+  ['奈良公園', '奈良公園 奈良市'],
+  ['東大寺', '東大寺 奈良市'],
+  ['奈良町', '奈良公園 奈良市'],
+  ['嵐山竹林', '嵐山竹林の道 京都市右京区'],
+  ['渡月橋', '渡月橋 京都市右京区嵐山'],
+  ['岩田山', '嵐山モンキーパーク岩田山 京都市西京区'],
+  ['天王寺動物園', '天王寺動物園 大阪市天王寺区'],
+  ['HARUKAS', 'あべのハルカス300 大阪市阿倍野区'],
+  ['NIFREL', 'ニフレル 吹田市千里万博公園'],
+  ['EXPOCITY', 'EXPOCITY 吹田市千里万博公園'],
+  ['商場採購', 'EXPOCITY 吹田市千里万博公園'],
+  ['南京町', '南京町 神戸市中央区'],
+  ['ハーバーランド', '神戸ハーバーランド 神戸市中央区'],
+  ['三宮', '三宮センタープラザ 神戸市中央区'],
+  ['難波', '難波駅 大阪市浪速区'],
+  ['梅田阪急', '阪急百貨店梅田本店 大阪市北区'],
+];
+/* 較模糊的地標關鍵字：僅在「出發/回飯店」等判斷都不命中時才當作備援 */
+const FALLBACK_QUERIES = [
+  ['嵐山', '嵐山駅 京都市右京区'],
+  ['天王寺', '天王寺動物園 大阪市天王寺区'],
+];
+const HOTEL_BY_DAY = {day1:ESLEAD_Q, day2:ESLEAD_Q, day3:ESLEAD_Q, day4:ESLEAD_Q, day5:LIZ3_Q, day6:LIZ3_Q, day7:LIZ3_Q, day8:LIZ3_Q, day9:LIZ3_Q, day10:LIZ3_Q};
+
+function resolveQuery(text, dayId){
+  for (const [kw, q] of PLACE_QUERIES) {
+    if (text.includes(kw)) return q;
+  }
+  if (/回飯店|回梅田|回難波|休息|午睡|晚餐|採購|出發|準備|退房|Check-?in|Check-?out/i.test(text)) {
+    return HOTEL_BY_DAY[dayId] || text;
+  }
+  for (const [kw, q] of FALLBACK_QUERIES) {
+    if (text.includes(kw)) return q;
+  }
+  return text;
+}
+
+/* 交通連接線：產生Google地圖路線連結(可即時看時刻表/其他交通方式) */
+document.querySelectorAll('.timeline').forEach(timeline=>{
+  const dayId = timeline.closest('.v2-panel').id;
+  const children = Array.from(timeline.children);
+  const getPlaceText = card => {
+    const name = card.querySelector('.tl-name').textContent.replace(/🌟必訪/,'').trim();
+    const sub = (card.querySelector('.tl-sub') || {}).textContent || '';
+    return name + ' ' + sub;
+  };
+  children.forEach((el,i)=>{
+    if (!el.classList.contains('tl-connector')) return;
+    const text = el.textContent.trim();
+    let mode;
+    if (/🚆|🚇|🚝|🚅|🚌/.test(text)) mode = 'transit';
+    else if (/🚶/.test(text)) mode = 'walking';
+    else if (/🚕|🚗/.test(text)) mode = 'driving';
+    if (!mode) return;
+
+    const prevCard = children[i-1];
+    const nextCard = children[i+1];
+    if (!prevCard || !nextCard) return;
+
+    const origin = resolveQuery(getPlaceText(prevCard), dayId);
+    const arrowMatch = text.match(/→\s*(.+)$/);
+    const isLineDesc = arrowMatch && /線|\d+分/.test(arrowMatch[1]);
+    const destText = (arrowMatch && !isLineDesc) ? arrowMatch[1].trim() : getPlaceText(nextCard);
+    const dest = resolveQuery(destText, dayId);
+
+    const link = document.createElement('a');
+    link.className = 'tl-route';
+    link.href = 'https://www.google.com/maps/dir/?api=1&origin=' + encodeURIComponent(origin) + '&destination=' + encodeURIComponent(dest) + '&travelmode=' + mode;
+    link.target = '_blank';
+    link.rel = 'noopener';
+    link.textContent = '🕐 路線/時刻表';
+    el.appendChild(link);
+  });
+});
+
+/* 收藏愛心：點擊切換 + localStorage 記住狀態 */
+const favs = JSON.parse(localStorage.getItem('osaka_v2_favs') || '{}');
+
+function renderFavs(){
+  const section = document.getElementById('favs-section');
+  const list = document.getElementById('favs-list');
+  list.innerHTML = '';
+  const ids = Object.keys(favs).filter(k=>favs[k]);
+  if (!ids.length) { section.classList.remove('show'); return; }
+  ids.forEach(id=>{
+    const m = id.match(/^(.+)-(\d+)$/);
+    if (!m) return;
+    const panel = document.getElementById(m[1]);
+    const card = panel && panel.querySelectorAll('.tl-card')[+m[2]];
+    if (!card) return;
+    const name = card.querySelector('.tl-name').textContent.trim();
+    const dayLabel = (panel.querySelector('.day-title') || {}).textContent || panel.id;
+    const item = document.createElement('div');
+    item.className = 'mini-card';
+    item.innerHTML = `<div class="mph">⭐</div><div class="mbody"><div class="mtitle">${name}</div><div class="mdesc">${dayLabel.split('・')[0]}</div></div>`;
+    list.appendChild(item);
+  });
+  section.classList.add('show');
+}
+
+document.querySelectorAll('.v2-panel').forEach(panel=>{
+  panel.querySelectorAll('.tl-heart').forEach((heart, i)=>{
+    const id = panel.id + '-' + i;
+    if (favs[id]) { heart.textContent = '♥'; heart.classList.add('active'); }
+    heart.addEventListener('click', ()=>{
+      const active = heart.classList.toggle('active');
+      heart.textContent = active ? '♥' : '♡';
+      heart.classList.remove('pulse');
+      requestAnimationFrame(()=>heart.classList.add('pulse'));
+      if (active) favs[id] = true; else delete favs[id];
+      localStorage.setItem('osaka_v2_favs', JSON.stringify(favs));
+      renderFavs();
+    });
+  });
+});
+renderFavs();
+
+/* 回到頂部按鈕 */
+const totop = document.getElementById('v2totop');
+window.addEventListener('scroll', ()=>{
+  totop.classList.toggle('show', window.scrollY > 300);
+});
+totop.addEventListener('click', ()=>{
+  window.scrollTo({top:0, behavior:'smooth'});
+});
+
+/* 分享：複製網址 */
+document.getElementById('v2share').addEventListener('click', ()=>{
+  const btn = document.getElementById('v2share');
+  const done = ()=>{ const old = btn.textContent; btn.textContent = '✅'; setTimeout(()=>btn.textContent = old, 1200); };
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(location.href).then(done).catch(()=>{
+      const ta = document.createElement('textarea');
+      ta.value = location.href;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      ta.remove();
+      done();
+    });
+  }
+});
+
+/* 備用景點分類篩選 */
+document.querySelectorAll('#backup .filter-tab').forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    document.querySelectorAll('#backup .filter-tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    const filter = tab.dataset.filter;
+    document.querySelectorAll('#backup .mini-card').forEach(card=>{
+      const cats = (card.dataset.cat || '').split(' ');
+      card.style.display = (filter === '全部' || cats.includes(filter)) ? '' : 'none';
+    });
+  });
+});
+
+
+/* 實景照片與完整地點名稱：將表情符號縮圖改成 Wikimedia 現場照片 */
+const PLACE_MEDIA_RULES = [
+  {kw:'關西機場抵達', full:'關西國際機場 第1航廈（Kansai International Airport Terminal 1）', query:'Kansai International Airport Terminal 1'},
+  {kw:'搭機回台灣', full:'關西國際機場 第1航廈（Kansai International Airport Terminal 1）', query:'Kansai International Airport Terminal 1'},
+  {kw:'關西機場辦理登機', full:'關西國際機場 第1航廈 免稅店區', query:'Kansai International Airport Terminal 1 departure hall'},
+  {kw:'Check-in｜ESLEAD', full:'ESLEAD HOTEL Osaka Nipponbashi（エスリードホテル大阪日本橋）', query:'Nipponbashi Osaka'},
+  {kw:'回飯店休息', full:'ESLEAD HOTEL Osaka Nipponbashi 周邊・日本橋/難波', query:'Nipponbashi Osaka'},
+  {kw:'出發｜難波', full:'難波站 / 大阪難波站（Namba Station / Osaka-Namba Station）', query:'Namba Station Osaka'},
+  {kw:'主動撤退', full:'日本環球影城 出入口（Universal Studios Japan Entrance）', query:'Universal Studios Japan entrance'},
+  {kw:'回飯店午睡補眠', full:'ESLEAD HOTEL Osaka Nipponbashi 周邊・日本橋/難波', query:'Nipponbashi Osaka'},
+  {kw:'難波附近晚餐', full:'難波・道頓堀周邊晚餐區', query:'Dotonbori Namba Osaka'},
+  {kw:'出發｜難波搭Osaka Metro中央線', full:'大阪地下鐵 難波站 / 本町轉乘中央線', query:'Osaka Metro Namba Station'},
+  {kw:'天保山 MARKETPLACE 午餐', full:'天保山 Marketplace（Tempozan Marketplace）', query:'Tempozan Marketplace Osaka'},
+  {kw:'回飯店，孩子午睡', full:'ESLEAD HOTEL Osaka Nipponbashi 周邊・日本橋/難波', query:'Nipponbashi Osaka'},
+  {kw:'午餐＋回飯店午睡', full:'大阪城公園 / 森之宮・谷町四丁目周邊午餐區', query:'Osaka Castle Park'},
+  {kw:'寄放行李・準備出發', full:'ESLEAD HOTEL Osaka Nipponbashi / 日本橋站周邊', query:'Nipponbashi Osaka'},
+  {kw:'奈良町午餐', full:'奈良町（Naramachi）傳統街區', query:'Naramachi Nara'},
+  {kw:'返回梅田，辦理 Check-in', full:'Liz3 Guest House 中崎町 / 中崎町站周邊', query:'Nakazakicho Osaka'},
+  {kw:'梅田阪急百貨地下美食街晚餐', full:'阪急百貨店梅田本店 地下食品街', query:'Hankyu Department Store Umeda'},
+  {kw:'梅田搭阪急出發', full:'阪急大阪梅田站（Hankyu Osaka-Umeda Station）', query:'Hankyu Osaka Umeda Station'},
+  {kw:'嵐山午餐', full:'京都嵐山 渡月橋周邊午餐區', query:'Arashiyama Kyoto'},
+  {kw:'返回梅田，孩子車上補眠', full:'阪急嵐山站 → 阪急大阪梅田站', query:'Hankyu Arashiyama Station'},
+  {kw:'梅田搭Osaka Metro出發', full:'大阪地下鐵 梅田站（Osaka Metro Umeda Station）', query:'Osaka Metro Umeda Station'},
+  {kw:'天王寺附近午餐', full:'天王寺公園 / 天王寺站周邊午餐區', query:'Tennoji Park Osaka'},
+  {kw:'回飯店午睡', full:'Liz3 Guest House 中崎町 / 中崎町站周邊', query:'Nakazakicho Osaka'},
+  {kw:'梅田晚餐', full:'大阪梅田站周邊晚餐區', query:'Umeda Osaka'},
+  {kw:'梅田搭御堂筋線 + 大阪モノレール', full:'大阪梅田站 → 萬博記念公園站（大阪單軌電車）', query:'Bampaku-kinen-koen Station Osaka Monorail'},
+  {kw:'EXPOCITY 商場午餐', full:'EXPOCITY 大型複合商場（吹田市萬博記念公園）', query:'EXPOCITY Suita Osaka'},
+  {kw:'商場採購伴手禮', full:'EXPOCITY 大型複合商場（吹田市萬博記念公園）', query:'EXPOCITY Suita Osaka'},
+  {kw:'回梅田，悠閒晚餐', full:'大阪梅田站周邊晚餐區', query:'Umeda Osaka'},
+  {kw:'Liz3出發', full:'Liz3 Guest House 中崎町 / 中崎町站周邊', query:'Nakazakicho Osaka'},
+  {kw:'モザイク商場午餐', full:'神戶 Harborland umie MOSAIC 海景商場', query:'Kobe Harborland Mosaic'},
+  {kw:'行李整理・最後採購', full:'中崎町商店街 / 大阪梅田周邊', query:'Nakazakicho Osaka'},
+  {kw:'Liz3退房', full:'Liz3 Guest House 中崎町 / 中崎町站周邊', query:'Nakazakicho Osaka'},
+  {kw:'梅田阪急百貨地下街最後採購', full:'阪急百貨店梅田本店 地下食品街', query:'Hankyu Department Store Umeda'}
+];
+const PHOTO_CACHE_KEY = 'osaka_v2_wikimedia_photos';
+const photoCache = (()=>{ try { return JSON.parse(localStorage.getItem(PHOTO_CACHE_KEY) || '{}'); } catch { return {}; } })();
+function savePhotoCache(){ localStorage.setItem(PHOTO_CACHE_KEY, JSON.stringify(photoCache)); }
+function matchPlaceRule(name){ return PLACE_MEDIA_RULES.find(rule => name.includes(rule.kw)); }
+async function fetchCommonsPhoto(query){
+  if (photoCache[query]) return photoCache[query];
+  const url = 'https://commons.wikimedia.org/w/api.php?origin=*&action=query&generator=search&gsrnamespace=6&gsrlimit=1&gsrsearch=' + encodeURIComponent(query) + '&prop=imageinfo&iiprop=url&iiurlwidth=160&format=json';
+  const res = await fetch(url);
+  const data = await res.json();
+  const pages = data.query && data.query.pages ? Object.values(data.query.pages) : [];
+  const image = pages[0] && pages[0].imageinfo && pages[0].imageinfo[0];
+  const src = image && (image.thumburl || image.url);
+  if (src) { photoCache[query] = src; savePhotoCache(); }
+  return src;
+}
+function addFullPlaceName(card, fullName){
+  const sub = card.querySelector('.tl-sub');
+  if (!sub || sub.querySelector('.tl-place-full')) return;
+  const line = document.createElement('span');
+  line.className = 'tl-place-full';
+  line.textContent = '完整地點：' + fullName;
+  sub.appendChild(line);
+}
+function replaceEmojiThumb(card, fullName, query){
+  const thumb = card.querySelector('.tl-thumb.ph');
+  if (!thumb) return;
+  const fallback = thumb.textContent.trim();
+  thumb.textContent = '照片載入中';
+  thumb.classList.add('loading-photo');
+  fetchCommonsPhoto(query).then(src=>{
+    if (!src) { thumb.textContent = fallback; thumb.classList.remove('loading-photo'); return; }
+    const img = document.createElement('img');
+    img.className = 'tl-thumb';
+    img.src = src;
+    img.alt = fullName;
+    img.loading = 'lazy';
+    thumb.replaceWith(img);
+  }).catch(()=>{
+    thumb.textContent = fallback;
+    thumb.classList.remove('loading-photo');
+  });
+}
+function enhancePlacePhotos(){
+  document.querySelectorAll('.tl-card').forEach(card=>{
+    const nameEl = card.querySelector('.tl-name');
+    if (!nameEl) return;
+    const name = nameEl.textContent.trim();
+    const rule = matchPlaceRule(name);
+    if (!rule) return;
+    addFullPlaceName(card, rule.full);
+    replaceEmojiThumb(card, rule.full, rule.query);
+  });
+}
+enhancePlacePhotos();
+/* 交通資訊強化：交通頁卡片自動產生 Google Maps 路線與搜尋入口 */
+(function enhanceTransportCards(){
+  const cards = document.querySelectorAll('#transport .mini-card');
+  cards.forEach(card=>{
+    const title = card.querySelector('.mtitle');
+    const desc = card.querySelector('.mdesc');
+    const body = card.querySelector('.mbody');
+    if (!title || !body || body.querySelector('.transport-actions')) return;
+
+    const text = title.textContent.trim();
+    const parts = text.split(/→|↔/).map(s=>s.trim()).filter(Boolean);
+    const actions = document.createElement('div');
+    actions.className = 'transport-actions';
+
+    if (parts.length >= 2) {
+      const origin = resolveQuery(parts[0], 'transport');
+      const dest = resolveQuery(parts[1], 'transport');
+      const route = document.createElement('a');
+      route.href = 'https://www.google.com/maps/dir/?api=1&origin=' + encodeURIComponent(origin) + '&destination=' + encodeURIComponent(dest) + '&travelmode=transit';
+      route.target = '_blank';
+      route.rel = 'noopener';
+      route.textContent = '開啟路線';
+      actions.appendChild(route);
+
+      const summary = document.createElement('span');
+      summary.className = 'route-summary';
+      summary.textContent = '建議出發前用 Google Maps 重查即時班次；推車優先找電梯出口。';
+      body.appendChild(summary);
+    }
+
+    const search = document.createElement('a');
+    search.href = 'https://www.google.com/search?q=' + encodeURIComponent(text + ' 最新 票價 時刻表');
+    search.target = '_blank';
+    search.rel = 'noopener';
+    search.textContent = '查最新資訊';
+    actions.appendChild(search);
+
+    if (desc) {
+      const copy = document.createElement('button');
+      copy.type = 'button';
+      copy.textContent = '複製交通說明';
+      copy.addEventListener('click', ()=>{
+        const value = title.textContent.trim() + '｜' + desc.textContent.trim();
+        const done = ()=>{ const old = copy.textContent; copy.textContent = '已複製'; setTimeout(()=>copy.textContent = old, 1000); };
+        if (navigator.clipboard) navigator.clipboard.writeText(value).then(done).catch(done);
+        else done();
+      });
+      actions.appendChild(copy);
+    }
+    body.appendChild(actions);
+  });
+})();
+
+/* v2 編輯模式：修改行程文字並存到本機 localStorage */
+const EDIT_KEY = 'osaka_v2_text_edits';
+const EDIT_SELECTORS = [
+  '.v2-info h2', '.v2-info .meta', '.ov-desc', '.ov-tag', '.day-title', '.day-sub',
+  '.tl-time', '.tl-name', '.tl-sub', '.tl-connector', '.mini-card .mtitle', '.mini-card .mdesc',
+  '.tip-box', '.tip-card2 h4', '.tip-card2 p', '.budget-row .lbl', '.budget-row .amt'
+].join(',');
+let editDirty = false;
+let editableElements = [];
+
+function loadEditStore(){
+  try { return JSON.parse(localStorage.getItem(EDIT_KEY) || '{}'); }
+  catch { return {}; }
+}
+function saveEditStore(store){
+  localStorage.setItem(EDIT_KEY, JSON.stringify(store));
+}
+function initEditableElements(){
+  editableElements = Array.from(document.querySelectorAll(EDIT_SELECTORS)).filter(el=>{
+    return !el.closest('.v2-bottombar') && !el.closest('.v2-editbar') && !el.closest('script') && !el.closest('style');
+  });
+  editableElements.forEach((el, index)=>{
+    if (!el.dataset.editId) el.dataset.editId = 'e' + index;
+  });
+}
+function applySavedEdits(){
+  const store = loadEditStore();
+  editableElements.forEach(el=>{
+    if (Object.prototype.hasOwnProperty.call(store, el.dataset.editId)) {
+      el.innerHTML = store[el.dataset.editId];
+    }
+  });
+}
+function setEditStatus(text){
+  const status = document.getElementById('v2editStatus');
+  if (status) status.textContent = text;
+}
+function persistEdits(){
+  const store = {};
+  editableElements.forEach(el=>{
+    store[el.dataset.editId] = el.innerHTML.trim();
+  });
+  saveEditStore(store);
+  editDirty = false;
+  setEditStatus('已儲存');
+}
+function setEditMode(enabled){
+  document.body.classList.toggle('edit-mode', enabled);
+  document.getElementById('v2editbar').classList.toggle('show', enabled);
+  editableElements.forEach(el=>{
+    el.contentEditable = enabled ? 'true' : 'false';
+    el.classList.toggle('editable-field', enabled);
+  });
+  setEditStatus(enabled ? '編輯中' : '');
+}
+
+initEditableElements();
+applySavedEdits();
+editableElements.forEach(el=>{
+  el.addEventListener('input', ()=>{
+    editDirty = true;
+    setEditStatus('未儲存');
+  });
+});
+document.getElementById('v2edit').addEventListener('click', ()=>setEditMode(true));
+document.getElementById('v2saveEdits').addEventListener('click', persistEdits);
+document.getElementById('v2exitEdit').addEventListener('click', ()=>{
+  if (editDirty) persistEdits();
+  setEditMode(false);
+});
+document.getElementById('v2resetEdits').addEventListener('click', ()=>{
+  if (!confirm('確定還原 v2 所有本機編輯內容？')) return;
+  localStorage.removeItem(EDIT_KEY);
+  location.reload();
+});
+window.addEventListener('beforeunload', ()=>{
+  if (editDirty) persistEdits();
+});
+</script>
+</body>
+</html>
+
+
+
