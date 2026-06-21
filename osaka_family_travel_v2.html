@@ -134,7 +134,6 @@ body{font-family:'Microsoft JhengHei','PingFang TC',Arial,sans-serif;background:
 /* ── BOTTOM BAR ── */
 .v2-bottombar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--border);display:flex;gap:.7em;padding:.65em 1em;align-items:center;z-index:200;max-width:600px;margin:0 auto}
 .v2-like{width:44px;height:44px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.15em;flex-shrink:0;background:#fff;cursor:pointer}
-.v2-cta{flex:1;background:var(--blue);color:#fff;border:none;border-radius:24px;padding:.85em;font-weight:800;font-size:.9em;text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:.4em}
 
 /* ── BACK TO TOP ── */
 .v2-totop{position:fixed;right:1em;bottom:78px;width:42px;height:42px;border-radius:50%;background:#fff;border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.12);display:flex;align-items:center;justify-content:center;font-size:1.1em;color:var(--pink);cursor:pointer;z-index:199;opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s}
@@ -1421,8 +1420,6 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
 <!-- ═══════ BOTTOM BAR ═══════ -->
 <div class="v2-bottombar">
   <button class="v2-like" id="v2edit" title="編輯">編</button>
-  <button class="v2-like" id="v2share" title="分享">🔗</button>
-  <a class="v2-cta" href="osaka_family_travel.html">📋 查看完整版（含編輯功能）</a>
 </div>
 
 <div class="v2-editbar" id="v2editbar">
@@ -1833,23 +1830,6 @@ window.addEventListener('scroll', ()=>{
 });
 totop.addEventListener('click', ()=>{
   window.scrollTo({top:0, behavior:'smooth'});
-});
-
-/* 分享：複製網址 */
-document.getElementById('v2share').addEventListener('click', ()=>{
-  const btn = document.getElementById('v2share');
-  const done = ()=>{ const old = btn.textContent; btn.textContent = '✅'; setTimeout(()=>btn.textContent = old, 1200); };
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(location.href).then(done).catch(()=>{
-      const ta = document.createElement('textarea');
-      ta.value = location.href;
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand('copy');
-      ta.remove();
-      done();
-    });
-  }
 });
 
 /* 備用景點分類篩選 */
