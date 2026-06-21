@@ -1446,66 +1446,108 @@ document.querySelectorAll('.day-nav [data-goto]').forEach(btn=>{
   });
 });
 
-/* 景點地圖連結：依名稱產生Google地圖搜尋連結 */
-document.querySelectorAll('.tl-card').forEach(card=>{
-  const body = card.querySelector('.tl-body');
-  const name = card.querySelector('.tl-name').textContent.trim();
-  const link = document.createElement('a');
-  link.className = 'tl-map';
-  link.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(name);
-  link.target = '_blank';
-  link.rel = 'noopener';
-  link.textContent = '📍 在地圖開啟';
-  body.appendChild(link);
-});
+/* v2 編輯模式：先把本機已存的文字編輯還原回畫面，後面所有「依文字產生地圖連結/照片」的邏輯才會讀到正確內容 */
+const EDIT_KEY = 'osaka_v2_text_edits';
+const EDIT_SELECTORS = [
+  '.v2-info h2', '.v2-info .meta', '.ov-desc', '.ov-tag', '.day-title', '.day-sub',
+  '.tl-time', '.tl-name', '.tl-sub', '.tl-connector', '.mini-card .mtitle', '.mini-card .mdesc',
+  '.tip-box', '.tip-card2 h4', '.tip-card2 p', '.budget-row .lbl', '.budget-row .amt'
+].join(',');
+let editDirty = false;
+let editableElements = [];
 
-/* 順遊景點地圖連結：依名稱產生Google地圖搜尋連結 */
-document.querySelectorAll('.mini-grid.side-trip .mini-card').forEach(card=>{
-  const body = card.querySelector('.mbody');
-  const titleEl = card.querySelector('.mtitle');
-  if (!body || !titleEl) return;
-  const name = titleEl.textContent.trim();
-  const link = document.createElement('a');
-  link.className = 'mlink';
-  link.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(name);
-  link.target = '_blank';
-  link.rel = 'noopener';
-  link.textContent = '📍 在地圖開啟';
-  body.appendChild(link);
-});
+function loadEditStore(){
+  try { return JSON.parse(localStorage.getItem(EDIT_KEY) || '{}'); }
+  catch { return {}; }
+}
+function saveEditStore(store){
+  localStorage.setItem(EDIT_KEY, JSON.stringify(store));
+}
+function initEditableElements(){
+  editableElements = Array.from(document.querySelectorAll(EDIT_SELECTORS)).filter(el=>{
+    return !el.closest('.v2-bottombar') && !el.closest('.v2-editbar') && !el.closest('script') && !el.closest('style');
+  });
+  editableElements.forEach((el, index)=>{
+    if (!el.dataset.editId) el.dataset.editId = 'e' + index;
+  });
+}
+function applySavedEdits(){
+  const store = loadEditStore();
+  editableElements.forEach(el=>{
+    if (Object.prototype.hasOwnProperty.call(store, el.dataset.editId)) {
+      el.innerHTML = store[el.dataset.editId];
+    }
+  });
+}
+function setEditStatus(text){
+  const status = document.getElementById('v2editStatus');
+  if (status) status.textContent = text;
+}
+function persistEdits(){
+  const store = {};
+  editableElements.forEach(el=>{
+    store[el.dataset.editId] = el.innerHTML.trim();
+  });
+  saveEditStore(store);
+  editDirty = false;
+  setEditStatus('已儲存');
+}
+function setEditMode(enabled){
+  document.body.classList.toggle('edit-mode', enabled);
+  document.getElementById('v2editbar').classList.toggle('show', enabled);
+  editableElements.forEach(el=>{
+    el.contentEditable = enabled ? 'true' : 'false';
+    el.classList.toggle('editable-field', enabled);
+  });
+  setEditStatus(enabled ? '編輯中' : '');
+}
 
-/* 真實地點查詢字串對照表（取自完整版行程的飯店地址與景點查詢字串） */
+initEditableElements();
+applySavedEdits();
+
+/* 真實地點對照表：每個地點/飯店只有「一筆」資料（名稱關鍵字＋地圖查詢字串＋完整地點），
+   地圖連結、路線連結、實景照片都從同一筆資料算出來。
+   ▶ 換地點/改飯店時，只要改這裡的一筆，下面所有用到這個關鍵字的卡片會一起更新地圖連結與路線連結。 */
 const ESLEAD_Q = 'ESLEAD HOTEL Osaka Nipponbashi 大阪市中央区日本橋';
 const LIZ3_Q   = 'Liz3 Guest House 大阪市北区中崎1-5-13';
-const PLACE_QUERIES = [
-  ['ESLEAD', ESLEAD_Q],
-  ['Liz3', LIZ3_Q],
-  ['中崎町', LIZ3_Q],
-  ['關西機場', '関西国際空港 泉佐野市'],
-  ['道頓堀', '道頓堀 大阪市中央区'],
-  ['環球', 'ユニバーサル・スタジオ・ジャパン 此花区 大阪'],
-  ['USJ', 'ユニバーサル・スタジオ・ジャパン 此花区 大阪'],
-  ['主動撤退', 'ユニバーサル・スタジオ・ジャパン 此花区 大阪'],
-  ['海遊館', '海遊館 大阪市港区'],
-  ['天保山', '天保山大観覧車 大阪市港区'],
-  ['大阪城', '大阪城公園 大阪市中央区'],
-  ['住吉大社', '住吉大社 大阪市住吉区'],
-  ['木津市場', '木津市場 大阪市浪速区'],
-  ['奈良公園', '奈良公園 奈良市'],
-  ['東大寺', '東大寺 奈良市'],
-  ['奈良町', '奈良公園 奈良市'],
-  ['嵐山竹林', '嵐山竹林の道 京都市右京区'],
-  ['渡月橋', '渡月橋 京都市右京区嵐山'],
-  ['岩田山', '嵐山モンキーパーク岩田山 京都市西京区'],
-  ['神戶動物王國', '神戸どうぶつ王国 神戸市中央区港島南町'],
-  ['NIFREL', 'ニフレル 吹田市千里万博公園'],
-  ['EXPOCITY', 'EXPOCITY 吹田市千里万博公園'],
-  ['商場採購', 'EXPOCITY 吹田市千里万博公園'],
-  ['南京町', '南京町 神戸市中央区'],
-  ['ハーバーランド', '神戸ハーバーランド 神戸市中央区'],
-  ['三宮', '三宮センタープラザ 神戸市中央区'],
-  ['難波', '難波駅 大阪市浪速区'],
-  ['梅田阪急', '阪急百貨店梅田本店 大阪市北区'],
+const PLACE_REGISTRY = [
+  {kw:'ESLEAD', query:ESLEAD_Q, full:'ESLEAD HOTEL Osaka Nipponbashi（エスリードホテル大阪日本橋）'},
+  {kw:'Liz3', query:LIZ3_Q, full:'Liz3 Guest House 中崎町 / 中崎町站周邊'},
+  {kw:'中崎町', query:LIZ3_Q, full:'Liz3 Guest House 中崎町 / 中崎町站周邊'},
+  {kw:'關西機場', query:'Kansai International Airport Terminal 1', full:'關西國際機場 第1航廈（Kansai International Airport Terminal 1）'},
+  {kw:'搭機回台灣', query:'Kansai International Airport Terminal 1', full:'關西國際機場 第1航廈（Kansai International Airport Terminal 1）'},
+  {kw:'難波附近晚餐', query:'Dotonbori Namba Osaka', full:'難波・道頓堀周邊晚餐區'},
+  {kw:'道頓堀', query:'道頓堀 大阪市中央区'},
+  {kw:'環球', query:'ユニバーサル・スタジオ・ジャパン 此花区 大阪'},
+  {kw:'USJ', query:'ユニバーサル・スタジオ・ジャパン 此花区 大阪'},
+  {kw:'主動撤退', query:'Universal Studios Japan entrance', full:'日本環球影城 出入口（Universal Studios Japan Entrance）'},
+  {kw:'海遊館', query:'海遊館 大阪市港区'},
+  {kw:'天保山 MARKETPLACE 午餐', query:'Tempozan Marketplace Osaka', full:'天保山 Marketplace（Tempozan Marketplace）'},
+  {kw:'天保山', query:'天保山大観覧車 大阪市港区'},
+  {kw:'午餐＋回飯店午睡', query:'Osaka Castle Park', full:'大阪城公園 / 森之宮・谷町四丁目周邊午餐區'},
+  {kw:'大阪城', query:'大阪城公園 大阪市中央区'},
+  {kw:'住吉大社', query:'住吉大社 大阪市住吉区'},
+  {kw:'木津市場', query:'木津市場 大阪市浪速区'},
+  {kw:'奈良町午餐', query:'Naramachi Nara', full:'奈良町（Naramachi）傳統街區'},
+  {kw:'奈良公園', query:'奈良公園 奈良市'},
+  {kw:'東大寺', query:'東大寺 奈良市'},
+  {kw:'奈良町', query:'奈良公園 奈良市'},
+  {kw:'嵐山竹林', query:'嵐山竹林の道 京都市右京区'},
+  {kw:'渡月橋', query:'渡月橋 京都市右京区嵐山'},
+  {kw:'岩田山', query:'嵐山モンキーパーク岩田山 京都市西京区'},
+  {kw:'嵐山午餐', query:'Arashiyama Kyoto', full:'京都嵐山 渡月橋周邊午餐區'},
+  {kw:'神戶動物王國', query:'Kobe Animal Kingdom Port Island', full:'神戸どうぶつ王国（Kobe Animal Kingdom）神戸市中央区港島南町'},
+  {kw:'NIFREL', query:'ニフレル 吹田市千里万博公園'},
+  {kw:'EXPOCITY', query:'EXPOCITY Suita Osaka', full:'EXPOCITY 大型複合商場（吹田市萬博記念公園）'},
+  {kw:'南京町', query:'南京町 神戸市中央区'},
+  {kw:'ハーバーランド', query:'神戸ハーバーランド 神戸市中央区'},
+  {kw:'モザイク商場午餐', query:'Kobe Harborland Mosaic', full:'神戶 Harborland umie MOSAIC 海景商場'},
+  {kw:'三宮', query:'三宮センタープラザ 神戸市中央区'},
+  {kw:'梅田阪急', query:'Hankyu Department Store Umeda', full:'阪急百貨店梅田本店 地下食品街'},
+  {kw:'梅田晚餐', query:'Umeda Osaka', full:'大阪梅田站周邊晚餐區'},
+  {kw:'回梅田，悠閒晚餐', query:'Umeda Osaka', full:'大阪梅田站周邊晚餐區'},
+  {kw:'回Liz3休息・行李整理', query:'Nakazakicho Osaka', full:'中崎町商店街 / 大阪梅田周邊'},
+  {kw:'難波', query:'難波駅 大阪市浪速区'},
 ];
 /* 較模糊的地標關鍵字：僅在「出發/回飯店」等判斷都不命中時才當作備援 */
 const FALLBACK_QUERIES = [
@@ -1514,8 +1556,8 @@ const FALLBACK_QUERIES = [
 const HOTEL_BY_DAY = {day1:ESLEAD_Q, day2:ESLEAD_Q, day3:ESLEAD_Q, day4:ESLEAD_Q, day5:LIZ3_Q, day6:LIZ3_Q, day7:LIZ3_Q, day8:LIZ3_Q, day9:LIZ3_Q, day10:LIZ3_Q};
 
 function resolveQuery(text, dayId){
-  for (const [kw, q] of PLACE_QUERIES) {
-    if (text.includes(kw)) return q;
+  for (const r of PLACE_REGISTRY) {
+    if (text.includes(r.kw)) return r.query;
   }
   if (/回飯店|回梅田|回難波|休息|午睡|晚餐|採購|出發|準備|退房|Check-?in|Check-?out/i.test(text)) {
     return HOTEL_BY_DAY[dayId] || text;
@@ -1525,42 +1567,99 @@ function resolveQuery(text, dayId){
   }
   return text;
 }
+function matchPlaceRule(name){ return PLACE_REGISTRY.find(r => r.full && name.includes(r.kw)); }
 
-/* 交通連接線：產生Google地圖路線連結(可即時看時刻表/其他交通方式) */
-document.querySelectorAll('.timeline').forEach(timeline=>{
-  const dayId = timeline.closest('.v2-panel').id;
-  const children = Array.from(timeline.children);
-  const getPlaceText = card => {
-    const name = card.querySelector('.tl-name').textContent.replace(/🌟必訪/,'').trim();
-    const sub = (card.querySelector('.tl-sub') || {}).textContent || '';
-    return name + ' ' + sub;
-  };
-  children.forEach((el,i)=>{
-    if (!el.classList.contains('tl-connector')) return;
-    const text = el.textContent.trim();
-    let mode;
-    if (/🚆|🚇|🚝|🚅|🚌/.test(text)) mode = 'transit';
-    else if (/🚶/.test(text)) mode = 'walking';
-    else if (/🚕|🚗/.test(text)) mode = 'driving';
-    if (!mode) return;
-
-    const prevCard = children[i-1];
-    const nextCard = children[i+1];
-    if (!prevCard || !nextCard) return;
-
-    const origin = resolveQuery(getPlaceText(prevCard), dayId);
-    const arrowMatch = text.match(/→\s*(.+)$/);
-    const isLineDesc = arrowMatch && /線|\d+分/.test(arrowMatch[1]);
-    const destText = (arrowMatch && !isLineDesc) ? arrowMatch[1].trim() : getPlaceText(nextCard);
-    const dest = resolveQuery(destText, dayId);
-
-    const link = document.createElement('a');
-    link.className = 'tl-route';
-    link.href = 'https://www.google.com/maps/dir/?api=1&origin=' + encodeURIComponent(origin) + '&destination=' + encodeURIComponent(dest) + '&travelmode=' + mode;
+/* 景點地圖連結：依名稱產生Google地圖搜尋連結（可重複呼叫，編輯名稱後會自動重建） */
+function addMapLink(card){
+  const body = card.querySelector('.tl-body');
+  const nameEl = card.querySelector('.tl-name');
+  if (!body || !nameEl) return;
+  const name = nameEl.textContent.trim();
+  let link = body.querySelector('.tl-map');
+  if (!link) {
+    link = document.createElement('a');
+    link.className = 'tl-map';
     link.target = '_blank';
     link.rel = 'noopener';
-    link.textContent = '🕐 路線/時刻表';
-    el.appendChild(link);
+    link.textContent = '📍 在地圖開啟';
+    body.appendChild(link);
+  }
+  link.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(name);
+}
+document.querySelectorAll('.tl-card').forEach(addMapLink);
+
+/* 順遊景點地圖連結：依名稱產生Google地圖搜尋連結（可重複呼叫） */
+function addSideTripMapLink(card){
+  const body = card.querySelector('.mbody');
+  const titleEl = card.querySelector('.mtitle');
+  if (!body || !titleEl) return;
+  const name = titleEl.textContent.trim();
+  let link = body.querySelector('.mlink');
+  if (!link) {
+    link = document.createElement('a');
+    link.className = 'mlink';
+    link.target = '_blank';
+    link.rel = 'noopener';
+    link.textContent = '📍 在地圖開啟';
+    body.appendChild(link);
+  }
+  link.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(name);
+}
+document.querySelectorAll('.mini-grid.side-trip .mini-card').forEach(addSideTripMapLink);
+
+/* 交通連接線：產生Google地圖路線連結（可重複呼叫，前後卡片名稱改了會自動重建） */
+function getPlaceText(card){
+  const nameEl = card.querySelector('.tl-name');
+  if (!nameEl) return '';
+  const name = nameEl.textContent.replace(/🌟必訪/,'').trim();
+  const sub = (card.querySelector('.tl-sub') || {}).textContent || '';
+  return name + ' ' + sub;
+}
+function addConnectorRouteLink(connectorEl){
+  const old = connectorEl.querySelector('.tl-route');
+  if (old) old.remove();
+  const text = connectorEl.textContent.trim();
+  let mode;
+  if (/🚆|🚇|🚝|🚅|🚌/.test(text)) mode = 'transit';
+  else if (/🚶/.test(text)) mode = 'walking';
+  else if (/🚕|🚗/.test(text)) mode = 'driving';
+  if (!mode) return;
+
+  const timeline = connectorEl.closest('.timeline');
+  if (!timeline) return;
+  const dayId = timeline.closest('.v2-panel').id;
+  const children = Array.from(timeline.children);
+  const i = children.indexOf(connectorEl);
+  const prevCard = children[i-1];
+  const nextCard = children[i+1];
+  if (!prevCard || !nextCard) return;
+
+  const origin = resolveQuery(getPlaceText(prevCard), dayId);
+  const arrowMatch = text.match(/→\s*(.+)$/);
+  const isLineDesc = arrowMatch && /線|\d+分/.test(arrowMatch[1]);
+  const destText = (arrowMatch && !isLineDesc) ? arrowMatch[1].trim() : getPlaceText(nextCard);
+  const dest = resolveQuery(destText, dayId);
+
+  const link = document.createElement('a');
+  link.className = 'tl-route';
+  link.href = 'https://www.google.com/maps/dir/?api=1&origin=' + encodeURIComponent(origin) + '&destination=' + encodeURIComponent(dest) + '&travelmode=' + mode;
+  link.target = '_blank';
+  link.rel = 'noopener';
+  link.textContent = '🕐 路線/時刻表';
+  connectorEl.appendChild(link);
+}
+function refreshAdjacentConnectorLinks(card){
+  const timeline = card.closest('.timeline');
+  if (!timeline) return;
+  const children = Array.from(timeline.children);
+  const i = children.indexOf(card);
+  [children[i-1], children[i+1]].forEach(el=>{
+    if (el && el.classList.contains('tl-connector')) addConnectorRouteLink(el);
+  });
+}
+document.querySelectorAll('.timeline').forEach(timeline=>{
+  Array.from(timeline.children).forEach(el=>{
+    if (el.classList.contains('tl-connector')) addConnectorRouteLink(el);
   });
 });
 
@@ -1646,44 +1745,10 @@ document.querySelectorAll('#backup .filter-tab').forEach(tab=>{
 });
 
 
-/* 實景照片與完整地點名稱：將表情符號縮圖改成 Wikimedia 現場照片 */
-const PLACE_MEDIA_RULES = [
-  {kw:'關西機場抵達', full:'關西國際機場 第1航廈（Kansai International Airport Terminal 1）', query:'Kansai International Airport Terminal 1'},
-  {kw:'搭機回台灣', full:'關西國際機場 第1航廈（Kansai International Airport Terminal 1）', query:'Kansai International Airport Terminal 1'},
-  {kw:'關西機場辦理登機', full:'關西國際機場 第1航廈 免稅店區', query:'Kansai International Airport Terminal 1 departure hall'},
-  {kw:'Check-in｜ESLEAD', full:'ESLEAD HOTEL Osaka Nipponbashi（エスリードホテル大阪日本橋）', query:'Nipponbashi Osaka'},
-  {kw:'回ESLEAD休息', full:'ESLEAD HOTEL Osaka Nipponbashi（エスリードホテル大阪日本橋）', query:'Nipponbashi Osaka'},
-  {kw:'ESLEAD出發｜搭JR環狀線', full:'ESLEAD HOTEL Osaka Nipponbashi（エスリードホテル大阪日本橋）', query:'Nipponbashi Osaka'},
-  {kw:'主動撤退', full:'日本環球影城 出入口（Universal Studios Japan Entrance）', query:'Universal Studios Japan entrance'},
-  {kw:'回飯店午睡補眠', full:'ESLEAD HOTEL Osaka Nipponbashi 周邊・日本橋/難波', query:'Nipponbashi Osaka'},
-  {kw:'難波附近晚餐', full:'難波・道頓堀周邊晚餐區', query:'Dotonbori Namba Osaka'},
-  {kw:'ESLEAD出發｜搭Osaka Metro中央線', full:'ESLEAD HOTEL Osaka Nipponbashi（エスリードホテル大阪日本橋）', query:'Nipponbashi Osaka'},
-  {kw:'天保山 MARKETPLACE 午餐', full:'天保山 Marketplace（Tempozan Marketplace）', query:'Tempozan Marketplace Osaka'},
-  {kw:'回飯店，孩子午睡', full:'ESLEAD HOTEL Osaka Nipponbashi 周邊・日本橋/難波', query:'Nipponbashi Osaka'},
-  {kw:'午餐＋回飯店午睡', full:'大阪城公園 / 森之宮・谷町四丁目周邊午餐區', query:'Osaka Castle Park'},
-  {kw:'寄放行李・準備出發', full:'ESLEAD HOTEL Osaka Nipponbashi / 日本橋站周邊', query:'Nipponbashi Osaka'},
-  {kw:'奈良町午餐', full:'奈良町（Naramachi）傳統街區', query:'Naramachi Nara'},
-  {kw:'返回梅田，辦理 Check-in', full:'Liz3 Guest House 中崎町 / 中崎町站周邊', query:'Nakazakicho Osaka'},
-  {kw:'梅田阪急百貨地下美食街晚餐', full:'阪急百貨店梅田本店 地下食品街', query:'Hankyu Department Store Umeda'},
-  {kw:'嵐山午餐', full:'京都嵐山 渡月橋周邊午餐區', query:'Arashiyama Kyoto'},
-  {kw:'返回梅田，孩子車上補眠', full:'阪急嵐山站 → 阪急大阪梅田站', query:'Hankyu Arashiyama Station'},
-  {kw:'神戶動物王國', full:'神戸どうぶつ王国（Kobe Animal Kingdom）神戸市中央区港島南町', query:'Kobe Animal Kingdom Port Island'},
-  {kw:'回飯店午睡', full:'Liz3 Guest House 中崎町 / 中崎町站周邊', query:'Nakazakicho Osaka'},
-  {kw:'梅田晚餐', full:'大阪梅田站周邊晚餐區', query:'Umeda Osaka'},
-  {kw:'Liz3出發｜搭御堂筋線轉モノレール', full:'Liz3 Guest House 中崎町 / 中崎町站周邊', query:'Nakazakicho Osaka'},
-  {kw:'EXPOCITY 商場午餐', full:'EXPOCITY 大型複合商場（吹田市萬博記念公園）', query:'EXPOCITY Suita Osaka'},
-  {kw:'商場採購伴手禮', full:'EXPOCITY 大型複合商場（吹田市萬博記念公園）', query:'EXPOCITY Suita Osaka'},
-  {kw:'回梅田，悠閒晚餐', full:'大阪梅田站周邊晚餐區', query:'Umeda Osaka'},
-  {kw:'Liz3出發', full:'Liz3 Guest House 中崎町 / 中崎町站周邊', query:'Nakazakicho Osaka'},
-  {kw:'モザイク商場午餐', full:'神戶 Harborland umie MOSAIC 海景商場', query:'Kobe Harborland Mosaic'},
-  {kw:'回Liz3休息・行李整理', full:'中崎町商店街 / 大阪梅田周邊', query:'Nakazakicho Osaka'},
-  {kw:'Liz3退房', full:'Liz3 Guest House 中崎町 / 中崎町站周邊', query:'Nakazakicho Osaka'},
-  {kw:'梅田阪急百貨地下街最後採購', full:'阪急百貨店梅田本店 地下食品街', query:'Hankyu Department Store Umeda'}
-];
+/* 實景照片與完整地點名稱：將表情符號縮圖改成 Wikimedia 現場照片（資料來自上面的 PLACE_REGISTRY） */
 const PHOTO_CACHE_KEY = 'osaka_v2_wikimedia_photos';
 const photoCache = (()=>{ try { return JSON.parse(localStorage.getItem(PHOTO_CACHE_KEY) || '{}'); } catch { return {}; } })();
 function savePhotoCache(){ localStorage.setItem(PHOTO_CACHE_KEY, JSON.stringify(photoCache)); }
-function matchPlaceRule(name){ return PLACE_MEDIA_RULES.find(rule => name.includes(rule.kw)); }
 async function fetchCommonsPhoto(query){
   if (photoCache[query]) return photoCache[query];
   const url = 'https://commons.wikimedia.org/w/api.php?origin=*&action=query&generator=search&gsrnamespace=6&gsrlimit=1&gsrsearch=' + encodeURIComponent(query) + '&prop=imageinfo&iiprop=url&iiurlwidth=160&format=json';
@@ -1787,68 +1852,21 @@ enhancePlacePhotos();
   });
 })();
 
-/* v2 編輯模式：修改行程文字並存到本機 localStorage */
-const EDIT_KEY = 'osaka_v2_text_edits';
-const EDIT_SELECTORS = [
-  '.v2-info h2', '.v2-info .meta', '.ov-desc', '.ov-tag', '.day-title', '.day-sub',
-  '.tl-time', '.tl-name', '.tl-sub', '.tl-connector', '.mini-card .mtitle', '.mini-card .mdesc',
-  '.tip-box', '.tip-card2 h4', '.tip-card2 p', '.budget-row .lbl', '.budget-row .amt'
-].join(',');
-let editDirty = false;
-let editableElements = [];
-
-function loadEditStore(){
-  try { return JSON.parse(localStorage.getItem(EDIT_KEY) || '{}'); }
-  catch { return {}; }
-}
-function saveEditStore(store){
-  localStorage.setItem(EDIT_KEY, JSON.stringify(store));
-}
-function initEditableElements(){
-  editableElements = Array.from(document.querySelectorAll(EDIT_SELECTORS)).filter(el=>{
-    return !el.closest('.v2-bottombar') && !el.closest('.v2-editbar') && !el.closest('script') && !el.closest('style');
-  });
-  editableElements.forEach((el, index)=>{
-    if (!el.dataset.editId) el.dataset.editId = 'e' + index;
-  });
-}
-function applySavedEdits(){
-  const store = loadEditStore();
-  editableElements.forEach(el=>{
-    if (Object.prototype.hasOwnProperty.call(store, el.dataset.editId)) {
-      el.innerHTML = store[el.dataset.editId];
-    }
-  });
-}
-function setEditStatus(text){
-  const status = document.getElementById('v2editStatus');
-  if (status) status.textContent = text;
-}
-function persistEdits(){
-  const store = {};
-  editableElements.forEach(el=>{
-    store[el.dataset.editId] = el.innerHTML.trim();
-  });
-  saveEditStore(store);
-  editDirty = false;
-  setEditStatus('已儲存');
-}
-function setEditMode(enabled){
-  document.body.classList.toggle('edit-mode', enabled);
-  document.getElementById('v2editbar').classList.toggle('show', enabled);
-  editableElements.forEach(el=>{
-    el.contentEditable = enabled ? 'true' : 'false';
-    el.classList.toggle('editable-field', enabled);
-  });
-  setEditStatus(enabled ? '編輯中' : '');
-}
-
-initEditableElements();
-applySavedEdits();
+/* v2 編輯模式互動：按鈕、儲存，以及「改名稱即時連動地圖連結/路線連結」 */
 editableElements.forEach(el=>{
   el.addEventListener('input', ()=>{
     editDirty = true;
     setEditStatus('未儲存');
+    if (el.classList.contains('tl-name')) {
+      const card = el.closest('.tl-card');
+      if (card) {
+        addMapLink(card);
+        refreshAdjacentConnectorLinks(card);
+      }
+    } else if (el.classList.contains('mtitle')) {
+      const card = el.closest('.mini-grid.side-trip .mini-card');
+      if (card) addSideTripMapLink(card);
+    }
   });
 });
 document.getElementById('v2edit').addEventListener('click', ()=>setEditMode(true));
