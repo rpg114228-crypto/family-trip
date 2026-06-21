@@ -11,13 +11,14 @@
   --bg:#f6f6f8;--card:#fff;--gray:#f1f2f5;
   --text:#222;--muted:#9a9aa2;--border:#ececef;
 }
-body{font-family:'Microsoft JhengHei','PingFang TC',Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;padding-bottom:74px}
+body{font-family:'Microsoft JhengHei','PingFang TC',Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;padding-bottom:16px}
 
 /* ── APP BAR ── */
 .v2-appbar{position:sticky;top:0;z-index:100;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:.75em 1em;border-bottom:1px solid var(--border)}
 .v2-appbar .back{font-size:1.1em;color:var(--text);text-decoration:none;font-weight:700}
 .v2-appbar .title{font-size:.9em;font-weight:700;color:var(--muted)}
 .v2-appbar .icons{display:flex;gap:.8em;font-size:1.05em;color:var(--muted)}
+.icons .icon-btn{background:none;border:none;font:inherit;color:inherit;cursor:pointer;padding:0;line-height:1;font-family:inherit}
 
 /* ── HERO ── */
 .v2-hero{height:170px;background:linear-gradient(160deg,rgba(10,10,30,.2),rgba(255,79,129,.35)),url('https://images.unsplash.com/photo-1590559899731-a382839e5549?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;position:relative}
@@ -131,12 +132,8 @@ body{font-family:'Microsoft JhengHei','PingFang TC',Arial,sans-serif;background:
 .filter-tab{border:1px solid var(--border);background:#fff;color:var(--muted);font-size:.78em;font-weight:700;padding:.4em 1em;border-radius:20px;cursor:pointer;font-family:inherit}
 .filter-tab.active{background:var(--pink);color:#fff;border-color:var(--pink)}
 
-/* ── BOTTOM BAR ── */
-.v2-bottombar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--border);display:flex;gap:.7em;padding:.65em 1em;align-items:center;z-index:200;max-width:600px;margin:0 auto}
-.v2-like{width:44px;height:44px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.15em;flex-shrink:0;background:#fff;cursor:pointer}
-
 /* ── BACK TO TOP ── */
-.v2-totop{position:fixed;right:1em;bottom:78px;width:42px;height:42px;border-radius:50%;background:#fff;border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.12);display:flex;align-items:center;justify-content:center;font-size:1.1em;color:var(--pink);cursor:pointer;z-index:199;opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s}
+.v2-totop{position:fixed;right:1em;bottom:18px;width:42px;height:42px;border-radius:50%;background:#fff;border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.12);display:flex;align-items:center;justify-content:center;font-size:1.1em;color:var(--pink);cursor:pointer;z-index:199;opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s}
 .v2-totop.show{opacity:1;visibility:visible}
 
 /* ── DESKTOP：置中卡片，避免大螢幕兩側空白過多 ── */
@@ -157,7 +154,7 @@ body.edit-mode .editable-field:focus{
   box-shadow:0 0 0 4px rgba(255,79,129,.12);
 }
 .v2-editbar{
-  position:fixed;left:0;right:0;bottom:64px;z-index:230;
+  position:fixed;left:0;right:0;bottom:0;z-index:230;
   display:none;gap:.5em;align-items:center;justify-content:center;
   max-width:600px;margin:0 auto;padding:.55em .75em;
   background:rgba(255,255,255,.96);border-top:1px solid var(--border);
@@ -206,7 +203,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
 <div class="v2-appbar">
   <span class="back">‹ 行程靈感</span>
   <span class="title">大阪親子旅遊</span>
-  <span class="icons">⤴ ✕</span>
+  <span class="icons">⤴ <button class="icon-btn" id="v2edit" title="編輯">編</button></span>
 </div>
 
 <!-- ═══════ HERO ═══════ -->
@@ -1415,11 +1412,6 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
   <div class="budget-row total"><span class="lbl">💰 總計預估</span><span class="amt">17–29萬</span></div>
 
   <div class="tip-box">※ 6歲以下孩童多數景點免費或半價｜淡季（5月）住宿較優惠｜匯率以 1日幣 ≈ 0.22台幣 計算</div>
-</div>
-
-<!-- ═══════ BOTTOM BAR ═══════ -->
-<div class="v2-bottombar">
-  <button class="v2-like" id="v2edit" title="編輯">編</button>
 </div>
 
 <div class="v2-editbar" id="v2editbar">
