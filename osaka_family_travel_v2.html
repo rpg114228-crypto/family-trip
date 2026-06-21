@@ -184,6 +184,15 @@ body.edit-mode .editable-field:focus{
 }
 body.edit-mode .tl-route, body.edit-mode .tl-map{pointer-events:none;opacity:.45}
 
+/* ── 換景點下拉選單（編輯模式才顯示） ── */
+.tl-swap-wrap{display:none}
+body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
+.tl-swap{
+  width:100%;border:1px solid rgba(255,79,129,.45);border-radius:8px;
+  padding:.4em .5em;font-size:.78em;font-family:inherit;color:var(--text);
+  background:#fff5f8;
+}
+
 .tl-thumb.loading-photo{
   display:flex;align-items:center;justify-content:center;
   background:linear-gradient(135deg,#f5f7fa,#e4e8ef);
@@ -1661,6 +1670,103 @@ document.querySelectorAll('.timeline').forEach(timeline=>{
   Array.from(timeline.children).forEach(el=>{
     if (el.classList.contains('tl-connector')) addConnectorRouteLink(el);
   });
+});
+
+/* 換景點景點包：每筆已經寫好名稱、描述、照片、從兩間飯店出發的交通文字。
+   ▶ 在編輯模式選單選一個，名稱/描述/照片/交通文字/地圖連結會一次換掉，不用分別點進三個欄位改。
+   ▶ 想換成資料庫沒收錄過的全新地點，還是要手動打字（沒有人幫你寫好新地點的介紹跟交通時間）。 */
+const SWAP_CATALOG = [
+  {name:'海遊館（Kaiyukan）', sub:'建議至少3小時，鯨鯊從頭頂游過是記憶最深畫面', photo:'https://images.unsplash.com/photo-1501426026826-31c667bdf23d?auto=format&fit=crop&w=160&h=160&q=80', transit:{ESLEAD:'Osaka Metro中央線 難波→大阪港 約15分', LIZ3:'御堂筋線轉中央線 梅田→大阪港 約25分'}},
+  {name:'天保山摩天輪', sub:'透明車廂眺望大阪灣，孩子直喊「好高好高」', photo:'https://images.unsplash.com/photo-1757059221115-36448e083d39?auto=format&fit=crop&w=160&h=160&q=80', transit:{ESLEAD:'Osaka Metro中央線 難波→大阪港 約15分', LIZ3:'御堂筋線轉中央線 梅田→大阪港 約25分'}},
+  {name:'大阪城公園（大草坪放電）', sub:'免費入場，帶一顆球讓孩子奔跑一上午', photo:'https://images.unsplash.com/photo-1580060839134-75a5edca2e99?auto=format&fit=crop&w=160&h=160&q=80', transit:{ESLEAD:'Osaka Metro中央線 約20分', LIZ3:'谷町線 約20分'}},
+  {name:'住吉大社（石橋 + 神社散步）', sub:'太鼓橋孩子最愛跑上跑下，坡陡需手牽手', photo:'https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=160&h=160&q=80', transit:{ESLEAD:'南海本線 難波→住吉大社駅 約15分', LIZ3:'先到難波轉南海 約30分'}},
+  {name:'奈良公園餵鹿', sub:'1,200頭野生鹿自由漫步，整趟旅行最珍貴的照片', photo:'https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=160&h=160&q=80', transit:{ESLEAD:'近鐵奈良線急行 約40分', LIZ3:'近鐵奈良線急行 約40分'}},
+  {name:'東大寺大佛殿', sub:'15公尺高盧舍那佛像，柱洞鑽過據說能增長智慧', photo:'https://images.unsplash.com/photo-1578639755533-2c52ba911914?auto=format&fit=crop&w=160&h=160&q=80', transit:{ESLEAD:'近鐵奈良線急行 約40分', LIZ3:'近鐵奈良線急行 約40分'}},
+  {name:'嵐山竹林小徑', sub:'高聳翠竹夾道，建議9點前入內人潮少', photo:'https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=160&h=160&q=80', transit:{ESLEAD:'先到梅田轉阪急 約55分', LIZ3:'阪急京都線→嵐山線 約40分'}},
+  {name:'渡月橋拍照 + 桂川河岸散步', sub:'河邊沙灘讓孩子玩石頭玩水', photo:'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=160&h=160&q=80', transit:{ESLEAD:'先到梅田轉阪急 約55分', LIZ3:'阪急京都線→嵐山線 約40分'}},
+  {name:'岩田山野猿公苑', sub:'步行20分上山，170隻以上野生猴子，大人需抱孩子上坡', photo:'https://images.unsplash.com/photo-1578632292335-df3abbb0d586?auto=format&fit=crop&w=160&h=160&q=80', transit:{ESLEAD:'先到梅田轉阪急 約55分', LIZ3:'阪急京都線→嵐山線 約40分'}},
+  {name:'神戶動物王國', sub:'水豚、紅鶴、貓頭鷹近距離接觸，全室內溫室不怕天氣', photo:'https://images.unsplash.com/photo-1534567153574-2b12153a87f0?auto=format&fit=crop&w=160&h=160&q=80', transit:{ESLEAD:'先到梅田轉阪急神戶線+Port Liner 約60分', LIZ3:'阪急神戶線特急28分 + Port Liner 11分 約45分'}},
+  {name:'NIFREL（にふれる）', sub:'水族館+動物園+藝術裝置三合一，2–3小時體驗', photo:'https://images.unsplash.com/photo-1485083269755-a7b559a4fe5e?auto=format&fit=crop&w=160&h=160&q=80', transit:{ESLEAD:'先到梅田轉モノレール 約40分', LIZ3:'御堂筋線+モノレール 約30分'}},
+  {name:'南京町散步・中華饅頭早餐', sub:'日本三大中華街之一，色彩鮮豔牌樓和紅燈籠', photo:'https://images.unsplash.com/photo-1566438480900-0609be27a4be?auto=format&fit=crop&w=160&h=160&q=80', transit:{ESLEAD:'先到梅田轉阪急神戶線 約40分', LIZ3:'阪急神戶線特急 約28分'}},
+  {name:'神戶ハーバーランド・海邊散步', sub:'大型摩天輪・觀光船・廣場噴水，推車暢行', photo:'https://images.unsplash.com/photo-1587595431973-160d0d94add1?auto=format&fit=crop&w=160&h=160&q=80', transit:{ESLEAD:'先到梅田轉阪急神戶線 約40分', LIZ3:'阪急神戶線特急 約28分'}},
+  {name:'Kid-o-Kid（梅田 Grand Front）', sub:'3F全室內遊樂場，攀爬、球池、滑梯，18個月以下有獨立嬰兒區', photo:'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=160&h=160&q=80', transit:{ESLEAD:'御堂筋線 難波→梅田 約4分 + 步行10分', LIZ3:'步行10分即達'}},
+  {name:'樂高樂園探索中心（天保山）', sub:'4D電影、樂高城市區、小型雲霄飛車，可搭配海遊館同一天逛', photo:'https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=160&h=160&q=80', transit:{ESLEAD:'Osaka Metro中央線 難波→大阪港 約15分', LIZ3:'御堂筋線轉中央線 梅田→大阪港 約25分'}},
+  {name:'大丸梅田13F｜任天堂・寶可夢・TOMICA', sub:'大阪最強玩具聖地三館集中，JR大阪駅即連結，入場免費', photo:'https://images.unsplash.com/photo-1612404730960-5c71577fca11?auto=format&fit=crop&w=160&h=160&q=80', transit:{ESLEAD:'御堂筋線 難波→梅田 約10分', LIZ3:'梅田站直結，步行可達'}},
+  {name:'大阪生活今昔館（天神橋）', sub:'完整重現江戶時代街道，屋頂有真實天空燈光效果，可租浴衣拍照', photo:'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=160&h=160&q=80', transit:{ESLEAD:'難波轉地鐵 約25分', LIZ3:'谷町線2站即達'}},
+  {name:'童書之森中之島（安藤忠雄設計）', sub:'三層樓挑高書牆，全日文繪本但圖畫精美，免費入場需官網預約', photo:'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=160&h=160&q=80', transit:{ESLEAD:'難波轉地鐵 約20分（估）', LIZ3:'谷町線+步行 約15分（估）'}},
+  {name:'日清泡麵發明紀念館（池田市）', sub:'免費入館，「我的杯麵工廠」DIY體驗最精彩，孩子自己設計世界唯一的泡麵', photo:'https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?auto=format&fit=crop&w=160&h=160&q=80', transit:{ESLEAD:'先到梅田轉阪急 約50分', LIZ3:'梅田搭阪急 約40分'}},
+];
+function applySwap(card, entry){
+  const nameEl = card.querySelector('.tl-name');
+  const subEl = card.querySelector('.tl-sub');
+  if (nameEl) nameEl.textContent = entry.name;
+  if (subEl) {
+    subEl.textContent = entry.sub;
+    const rule = matchPlaceRule(entry.name);
+    if (rule) addFullPlaceName(card, rule.full);
+  }
+  let thumb = card.querySelector('.tl-thumb');
+  if (thumb && entry.photo) {
+    if (thumb.tagName !== 'IMG') {
+      const img = document.createElement('img');
+      img.className = 'tl-thumb';
+      img.loading = 'lazy';
+      thumb.replaceWith(img);
+      thumb = img;
+    }
+    thumb.src = entry.photo;
+    thumb.alt = entry.name;
+  }
+  addMapLink(card);
+  refreshAdjacentConnectorLinks(card);
+
+  const timeline = card.closest('.timeline');
+  if (timeline && entry.transit) {
+    const dayId = timeline.closest('.v2-panel').id;
+    const hotelKey = HOTEL_BY_DAY[dayId] === LIZ3_Q ? 'LIZ3' : 'ESLEAD';
+    const transitText = entry.transit[hotelKey];
+    const children = Array.from(timeline.children);
+    const i = children.indexOf(card);
+    const prevConnector = children[i-1];
+    if (transitText && prevConnector && prevConnector.classList.contains('tl-connector')) {
+      const emojiMatch = prevConnector.textContent.trim().match(/^(\S+)/);
+      const emoji = emojiMatch ? emojiMatch[1] : '🚆';
+      prevConnector.textContent = emoji + ' ' + transitText;
+      addConnectorRouteLink(prevConnector);
+    }
+  }
+
+  editDirty = true;
+  setEditStatus('未儲存');
+}
+function addSwapPicker(card){
+  if (card.querySelector('.tl-swap-wrap')) return;
+  const body = card.querySelector('.tl-body');
+  if (!body) return;
+  const wrap = document.createElement('div');
+  wrap.className = 'tl-swap-wrap';
+  const select = document.createElement('select');
+  select.className = 'tl-swap';
+  const placeholder = document.createElement('option');
+  placeholder.textContent = '🔄 換成…';
+  placeholder.value = '';
+  select.appendChild(placeholder);
+  SWAP_CATALOG.forEach((entry, idx)=>{
+    const opt = document.createElement('option');
+    opt.value = idx;
+    opt.textContent = entry.name;
+    select.appendChild(opt);
+  });
+  select.addEventListener('change', ()=>{
+    if (select.value === '') return;
+    applySwap(card, SWAP_CATALOG[select.value]);
+    select.value = '';
+  });
+  wrap.appendChild(select);
+  body.appendChild(wrap);
+}
+document.querySelectorAll('.tl-card').forEach(card=>{
+  if (card.querySelector('.tl-thumb[src]')) addSwapPicker(card);
 });
 
 /* 收藏愛心：點擊切換 + localStorage 記住狀態 */
