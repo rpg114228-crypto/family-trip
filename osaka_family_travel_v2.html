@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>大阪親子旅遊行程｜10天9夜 3-4歲版（行程靈感版）</title>
+<meta name="description" content="大阪・奈良・京都嵐山・神戶 10天9夜親子慢遊行程，專為3–4歲幼童設計：每日午睡、推車友善、室內景點多，含交通、住宿、預算與備用景點。">
+<meta name="theme-color" content="#ff4f81">
+<meta property="og:type" content="website">
+<meta property="og:title" content="大阪 10天9夜親子旅遊行程（3–4歲版）">
+<meta property="og:description" content="奈良餵鹿・USJ・海遊館・嵐山猴子山・神戶動物王國，每日午睡、推車友善的幼童慢遊路線。">
+<meta property="og:image" content="https://images.unsplash.com/photo-1590559899731-a382839e5549?auto=format&fit=crop&w=1200&q=80">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Ctext%20y='.9em'%20font-size='90'%3E%F0%9F%A6%8C%3C/text%3E%3C/svg%3E">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -195,6 +203,16 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
   color:var(--muted);font-size:.68em;text-align:center;padding:.4em;
 }
 .tl-place-full{display:block;margin-top:.25em;color:#555;font-size:.72em;line-height:1.5}
+
+/* ── 列印：一次印出全部 10 天，隱藏互動元件 ── */
+@media print{
+  .v2-appbar,.v2-tabs,.day-nav,.v2-totop,.v2-editbar,.tl-heart,.tl-swap-wrap,.tl-map,.tl-route,.transport-actions{display:none!important}
+  body{max-width:100%!important;box-shadow:none!important;background:#fff!important}
+  .v2-panel{display:block!important;max-width:100%;page-break-inside:auto}
+  .v2-panel:not(#overview){page-break-before:always}
+  .tl-card,.mini-card,.tip-box,.tip-card2,.budget-row{page-break-inside:avoid}
+  .v2-hero{height:120px}
+}
 </style>
 </head>
 <body>
@@ -306,12 +324,16 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
   <div class="tip-box">
     <b>路線總覽：</b>Day1 抵達難波 → Day2 USJ → Day3 海遊館/天保山 → Day4 大阪城/住吉大社 → Day5 奈良 + 換宿梅田 → Day6 嵐山 → Day7 神戶動物王國 → Day8 天橋立/伊根舟屋（長征日） → Day9 神戶 → Day10 回程
   </div>
+
+  <div class="tip-box" style="background:#fff3cd;color:#7a5a00">
+    <b>⚠️ 8/8–8/17 全程遇日本「お盆」連假（約 8/13–8/16）：</b>這是日本最大返鄉旅遊潮，新幹線/高速巴士、熱門景點與住宿全面爆滿並漲價，主要影響 Day5–Day9。務必：<br>① 住宿與 Day8 高速巴士「盡早」訂並選可免費取消<br>② Day2 USJ 落在星期日、Day8 長征落在星期六，人潮加倍，快速通關券必買<br>③ お盆期間部分小店/餐廳公休，出發前先確認營業日
+  </div>
 </div>
 
 <!-- DAY PANELS -->
 <div class="v2-panel" id="day1">
   <div class="day-title">第1天・抵達大阪・輕鬆開場</div>
-  <div class="day-sub">關西機場入境 → 難波 → 道頓堀夜遊</div>
+  <div class="day-sub">📅 8/8（六）｜關西機場入境 → 難波 → 道頓堀夜遊</div>
   <div class="timeline">
     <div class="tl-card">
       <div class="tl-num">1</div>
@@ -321,7 +343,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">關西機場抵達・入境</div>
         <div class="tl-sub">第一天時差調整，孩子容易疲累</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-connector">🚆 南海特急ラピート・45分 → 難波</div>
     <div class="tl-card">
@@ -332,7 +354,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">Check-in｜ESLEAD酒店大阪日本橋</div>
         <div class="tl-sub">日本橋駅近，步行難波・道頓堀5–8分</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-card">
       <div class="tl-num">3</div>
@@ -342,7 +364,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">道頓堀散步 + 章魚燒</div>
         <div class="tl-sub">霓虹招牌、旋轉螃蟹，章魚燒現炸必吃</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-connector">🚶 步行返回飯店</div>
     <div class="tl-card">
@@ -353,7 +375,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">回ESLEAD休息</div>
         <div class="tl-sub">熱水澡幫助孩子入睡，第一天輕鬆為主</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
   </div>
 
@@ -395,7 +417,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
 
 <div class="v2-panel" id="day2">
   <div class="day-title">第2天・環球影城 USJ（幼童策略版）</div>
-  <div class="day-sub">半天精攻兒童區，下午兩點主動撤退</div>
+  <div class="day-sub">📅 8/9（日）｜半天精攻兒童區，下午兩點主動撤退（週日人潮多，快速通關必買）</div>
   <div class="timeline">
     <div class="tl-card">
       <div class="tl-num">1</div>
@@ -405,7 +427,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">ESLEAD出發｜搭JR環狀線</div>
         <div class="tl-sub">前往ユニバーサルシティ站</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-connector">🚆 JR大阪環狀線・約30分 → ユニバーサルシティ</div>
     <div class="tl-card">
@@ -416,7 +438,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">環球奇境（Universal Wonderland）<span class="tl-badge">🌟必訪</span></div>
         <div class="tl-sub">Hello Kitty・芝麻街4D，無身高限制最適合3–4歲</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-card">
       <div class="tl-num">3</div>
@@ -426,7 +448,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">小小兵樂園 + 午餐</div>
         <div class="tl-sub">旋轉杯、吹氣槍體驗，部分設施需92cm</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-connector">🎫 主動撤退・整理回程</div>
     <div class="tl-card">
@@ -437,7 +459,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">主動撤退</div>
         <div class="tl-sub">孩子體力到此為止，不硬撐</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-connector">🚆 JR環狀線返回難波・約30分</div>
     <div class="tl-card">
@@ -448,7 +470,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">回飯店午睡補眠</div>
         <div class="tl-sub">回ESLEAD日本橋休息</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-card">
       <div class="tl-num">6</div>
@@ -458,7 +480,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">難波附近晚餐</div>
         <div class="tl-sub">步行範圍內覓食，輕鬆收尾</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-connector">🚶 步行返回飯店</div>
     <div class="tl-card">
@@ -469,7 +491,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">回ESLEAD休息</div>
         <div class="tl-sub">回ESLEAD日本橋，今日結束</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
   </div>
 
@@ -496,7 +518,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
 
 <div class="v2-panel" id="day3">
   <div class="day-title">第3天・海遊館 + 天保山</div>
-  <div class="day-sub">日本最大水族館，室內涼爽，全日幼童友善</div>
+  <div class="day-sub">📅 8/10（一）｜日本最大水族館，室內涼爽，全日幼童友善</div>
   <div class="timeline">
     <div class="tl-card">
       <div class="tl-num">1</div>
@@ -506,7 +528,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">ESLEAD出發｜搭Osaka Metro中央線</div>
         <div class="tl-sub">前往大阪港站</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-card">
       <div class="tl-num">2</div>
@@ -516,7 +538,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">海遊館（Kaiyukan）<span class="tl-badge">🌟必訪</span></div>
         <div class="tl-sub">建議至少3小時，鯨鯊從頭頂游過是記憶最深畫面</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-card">
       <div class="tl-num">3</div>
@@ -526,7 +548,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">天保山 MARKETPLACE 午餐</div>
         <div class="tl-sub">海遊館旁商場用餐</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-card">
       <div class="tl-num">4</div>
@@ -536,7 +558,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">天保山摩天輪</div>
         <div class="tl-sub">透明車廂眺望大阪灣，孩子直喊「好高好高」</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-connector">🚇 Osaka Metro中央線返回難波</div>
     <div class="tl-card">
@@ -547,7 +569,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">回飯店，孩子午睡</div>
         <div class="tl-sub">休息補體力</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-card">
       <div class="tl-num">6</div>
@@ -557,7 +579,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">難波 Donki 驚安殿堂採購</div>
         <div class="tl-sub">24小時營業，扭蛋區和零食牆要小心失控購物</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-connector">🚶 步行返回飯店</div>
     <div class="tl-card">
@@ -568,7 +590,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">回ESLEAD休息</div>
         <div class="tl-sub">回ESLEAD日本橋，今日結束</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
   </div>
 
@@ -582,7 +604,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
 
 <div class="v2-panel" id="day4">
   <div class="day-title">第4天・大阪城 + 住吉大社</div>
-  <div class="day-sub">戶外放電日，草坪奔跑 + 神社石橋跳跳</div>
+  <div class="day-sub">📅 8/11（二）｜戶外放電日，草坪奔跑 + 神社石橋跳跳（盛夏避正午，早出早回）</div>
   <div class="timeline">
     <div class="tl-card">
       <div class="tl-num">1</div>
@@ -592,7 +614,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">ESLEAD出發｜搭Osaka Metro中央線</div>
         <div class="tl-sub">前往大阪城公園</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-connector">🚇 Osaka Metro中央線・約20分</div>
     <div class="tl-card">
@@ -603,7 +625,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">大阪城公園（大草坪放電）</div>
         <div class="tl-sub">免費入場，帶一顆球讓孩子奔跑一上午</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-card">
       <div class="tl-num">3</div>
@@ -613,7 +635,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">大阪城天守閣參觀</div>
         <div class="tl-sub">電梯排隊久時可只逛外部公園</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-card">
       <div class="tl-num">4</div>
@@ -623,7 +645,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">午餐＋回飯店午睡</div>
         <div class="tl-sub">回ESLEAD補體力</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-connector">🚕 計程車・約15分 → 住吉大社</div>
     <div class="tl-card">
@@ -634,7 +656,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">住吉大社（石橋 + 神社散步）</div>
         <div class="tl-sub">太鼓橋孩子最愛跑上跑下，坡陡需手牽手</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-connector">🚇 Osaka Metro返回難波</div>
     <div class="tl-card">
@@ -645,7 +667,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">木津市場晚餐食材</div>
         <div class="tl-sub">新鮮海鮮、蔬果採購</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-connector">🚶 步行返回飯店</div>
     <div class="tl-card">
@@ -656,14 +678,14 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">回ESLEAD休息</div>
         <div class="tl-sub">回ESLEAD日本橋，木津市場戰利品當晚餐</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
   </div>
 
   <div class="panel-h">順遊景點</div>
   <div class="mini-grid side-trip">
     <div class="mini-card">
-      <img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=160&h=160&q=80" alt="法善寺横丁" loading="lazy">
+      <div class="mph">🏮</div>
       <div class="mbody">
         <div class="mtitle">法善寺横丁・でんでんタウン</div>
         <div class="mdesc">石板小巷、苔蘚水掛不動尊，夜晚氣氛絕佳。往南5分鐘即でんでんタウン，孩子必停扭蛋機。</div>
@@ -682,7 +704,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
 
 <div class="v2-panel" id="day5">
   <div class="day-title">第5天・搬梅田 + 奈良一日遊</div>
-  <div class="day-sub">本次旅程最適合幼童的景點 — 餵鹿</div>
+  <div class="day-sub">📅 8/12（三）｜本次旅程最適合幼童的景點 — 餵鹿</div>
   <div class="timeline">
     <div class="tl-card">
       <div class="tl-num">1</div>
@@ -692,18 +714,18 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">寄放行李・準備出發</div>
         <div class="tl-sub">ESLEAD Check-out，行李寄放</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-connector">🚆 近鐵奈良線急行・40分 → 近鐵奈良</div>
     <div class="tl-card">
       <div class="tl-num">2</div>
-      <img class="tl-thumb" src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=160&h=160&q=80" alt="奈良公園餵鹿" loading="lazy">
+      <div class="tl-thumb ph">🦌</div>
       <div class="tl-body">
         <div class="tl-time">🦌 10:00</div>
         <div class="tl-name">奈良公園餵鹿（重頭戲）<span class="tl-badge">🌟必訪</span></div>
         <div class="tl-sub">1,200頭野生鹿自由漫步，整趟旅行最珍貴的照片</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-card">
       <div class="tl-num">3</div>
@@ -713,7 +735,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">東大寺大佛殿</div>
         <div class="tl-sub">15公尺高盧舍那佛像，柱洞鑽過據說能增長智慧</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-card">
       <div class="tl-num">4</div>
@@ -723,7 +745,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">奈良町午餐</div>
         <div class="tl-sub">老街午餐補體力</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-connector">🚆 近鐵奈良→難波40分，轉乘至梅田總計約60分</div>
     <div class="tl-card">
@@ -734,7 +756,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">返回梅田，辦理 Check-in</div>
         <div class="tl-sub">Liz3 Guest House 中崎町，後5晚住宿</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-card">
       <div class="tl-num">6</div>
@@ -744,7 +766,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">梅田阪急百貨地下美食街晚餐</div>
         <div class="tl-sub">迴轉壽司、烏龍麵、親子丼，孩子接受度高</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-connector">🚶 步行返回飯店</div>
     <div class="tl-card">
@@ -755,7 +777,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">回Liz3休息</div>
         <div class="tl-sub">中崎町新家，今日結束</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
   </div>
 
@@ -789,7 +811,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
 
 <div class="v2-panel" id="day6">
   <div class="day-title">第6天・京都嵐山（精簡版）</div>
-  <div class="day-sub">竹林 + 渡月橋 + 野生猴子山</div>
+  <div class="day-sub">📅 8/13（四）｜竹林 + 渡月橋 + 野生猴子山（お盆連假首日，京都人潮多）</div>
   <div class="timeline">
     <div class="tl-card">
       <div class="tl-num">1</div>
@@ -799,18 +821,18 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">Liz3出發｜搭阪急</div>
         <div class="tl-sub">前往嵐山</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-connector">🚆 阪急京都線→嵐山線・約40分</div>
     <div class="tl-card">
       <div class="tl-num">2</div>
-      <img class="tl-thumb" src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=160&h=160&q=80" alt="嵐山竹林" loading="lazy">
+      <div class="tl-thumb ph">🎍</div>
       <div class="tl-body">
         <div class="tl-time">🎍 09:30</div>
         <div class="tl-name">嵐山竹林小徑</div>
         <div class="tl-sub">高聳翠竹夾道，建議9點前入內人潮少</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-card">
       <div class="tl-num">3</div>
@@ -820,7 +842,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">渡月橋拍照 + 桂川河岸散步</div>
         <div class="tl-sub">河邊沙灘讓孩子玩石頭玩水</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-card">
       <div class="tl-num">4</div>
@@ -830,7 +852,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">岩田山野猿公苑<span class="tl-badge">🌟必訪</span></div>
         <div class="tl-sub">步行20分上山，170隻以上野生猴子，大人需抱孩子上坡</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-card">
       <div class="tl-num">5</div>
@@ -840,7 +862,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">嵐山午餐</div>
         <div class="tl-sub">湯豆腐 or 抹茶甜點</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-connector">🚆 阪急返回梅田・約40分</div>
     <div class="tl-card">
@@ -851,7 +873,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">回Liz3休息</div>
         <div class="tl-sub">返回梅田，孩子車上補眠</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
   </div>
 
@@ -877,7 +899,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
 
 <div class="v2-panel" id="day7">
   <div class="day-title">第7天・神戶動物王國</div>
-  <div class="day-sub">水豚、紅鶴、貓頭鷹近距離接觸，全室內溫室親子樂園</div>
+  <div class="day-sub">📅 8/14（五）｜水豚、紅鶴、貓頭鷹近距離接觸，全室內溫室親子樂園</div>
   <div class="timeline">
     <div class="tl-card">
       <div class="tl-num">1</div>
@@ -887,7 +909,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">Liz3出發｜搭阪急</div>
         <div class="tl-sub">前往三宮，轉Port Liner</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-connector">🚆 阪急神戶線特急28分 + Port Liner 三宮→計算科学センター前11分</div>
     <div class="tl-card">
@@ -898,7 +920,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">神戶動物王國</div>
         <div class="tl-sub">水豚、紅鶴、貓頭鷹近距離接觸，全室內溫室不怕天氣</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-card">
       <div class="tl-num">3</div>
@@ -908,7 +930,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">神戶動物王國園內午餐</div>
         <div class="tl-sub">園內餐廳用餐，不必移動</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-card">
       <div class="tl-num">4</div>
@@ -918,7 +940,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">神戶動物王國室內午睡</div>
         <div class="tl-sub">溫室內長椅或推車小睡，全程有空調</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-card">
       <div class="tl-num">5</div>
@@ -928,7 +950,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">神戶動物王國 鳥類飛行秀</div>
         <div class="tl-sub">貓頭鷹、鸚鵡互動體驗，下午場次最熱鬧</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-connector">🚆 Port Liner+阪急神戶線返回梅田・約45分</div>
     <div class="tl-card">
@@ -939,7 +961,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">梅田晚餐</div>
         <div class="tl-sub">阪急百貨地下街，日本料理選擇多</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-connector">🚶 步行返回飯店</div>
     <div class="tl-card">
@@ -950,7 +972,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">回Liz3休息</div>
         <div class="tl-sub">中崎町，今日結束</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
   </div>
 
@@ -976,7 +998,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
 
 <div class="v2-panel" id="day8">
   <div class="day-title">第8天・天橋立 + 伊根舟屋</div>
-  <div class="day-sub">⚠️全日長征：日本三景之一+海上船屋村，來回近8小時車程</div>
+  <div class="day-sub">📅 8/15（六）｜⚠️全日長征：日本三景之一+海上船屋村，來回近8小時車程（お盆＋週末，巴士務必早訂）</div>
   <div class="timeline">
     <div class="tl-card">
       <div class="tl-num">1</div>
@@ -986,7 +1008,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">Liz3出發｜前往阪急梅田巴士總站</div>
         <div class="tl-sub">提早出發，孩子可在車上補眠</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-connector">🚶 步行/轉乘 約15分</div>
     <div class="tl-card">
@@ -997,7 +1019,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">梅田（阪急三番街）搭丹海高速巴士</div>
         <div class="tl-sub">直達不換車，建議提前上網訂票（每日約3班，班次少）</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-connector">🚌 丹海高速巴士 約2小時40分</div>
     <div class="tl-card">
@@ -1008,7 +1030,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">天橋立View Land</div>
         <div class="tl-sub">吊椅式纜車上山看「飛龍観」，山頂有小型遊樂設施適合3–4歲</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-card">
       <div class="tl-num">4</div>
@@ -1018,7 +1040,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">天橋立駅周邊午餐</div>
         <div class="tl-sub">海鮮丼、丹後ちらし壽司是當地名物</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-connector">🚌 丹後海陸交通巴士 約75分 → 伊根</div>
     <div class="tl-card">
@@ -1029,7 +1051,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">伊根舟屋・伊根浦舟屋群散步</div>
         <div class="tl-sub">海上船屋群，1樓停船2樓住人，京都最美海景漁村之一</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-card">
       <div class="tl-num">6</div>
@@ -1039,7 +1061,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">伊根灣めぐり遊覧船</div>
         <div class="tl-sub">約30分鐘環灣遊覽船，近距離看海上舟屋，孩子坐船最興奮（時間緊湊可省略，直接散步拍照）</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-connector">🚌 巴士返回天橋立駅 約75分</div>
     <div class="tl-card">
@@ -1050,7 +1072,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">天橋立駅搭丹海高速巴士返程</div>
         <div class="tl-sub">建議先在站內買晚餐便當，車上吃</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-connector">🚌 丹海高速巴士 約2小時40分</div>
     <div class="tl-card">
@@ -1061,11 +1083,11 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">回Liz3休息</div>
         <div class="tl-sub">中崎町，今日結束，孩子大概一上車就睡了</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
   </div>
 
-  <div class="tip-box"><b>⚠️長征日提醒：</b>來回巴士各約2小時40分，加上天橋立↔伊根接駁，全天交通時間近8小時，孩子大部分時間都在車上。建議：①前一晚提早睡②帶足夠零食/玩具/平板③推車摺疊輕便款④高速巴士每日僅3班，務必提前訂票確認時間⑤明天請安排較輕鬆的行程讓孩子恢復體力。</div>
+  <div class="tip-box"><b>⚠️長征日提醒：</b>來回巴士各約2小時40分，加上天橋立↔伊根接駁，全天交通時間近8小時，孩子大部分時間都在車上。建議：①前一晚提早睡②帶足夠零食/玩具/平板③推車摺疊輕便款④高速巴士每日僅3班，務必提前訂票確認時間⑤明天請安排較輕鬆的行程讓孩子恢復體力⑥<b>替代方案：</b>若擔心孩子受不了近8小時車程，可把這天改成梅田周邊室內景點（見「備用景點」頁），長征留待孩子大一點再訪。</div>
 
   <div class="day-nav">
     <button data-goto="day7">← 第7天</button>
@@ -1075,7 +1097,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
 
 <div class="v2-panel" id="day9">
   <div class="day-title">第9天・神戶一日遊</div>
-  <div class="day-sub">南京町中華美食 + 港口景觀 + モザイク商場</div>
+  <div class="day-sub">📅 8/16（日）｜南京町中華美食 + 港口景觀 + モザイク商場</div>
   <div class="timeline">
     <div class="tl-card">
       <div class="tl-num">1</div>
@@ -1085,7 +1107,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">Liz3出發</div>
         <div class="tl-sub">中崎町搭谷町線→梅田，換阪急至三宮</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-connector">🚆 谷町線→阪急神戶線・約35分</div>
     <div class="tl-card">
@@ -1096,7 +1118,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">南京町散步・中華饅頭早餐</div>
         <div class="tl-sub">日本三大中華街之一，色彩鮮豔牌樓和紅燈籠</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-card">
       <div class="tl-num">3</div>
@@ -1106,7 +1128,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">神戶ハーバーランド・海邊散步</div>
         <div class="tl-sub">大型摩天輪・觀光船・廣場噴水，推車暢行</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-card">
       <div class="tl-num">4</div>
@@ -1116,7 +1138,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">モザイク商場午餐（海景位置）</div>
         <div class="tl-sub">面海餐廳，孩子可以看船邊吃飯</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-card">
       <div class="tl-num">5</div>
@@ -1126,7 +1148,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">三宮センター街採購</div>
         <div class="tl-sub">最後一個對外旅遊日，補完購物清單尾巴</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-connector">🚆 搭阪急返回梅田 → Liz3</div>
     <div class="tl-card">
@@ -1137,7 +1159,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">回Liz3休息・行李整理</div>
         <div class="tl-sub">中崎町周邊最後採購，明天一早退房，今晚提早洗澡休息</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
   </div>
 
@@ -1151,7 +1173,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
 
 <div class="v2-panel" id="day10">
   <div class="day-title">第10天・採購收尾 → 回程</div>
-  <div class="day-sub">梅田最後掃貨 → 關西機場</div>
+  <div class="day-sub">📅 8/17（一）｜梅田最後掃貨 → 關西機場</div>
   <div class="timeline">
     <div class="tl-card">
       <div class="tl-num">1</div>
@@ -1161,7 +1183,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">Liz3退房</div>
         <div class="tl-sub">行李寄放或直接帶走</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-card">
       <div class="tl-num">2</div>
@@ -1171,7 +1193,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">梅田阪急百貨地下街最後採購</div>
         <div class="tl-sub">B2美食街是大阪最強伴手禮集中地，9點開門要趁早</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-connector">🚆 JRはるか／利木津巴士・約60–75分 → 關西機場</div>
     <div class="tl-card">
@@ -1182,7 +1204,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">關西機場辦理登機、最後免稅店購物</div>
         <div class="tl-sub">有嬰幼兒記得提前3小時到機場，航廈內有兒童遊戲區</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
     <div class="tl-card">
       <div class="tl-num">4</div>
@@ -1192,7 +1214,7 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
         <div class="tl-name">搭機回台灣</div>
         <div class="tl-sub">10天9夜行程圓滿結束</div>
       </div>
-      <div class="tl-heart">♡</div>
+      <div class="tl-heart" role="button" tabindex="0" aria-label="加入收藏">♡</div>
     </div>
   </div>
 
@@ -1394,8 +1416,10 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
   <div class="tip-card2"><div class="ico">💊</div><div><h4>必備藥品</h4><p>兒童退燒藥（栓劑備份）、止瀉藥、防蚊貼、外傷消毒藥。日本藥好但看不懂日文，自備更安心。</p></div></div>
   <div class="tip-card2"><div class="ico">👕</div><div><h4>多帶換洗衣物</h4><p>每人多備2套。餵鹿弄髒、玩水濕透是常態。飯店洗衣機通常¥200一次，也可送外洗服務。</p></div></div>
   <div class="tip-card2"><div class="ico">📱</div><div><h4>離線地圖＋翻譯</h4><p>Google Maps離線下載大阪區域。日文看不懂時，Google翻譯相機功能拍一下即時翻譯。</p></div></div>
-  <div class="tip-card2"><div class="ico">☀️</div><div><h4>防曬不能少</h4><p>5月日本紫外線強，孩子嫩皮膚更要做好防護。防曬乳SPF50+、帽子、薄外套缺一不可。</p></div></div>
-  <div class="tip-card2"><div class="ico">🎫</div><div><h4>USJ＆海遊館提前訂</h4><p>黃金週或週末一定賣光，最少提前2週線上購票。海遊館也可事先訂票避免排隊。</p></div></div>
+  <div class="tip-card2"><div class="ico">☀️</div><div><h4>盛夏防曬＋防中暑</h4><p>8月大阪常37°C以上、紫外線極強。防曬乳SPF50+、遮陽帽、隨身水壺與電解質補充缺一不可；正午盡量安排室內，隨時留意幼童中暑徵兆。也留意8月為颱風季，出發前查好天氣。</p></div></div>
+  <div class="tip-card2"><div class="ico">🎫</div><div><h4>USJ＆海遊館提前訂</h4><p>お盆連假與週末一定賣光，最少提前2週線上購票。海遊館也可事先訂票避免排隊。</p></div></div>
+  <div class="tip-card2"><div class="ico">🆘</div><div><h4>緊急聯絡（先存進手機）</h4><p>日本報警 110・火警救護車 119。台北駐大阪經濟文化辦事處急難救助行動電話 <b>+81-90-8794-4568</b>（限車禍、搶劫等重大緊急事故）；一般館務 +81-6-6443-8481。外交部旅外緊急服務專線：日本境內可直撥 011-800-0885-0885。</p></div></div>
+  <div class="tip-card2"><div class="ico">🧒</div><div><h4>幼童走失應對</h4><p>每天出門先幫孩子拍一張當日全身照（記錄穿著）。孩子口袋放張小卡，寫上飯店名稱與你的手機（含國碼 +886）。約定走失就「站在原地不要動」，並就近找店員或車站站務員求助。</p></div></div>
 </div>
 
 <div class="v2-panel" id="budget">
@@ -1405,13 +1429,14 @@ body.edit-mode .tl-swap-wrap{display:block;margin-top:.4em}
   <div class="budget-row"><span class="lbl">✈️ 機票（來回 6人）</span><span class="amt">6–9萬</span></div>
   <div class="budget-row"><span class="lbl">🏨 住宿（9晚）</span><span class="amt">3–5萬</span></div>
   <div class="budget-row"><span class="lbl">🎢 USJ門票（6人）</span><span class="amt">2–3萬</span></div>
-  <div class="budget-row"><span class="lbl">🐟 海遊館 + NIFREL + 神戶動物王國</span><span class="amt">1–2萬</span></div>
+  <div class="budget-row"><span class="lbl">🐟 海遊館 + 神戶動物王國 + 天橋立纜車</span><span class="amt">1–2萬</span></div>
   <div class="budget-row"><span class="lbl">🍜 餐費（10天）</span><span class="amt">3–5萬</span></div>
   <div class="budget-row"><span class="lbl">🚇 交通（市區+日遊）</span><span class="amt">1–2萬</span></div>
+  <div class="budget-row"><span class="lbl">🚌 天橋立/伊根長征巴士（6人來回）</span><span class="amt">0.7–1萬</span></div>
   <div class="budget-row"><span class="lbl">🛍 伴手禮採購</span><span class="amt">1–3萬</span></div>
-  <div class="budget-row total"><span class="lbl">💰 總計預估</span><span class="amt">17–29萬</span></div>
+  <div class="budget-row total"><span class="lbl">💰 總計預估</span><span class="amt">18–30萬</span></div>
 
-  <div class="tip-box">※ 6歲以下孩童多數景點免費或半價｜淡季（5月）住宿較優惠｜匯率以 1日幣 ≈ 0.22台幣 計算</div>
+  <div class="tip-box">※ 6歲以下孩童多數景點免費或半價｜⚠️ 8月為暑假旺季、又逢お盆連假，住宿與機票偏貴且需提早訂｜匯率以 1日幣 ≈ 0.22台幣 計算</div>
 </div>
 
 <div class="v2-editbar" id="v2editbar">
@@ -1527,10 +1552,10 @@ const PLACE_REGISTRY = [
   {kw:'住吉大社', query:'住吉大社 大阪市住吉区'},
   {kw:'木津市場', query:'木津市場 大阪市浪速区'},
   {kw:'奈良町午餐', query:'Naramachi Nara', full:'奈良町（Naramachi）傳統街區'},
-  {kw:'奈良公園', query:'奈良公園 奈良市'},
+  {kw:'奈良公園', query:'Nara Park deer', full:'奈良公園（Nara Park）奈良市・野生鹿棲息地'},
   {kw:'東大寺', query:'東大寺 奈良市'},
   {kw:'奈良町', query:'奈良公園 奈良市'},
-  {kw:'嵐山竹林', query:'嵐山竹林の道 京都市右京区'},
+  {kw:'嵐山竹林', query:'Arashiyama Bamboo Grove', full:'嵐山 竹林の道（Arashiyama Bamboo Grove）京都市右京区'},
   {kw:'渡月橋', query:'渡月橋 京都市右京区嵐山'},
   {kw:'岩田山', query:'嵐山モンキーパーク岩田山 京都市西京区'},
   {kw:'嵐山午餐', query:'Arashiyama Kyoto', full:'京都嵐山 渡月橋周邊午餐區'},
@@ -1806,15 +1831,21 @@ function renderFavs(){
 document.querySelectorAll('.v2-panel').forEach(panel=>{
   panel.querySelectorAll('.tl-heart').forEach((heart, i)=>{
     const id = panel.id + '-' + i;
-    if (favs[id]) { heart.textContent = '♥'; heart.classList.add('active'); }
-    heart.addEventListener('click', ()=>{
+    if (favs[id]) { heart.textContent = '♥'; heart.classList.add('active'); heart.setAttribute('aria-pressed','true'); }
+    else heart.setAttribute('aria-pressed','false');
+    const toggleFav = ()=>{
       const active = heart.classList.toggle('active');
       heart.textContent = active ? '♥' : '♡';
+      heart.setAttribute('aria-pressed', active ? 'true' : 'false');
       heart.classList.remove('pulse');
       requestAnimationFrame(()=>heart.classList.add('pulse'));
       if (active) favs[id] = true; else delete favs[id];
       localStorage.setItem('osaka_v2_favs', JSON.stringify(favs));
       renderFavs();
+    };
+    heart.addEventListener('click', toggleFav);
+    heart.addEventListener('keydown', e=>{
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFav(); }
     });
   });
 });
@@ -1981,6 +2012,23 @@ document.getElementById('v2resetEdits').addEventListener('click', ()=>{
 window.addEventListener('beforeunload', ()=>{
   if (editDirty) persistEdits();
 });
+
+/* 外連圖片載入失敗時回退為漸層佔位，避免破圖（用 capture 委派，連動態新增的 Wikimedia 圖也涵蓋） */
+document.addEventListener('error', e=>{
+  const img = e.target;
+  if (!(img instanceof HTMLImageElement)) return;
+  if (img.classList.contains('tl-thumb')) {
+    const ph = document.createElement('div');
+    ph.className = 'tl-thumb ph';
+    ph.textContent = '📷';
+    img.replaceWith(ph);
+  } else if (img.closest('.mini-card')) {
+    const ph = document.createElement('div');
+    ph.className = 'mph';
+    ph.textContent = '📷';
+    img.replaceWith(ph);
+  }
+}, true);
 </script>
 </body>
 </html>
